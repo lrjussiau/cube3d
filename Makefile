@@ -1,6 +1,9 @@
 NAME = cube3D
 FILES = cube3d \
-			utils
+			utils \
+			parsing_map \
+			parsing_map__utils
+
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)
 

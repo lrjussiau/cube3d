@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 09:07:42 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:24:26 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,10 @@ void	*safe_malloc(unsigned int bytes);
 
 //map_parsing
 void	parsing_map(char *path, t_map *map);
+
+//map_parsing_utils
+char	*str_append(const char *str1, const char *str2);
+char	*clear_path(char *str);
+char	*clear_color(char *str);
 
 #endif
