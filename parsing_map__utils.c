@@ -6,13 +6,13 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:01:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 11:24:09 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:36:11 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-char	*str_append(const char *str1, const char *str2)
+char	*str_append(char *str1, char *str2)
 {
 	char	*result;
 	size_t	len1;
@@ -32,6 +32,7 @@ char	*str_append(const char *str1, const char *str2)
 		ft_strlcat(result, str1, len1 + 1);
 	if (str2[0] != '\0')
 		ft_strlcat(result, str2, len1 + len2 + 1);
+	free(str1);
 	return (result);
 }
 

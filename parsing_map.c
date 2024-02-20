@@ -6,13 +6,13 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:47:14 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 11:42:53 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:20:10 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	get_color(t_map *map)
+static void	get_color(t_map *map)
 {
 	int	i;
 
@@ -27,7 +27,7 @@ void	get_color(t_map *map)
 	}
 }
 
-void	get_map(t_map *map)
+static void	get_map(t_map *map)
 {
 	int		i;
 	char	*str;
@@ -46,9 +46,10 @@ void	get_map(t_map *map)
 		i++;
 	}
 	map->map = ft_split(str, '\n');
+	free(str);
 }
 
-void	get_texture(t_map *map)
+static void	get_texture(t_map *map)
 {
 	int	i;
 
@@ -67,7 +68,7 @@ void	get_texture(t_map *map)
 	}
 }
 
-void	parse_line(int fd, t_map *map)
+static void	parse_line(int fd, t_map *map)
 {
 	char	*tmp_file;
 	char	*line;
@@ -79,9 +80,11 @@ void	parse_line(int fd, t_map *map)
 		if (!line)
 			break ;
 		tmp_file = str_append(tmp_file, line);
+		free(line);
 	}
 	tmp_file = str_append(tmp_file, "\0");
 	map->file = ft_split(tmp_file, '\n');
+	free(tmp_file);
 }
 
 void	parsing_map(char *path, t_map *map)

@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 11:24:26 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:36:26 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_map
 }		t_map;
 
 //utils
-void	ft_print_map(char **tab);
 void	error(char *str);
 void	*safe_malloc(unsigned int bytes);
 
@@ -43,8 +42,15 @@ void	*safe_malloc(unsigned int bytes);
 void	parsing_map(char *path, t_map *map);
 
 //map_parsing_utils
-char	*str_append(const char *str1, const char *str2);
+char	*str_append(char *str1, char *str2);
 char	*clear_path(char *str);
 char	*clear_color(char *str);
+
+//debug
+void	print_struct_map(t_map *map);
+void	ft_print_map(char **tab);
+
+//cleaner
+void	cleaner(t_map *map);
 
 #endif
