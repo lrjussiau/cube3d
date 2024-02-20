@@ -1,5 +1,6 @@
 NAME = cube3D
-FILES = main
+FILES = cube3d \
+			utils
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)
 
@@ -7,8 +8,10 @@ LIBFT_DIR = libft
 LIBFT_MAKEFILE = $(LIBFT_DIR)/Makefile
 LIBFT = $(LIBFT_DIR)/$(NAME)
 
+#-Wall -Wextra -Werror
+
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -Imlx -I$(LIBFT_DIR) -g
+CFLAGS = -Imlx -I$(LIBFT_DIR) -g
 LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
 
 all: $(NAME)
