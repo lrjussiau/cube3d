@@ -4,7 +4,8 @@ FILES = cube3d \
 			parsing_map \
 			parsing_map__utils \
 			debug \
-			cleaner 
+			cleaner \
+			checker 
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

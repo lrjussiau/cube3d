@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:20:36 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 14:41:22 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:42:31 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		error("Wrong input, insert the map.cub path.");
 	parsing_map(av[1], map);
+	checker(map);
 	print_struct_map(map);
 	cleaner(map);
 }

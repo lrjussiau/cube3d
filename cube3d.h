@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 15:36:26 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:02:17 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ typedef struct s_map
 	char	*ea_path;
 	char	*floor_color;
 	char	*cell_color;
-	int		*player_pos;
+	int		player_pos_x;
+	int		player_pos_y;
 	char	player_orientation;
 	char	**map;
 	char	**file;
@@ -52,5 +53,8 @@ void	ft_print_map(char **tab);
 
 //cleaner
 void	cleaner(t_map *map);
+
+//checker
+void	checker(t_map *map);
 
 #endif
