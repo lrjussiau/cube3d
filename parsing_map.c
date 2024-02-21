@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:47:14 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 15:20:10 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:23:23 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	get_texture(t_map *map)
 	}
 }
 
-static void	parse_line(int fd, t_map *map)
+static void	get_file(int fd, t_map *map)
 {
 	char	*tmp_file;
 	char	*line;
@@ -95,7 +95,7 @@ void	parsing_map(char *path, t_map *map)
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		error("Fail to open file.");
-	parse_line(fd, map);
+	get_file(fd, map);
 	close(fd);
 	get_texture(map);
 	get_color(map);
