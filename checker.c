@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:43:01 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 08:03:30 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:48:54 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	check_player(t_map *map)
 		j = 0;
 		while (map->map[i][j])
 		{
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'N'
-				|| map->map[i][j] == 'N' || map->map[i][j] == 'N')
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'E'
+				|| map->map[i][j] == 'S' || map->map[i][j] == 'W')
 			{
 				map->player_orientation = map->map[i][j];
-				map->player_pos_x = j;
-				map->player_pos_y = i;
+				map->player_pos_x = (double)j;
+				map->player_pos_y = (double)i;
 				return ;
 			}
 			j++;

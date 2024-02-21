@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 11:22:52 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:26:02 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ typedef struct	s_ray
 	int		stepY;
 	int		hit;
 	int		side;
-	int		sideDistX;
-	int		sideDistY;
+	double	sideDistX;
+	double	sideDistY;
 	double	cameraX;
 	double	corX;
 	double	corY;

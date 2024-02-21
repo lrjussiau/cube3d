@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/21 11:50:40 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:27:48 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
+	//printf("pixel\n");
 	dst = img->addr + (y * img->l_l + x * (img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
@@ -33,7 +34,7 @@ void	draw_column(t_img *img, t_col *column)
 	while (y <= column->end)
 	{
 		//printf("y: %d y_end: %d\n", y, column->end);
-		pixel_put(img, column->corX, y, create_trgb(100, 255,0,0));
+		pixel_put(img, column->corX, y, column->color);
 		y++;
 	}
 }

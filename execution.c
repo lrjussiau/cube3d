@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/21 11:58:20 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/21 15:01:31 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,33 @@ int	init_player_s(t_player **player, t_map *map)
 	(*player)->posX = map->player_pos_x;
 	(*player)->posY = map->player_pos_y;
 	(*player)->corX = -1;
-	(*player)->corY = 0;
+	(*player)->corY = 1;
 	(*player)->planeX = 0;
-	(*player)->planeY = 0.66;
+	(*player)->planeY = 1.8;
 	(*player)->time = 0;
 	(*player)->oldTime = 0;
 	return (0);
 }
 
-int	init_ray_s(t_ray **ray, char **map)
+t_ray	*init_ray_s(t_ray *ray, char **map)
 {
-	(*ray) = malloc(sizeof(t_ray));
-	if (!(*ray))
-		return (1);
-	(*ray)->mapX = 0;
-	(*ray)->mapY = 0;
-	(*ray)->stepX = 0;
-	(*ray)->stepY = 0;
-	(*ray)->hit = 0;
-	(*ray)->side = 0;
-	(*ray)->cameraX = 0;
-	(*ray)->corX = 0;
-	(*ray)->corY = 0;
-	(*ray)->distX = 0;
-	(*ray)->distY = 0;
-	(*ray)->deltaDistX = 0;
-	(*ray)->deltaDistY = 0;
-	(*ray)->wallDist = 0;
-	(*ray)->map = map;
-	return (0);
+	ray = (t_ray *)safe_malloc(sizeof(t_ray));
+	ray->mapX = 0;
+	ray->mapY = 0;
+	ray->stepX = 0;
+	ray->stepY = 0;
+	ray->hit = 0;
+	ray->side = 0;
+	ray->cameraX = 0.0;
+	ray->corX = 0.0;
+	ray->corY = 0.0;
+	ray->distX = 0.0;
+	ray->distY = 0.0;
+	ray->deltaDistX = 0.0;
+	ray->deltaDistY = 0.0;
+	ray->wallDist = 0.0;
+	ray->map = map;
+	return (ray);
 }
 
 int	init_col_s(t_col **column)
@@ -76,72 +74,82 @@ int	init_img(t_img *img)
 	return (1);
 }
 
-unsigned int	ft_abs(int num)
+double	ft_abs(double num)
 {
 	if (num < 0)
 		return (-num);
 	return (num);
 }
 
-int	update_ray_step(t_ray **ray, t_player *player)
+int	update_ray_step(t_ray *ray, t_player *player)
 {
-	if ((*ray)->corX < 0)
+	if (ray->corX < 0)
 	{
-		(*ray)->stepX = -1;
-		(*ray)->sideDistX = (player->posX - (*ray)->mapX) * (*ray)->deltaDistX;
+		ray->stepX = -1;
+		ray->sideDistX = (player->posX - ray->mapX) * ray->deltaDistX;
 	}
 	else
 	{
-		(*ray)->stepX = 1;
-		(*ray)->sideDistX = ((*ray)->mapX + 1.0 - player->posX) * (*ray)->deltaDistX;
+		ray->stepX = 1;
+		ray->sideDistX = (ray->mapX + 1.0 - player->posX) * ray->deltaDistX;
 	}
-	if ((*ray)->corY < 0)
+	if (ray->corY < 0)
 	{
-		(*ray)->stepY = -1;
-		(*ray)->sideDistY = (player->posY - (*ray)->mapY) * (*ray)->deltaDistY;
+		ray->stepY = -1;
+		ray->sideDistY = (player->posY - ray->mapY) * ray->deltaDistY;
 	}
 	else
 	{
-		(*ray)->stepY = 1;
-		(*ray)->sideDistX = ((*ray)->mapY + 1.0 - player->posY) * (*ray)->deltaDistY;
+		ray->stepY = 1;
+		ray->sideDistY = (ray->mapY + 1.0 - player->posY) * ray->deltaDistY;
 	}
 	return (0);
 }
 
-int	update_ray_s(t_ray **ray, int x, t_player *player)
+int	update_ray_s(t_ray *ray, int x, t_player *player)
 {
-	(*ray)->mapX = player->posX;
-	(*ray)->mapY = player->posY;
-	(*ray)->cameraX = (2 * x / SCREEN_X) - 1;
-	(*ray)->corX = player->corX + player->planeX * (*ray)->cameraX;
-	(*ray)->corY =  player->corY + player->planeY * (*ray)->cameraX;
-	if ((*ray)->corX == 0)
-		(*ray)->deltaDistX = 1e30;
+	printf("ray : %d player : \n", (int)player->posX );
+	ray->mapX = (int)player->posX;
+	ray->mapY = (int)player->posY;
+	printf("okok\n");
+	ray->cameraX = 2 * x / (double)SCREEN_X - 1;
+	printf("cmaera: %f\n", ray->cameraX);
+	ray->corX = player->corX + player->planeX * ray->cameraX;
+	ray->corY =  player->corY + player->planeY * ray->cameraX;
+	printf("CorX : %f, Cor Y:%f\n", ray->corX, ray->corY);
+	if (ray->corX == 0)
+		ray->deltaDistX = 1e30;
 	else
-		(*ray)->deltaDistX = (ft_abs(1 / (*ray)->corX));
-	if ((*ray)->corY == 0)
-		(*ray)->deltaDistY = 1e30;
+		ray->deltaDistX = (ft_abs(1.0 / ray->corX));
+	if (ray->corY == 0)
+		ray->deltaDistY = 1e30;
 	else
-		(*ray)->deltaDistY = (ft_abs(1 / (*ray)->corX));
+		ray->deltaDistY = (ft_abs(1.0 / ray->corY));
 	update_ray_step(ray, player);
+	ray->hit = 0;
 	return (0);
 }
 
-int	update_column(t_col **col, t_ray **ray, int x)
+int	update_column(t_col **col, t_ray *ray, int x)
 {
 	t_col	*column;
 
 	column = *col;
-	column->color = 16711680;
-	if ((*ray)->side ==  0)
-		(*ray)->wallDist = (*ray)->sideDistX - (*ray)->deltaDistX;
+	if (ray->hit == 2)
+		column->color = 16711680;
+	else
+		column->color = 65280;
+	//printf("side DIST : %f, delta : %f\n", ray->sideDistY, ray->deltaDistY);
+	if (ray->side ==  0)
+		ray->wallDist = ray->sideDistX - ray->deltaDistX;
 	else
 	{
-		(*ray)->wallDist = (*ray)->sideDistY - (*ray)->deltaDistY;
+		printf("GO Y\n");
+		ray->wallDist = ray->sideDistY - ray->deltaDistY;
 		column->color = column->color / 2;
 	}
-	printf("distance du mur: %f\n",(*ray)->wallDist);
-	column->height = SCREEN_Y / (*ray)->wallDist;
+	printf("distance du mur: %f\n",ray->wallDist);
+	column->height = (double)SCREEN_Y / ray->wallDist;
 	column->start = ((-column->height) / 2) + (SCREEN_Y / 2);
 	if (column->start < 0)
 		column->start = 0;
@@ -152,29 +160,31 @@ int	update_column(t_col **col, t_ray **ray, int x)
 	return (0);
 }
 
-int dda(t_ray **ray)
+void dda(t_ray *ray)
 {
-	//printf("rayon: %d\n", ray->sideDistX);
-	while ((*ray)->hit == 0)
+	//printf("side_dist avant: %f\n", ray->sideDistX)
+	while (ray->hit == 0)
 	{
-		printf("hello1\2");
-		if ((*ray)->sideDistX < (*ray)->sideDistY)
+		if (ray->sideDistX < ray->sideDistY)
 		{
-			(*ray)->sideDistX += (*ray)->deltaDistX;
-			(*ray)->mapX += (*ray)->stepX;
-			(*ray)->side = 0;
+			ray->sideDistX += ray->deltaDistX;
+			ray->mapX += ray->stepX;
+			ray->side = 0;
 		}
 		else
 		{
-			(*ray)->sideDistY += (*ray)->deltaDistY;
-			(*ray)->mapY += (*ray)->stepY;
-			(*ray)->side = 1;
+			ray->sideDistY += ray->deltaDistY;
+			ray->mapY += ray->stepY;
+			ray->side = 1;
 		}
-		printf("hello\2");
-		if ((*ray)->map[(*ray)->mapX][(*ray)->mapY] > 0)
-			(*ray)->hit = 1;
+		if (ray->map[ray->mapY][ray->mapX] > '0')
+		{
+			if (ray->map[ray->mapY][ray->mapX] == '2')
+				ray->hit = 2;
+			else
+				ray->hit = 1;
+		}
 	}
-	return (0);
 }
 
 int main(int ac, char **av)
@@ -199,25 +209,29 @@ int main(int ac, char **av)
 		return (1);
 	if (init_player_s(&player, map))
 		return (1);
-	if (init_ray_s(&ray, map->map))
-		return (1);
+	ray = init_ray_s(ray, map->map);
+	printf("\n\n\n\n\n");
+	ft_print_map(ray->map);
 	if (init_col_s(&column))
 		return (1);
 	if (!init_img(&img))
 		return (1);
+	
 	while (x < SCREEN_X)
 	{
-		update_ray_s(&ray, x, player);
-		printf("okok1\n");
-		dda(&ray);
-		printf("okok2\n");
-		update_column(&column, &ray, x);
+		printf("def\n");
+		update_ray_s(ray, x, player);
+		printf("1. %d\n", ray->mapX);
+		dda(ray);
+		printf("2. %d\n", ray->mapX);
+		update_column(&column, ray, x);
 		printf("hauteur du mur: %d\n",column->height);
 		printf("okok3\n");
 		draw_column(&img, column);
 		printf("okok4\n");
 		x++;
 	}
+	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 	mlx_key_hook (img.mlx_win, esc_hook, &img);
 	mlx_hook(img.mlx_win, 17, 1L << 17, close_hook, &img);
 	mlx_loop(img.mlx);
