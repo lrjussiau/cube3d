@@ -10,7 +10,14 @@ void	pixel_put(t_img *img, int x, int y, int color)
 
 void	draw_column(t_img *img, t_col *column)
 {
-	
+	int	y;
+
+	y = column->start;
+	while (y <= column->end)
+	{
+		pixel_put(img, column->corX, y, column->color)
+		y++;
+	}
 }
 
 int	esc_hook(int keycode, t_data *img)

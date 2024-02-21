@@ -68,7 +68,19 @@
  68     int start;
  69     int end;
  70     int color;
+		int	corX;
  71 }           col_s;
+
+ typedef struct s_image{
+	void	*mlx;
+	void	*mlx_win;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		l_l;
+	int		en;
+ }				t_img;
+
  72
  73 int init_player_s(player_s **player)
  74 {
@@ -122,10 +134,39 @@
 122     (*column)->end = 0;
 123     return (0);
 124 }
+
+int	init_img_s(t_img **img)
+{
+	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X_SIZE, SCREEN_Y_SIZE, "CUBE3D");
+	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X_SIZE, SCREEN_Y_SIZE );
+	if (!img->img_ptr)
+		return (0);
+	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->l_l, &img->en);
+	return (1);
+}
 125
-126 int update_column(col_s **column, int wallDist)
+126 int update_column(col_s **col, ray_s **ray, int screenHeight)
 127 {
-128     (*column)->height =
+128     col_s   *column;
+129
+130     column = *col;
+131     column->color = 16711680;
+132     if ((*ray)->side ==  0)
+133         (*ray)->wallDist = (*ray)->sideDistX - (*ray)->delatDistX;
+134     else
+135     {
+136         (*ray)->wallDist = (*ray)->sideDistY - (*ray)->deltaDistY;
+137         column->color = column->color / 2;
+138     }
+139     column->height = screenHeight / wallDist;
+140     column->start = (-column->height) / 2 + screenHeight / 2;
+141    if (column->start < 0)
+142        column->start = 0;
+143    column->end = column->height / 2 + screenHeight / 2;
+144    if (column->end >= screenHeight)
+145        column->end = screenHeight - 1;
+146    return (0);
+}
 129
 130
 131 unsigned int    abs(int num)
@@ -169,10 +210,16 @@
 169     (*ray)->corX = player->corX + player->planeX * cameraX;
 170     (*ray)->corY =  player->corY + player->planeY * cameraX;
 171     (*ray)->deltaDistX = 0;
-172     (*ray)->deltaDistY = 0;
-173     if ((*ray)->corX == 0)
-109     (*ray)->wallDist = 0;
+		if ((*ray)->corX == 0)
+194         (*ray)->deltaDistX = le30;
+195     else
+196         (*ray)->deltaDistX = (abs(1 / corX);
+		if ((*ray)->corY == 0)
+194         (*ray)->deltaDistY = le30;
+195     else
+196         (*ray)->deltaDistY = (abs(1 / corX);
 110     (*ray)->map = map;
+		update_ray_step(ray, player);
 111     return (0);
 112 }
 113
@@ -188,7 +235,7 @@
 123     return (0);
 124 }
 125
-126 int update_column(col_s **col, ray_s **ray, int screenHeight)
+126 int update_column(col_s **col, ray_s **ray, int screenHeight, int x)
 127 {
 128     col_s   *column;
 129
@@ -208,6 +255,7 @@
 143    column->end = column->height / 2 + screenHeight / 2;
 144    if (column->end >= screenHeight)
 145        column->end = screenHeight - 1;
+		column->corX = x;
 146    return (0);
 147 }
 148
@@ -257,3 +305,69 @@
 192     (*ray)->deltaDistY = 0;
 193     if ((*ray)->corX == 0)
 194         (*ray)->deltaDistX = le30;
+		else
+152         (*ray)->deltaDistX = (abs(1 / corX);
+153     if ((*ray)->corY == 0)
+154         (*ray)->deltaDistY = le30;
+155     else
+156         (*ray)->deltaDistY = (abs(1 / corY);
+157     return (update_ray_step(ray, player);
+	}
+
+int dda(ray_s **rayon)
+{
+	ray_s   *ray;
+
+	ray = *rayon;
+	while (ray->hit == 0)
+	{
+			if (ray->sideDistX < ray->sideDistY)
+		{
+				ray->sideDistX += ray->deltaDistX;
+			ray->mapX += stepX;
+			ray->side = 0;
+		}
+		else
+		{
+				ray->sideDistY += ray->deltaDistY;
+			ray->mapY += ray->stepY;
+			ray->side = 1;
+		}
+		if (ray->map[ray->mapX][ray->mapY] > 0)
+			ray->hit = 1;
+	}
+	return (0);
+}
+
+int main()
+{
+	player_s    *player;
+	ray_s       *ray;
+	t_col		*column;
+	t_img		img;
+	int         x;
+
+	x = 0;
+	img.mlx = mlx_init();
+	if (!img.mlx)
+		return (1);
+	if (init_player_s(&player)
+		return (1);
+	if (init_ray_s(&ray, player)
+		return (1);
+	if (init_col_s(&column))
+		return (1);
+	if (!init_img(&img))
+		return (1);
+	while (x < player->screenWidth)
+	{
+		update_ray_s(&ray, player);
+		dda(&ray);
+		update_column(&column, ray, player->screenHeight, int x);
+		draw_column(&img, column);
+	x++;   
+	}
+	mlx_key_hook (img.mlx_win, esc_hook, &img);
+	mlx_hook(img.mlx_win, 17, 1L << 17, close_hook, &img);
+	mlx_loop(img.mlx);
+}
