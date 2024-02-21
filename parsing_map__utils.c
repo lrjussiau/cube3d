@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:01:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 15:36:11 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:06:38 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,47 @@ char	*clear_color(char *str)
 	while (str[i] == ' ' || str[i] == '\t')
 		i++;
 	return (&str[i]);
+}
+
+void	get_size(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+			j++;
+		if (map->x_max < j)
+			map->x_max = j - 1;
+		i++;
+	}
+	map->y_max = i - 1;
+}
+
+void	process_wall(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+		{
+			if (str[i] != '1')
+				error("map not correctly walled.");
+			while (str[i])
+			{
+				if (str[i] == ' ')
+					break ;
+				i++;
+			}
+			i--;
+			if (str[i] != '1')
+				error("map not correctly walled.");
+		}
+		i++;
+	}
 }

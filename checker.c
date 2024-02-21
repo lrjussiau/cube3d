@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:43:01 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 16:05:12 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/21 08:03:30 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,44 @@ void	check_player(t_map *map)
 	error("No player inside the map");
 }
 
+void	check_wall(t_map *map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	get_size(map);
+	while (map->map[row])
+	{
+		col = 0;
+		while (map->map[row][col])
+		{
+			if (row == 0 && (map->map[row][col] != ' '
+				&& map->map[row][col] != '1'))
+				error("map not correctly walled.");
+			else if (row == map->y_max && (map->map[row][col] != ' '
+				&& map->map[row][col] != '1'))
+				error("map not correctly walled.");
+			else
+				process_wall(map->map[row]);
+			col++;
+		}
+		row++;
+	}
+}
+
+void	check_inside(t_map *map)
+{
+	if (map->player_pos_x == 0 || map->player_pos_y == 0)
+		error("no player inside the map.");
+	if (map->player_orientation == '\0')
+		error("not good orientation for the player.");
+}
+
 void	checker(t_map *map)
 {
 	// check_path(map);
 	check_player(map);
-	// check_wall(map);
-	// check_inside(map);
+	check_wall(map);
+	check_inside(map);
 }

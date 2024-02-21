@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 14:36:34 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/20 16:06:56 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/21 07:35:48 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	print_struct_map(t_map *map)
 	printf("CELLING COLOR : '%s'\n", map->cell_color);
 	printf("PLAYER ORIENTATION : '%c'\n", map->player_orientation);
 	printf("PLAYER POS : (x:%d ; y:%d)\n", map->player_pos_x, map->player_pos_y);
+	printf("MAP SIZE : (x:%d ; y:%d)\n", map->x_max, map->y_max);
 	printf("FINAL_MAP :\n");
 	ft_print_map(map->map);
 }
