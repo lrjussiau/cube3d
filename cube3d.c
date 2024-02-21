@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:20:36 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 08:13:26 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:54:45 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_map	*map_init(t_map *map)
 	return (map);
 }
 
-int	main(int ac, char **av)
+/*int	main(int ac, char **av)
 {
 	t_map	*map;
 
@@ -42,4 +42,4 @@ int	main(int ac, char **av)
 	print_struct_map(map); //debug_mode
 	
 	cleaner(map);
-}
+}*/
