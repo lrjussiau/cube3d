@@ -3,16 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/21 15:01:31 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/23 07:06:23 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+//remplacer les nom des field de structure
+//touche en continue pour deplacement
+//rotation du joueur
+//textures + plafond
+//minimap
+
 //update_player when add hook for movement
+//ecriture de l'image juste probleme -> clear()
+// si corX = 0 -> planeX = 0.66 si corY = 0 ->planeY = 0.66
+//-1 <= corX et corY <= 1
+//camera plane un peu decale sur la gauche
 int	init_player_s(t_player **player, t_map *map)
 {
 	(*player) = malloc(sizeof(t_player));
@@ -20,12 +30,13 @@ int	init_player_s(t_player **player, t_map *map)
 		return (1);
 	(*player)->posX = map->player_pos_x;
 	(*player)->posY = map->player_pos_y;
-	(*player)->corX = -1;
-	(*player)->corY = 1;
-	(*player)->planeX = 0;
-	(*player)->planeY = 1.8;
+	(*player)->corX = 0;
+	(*player)->corY = -1;
+	(*player)->planeX = 0.66;
+	(*player)->planeY = 0;
 	(*player)->time = 0;
 	(*player)->oldTime = 0;
+	(*player)->map = map->map;
 	return (0);
 }
 
@@ -96,7 +107,9 @@ int	update_ray_step(t_ray *ray, t_player *player)
 	if (ray->corY < 0)
 	{
 		ray->stepY = -1;
+		//printf("playerposY: %f raymapY: %d\n", player->posY, ray->mapY);
 		ray->sideDistY = (player->posY - ray->mapY) * ray->deltaDistY;
+		//printf("ray_side_distY: %f\n",ray->sideDistY);
 	}
 	else
 	{
@@ -108,17 +121,20 @@ int	update_ray_step(t_ray *ray, t_player *player)
 
 int	update_ray_s(t_ray *ray, int x, t_player *player)
 {
-	printf("ray : %d player : \n", (int)player->posX );
+	//printf("ray : %d player : \n", (int)player->posX);
 	ray->mapX = (int)player->posX;
 	ray->mapY = (int)player->posY;
-	printf("okok\n");
-	ray->cameraX = 2 * x / (double)SCREEN_X - 1;
-	printf("cmaera: %f\n", ray->cameraX);
+	//printf("okok\n");
+	ray->cameraX = 2 * (SCREEN_X - x - 1) / (double)SCREEN_X - 1;
+	//printf("cmaera: %f\n", ray->cameraX);
 	ray->corX = player->corX + player->planeX * ray->cameraX;
 	ray->corY =  player->corY + player->planeY * ray->cameraX;
-	printf("CorX : %f, Cor Y:%f\n", ray->corX, ray->corY);
+	//printf("CorX : %f, Cor Y:%f\n", ray->corX, ray->corY);
 	if (ray->corX == 0)
+	{
+		printf("rayCorX == 0\n");
 		ray->deltaDistX = 1e30;
+	}
 	else
 		ray->deltaDistX = (ft_abs(1.0 / ray->corX));
 	if (ray->corY == 0)
@@ -144,11 +160,11 @@ int	update_column(t_col **col, t_ray *ray, int x)
 		ray->wallDist = ray->sideDistX - ray->deltaDistX;
 	else
 	{
-		printf("GO Y\n");
 		ray->wallDist = ray->sideDistY - ray->deltaDistY;
+		//printf("ray_side: %f, ray_delta: %f\n",ray->sideDistY , ray->deltaDistY);
 		column->color = column->color / 2;
 	}
-	printf("distance du mur: %f\n",ray->wallDist);
+	//printf("distance du mur: %f\n",ray->wallDist);
 	column->height = (double)SCREEN_Y / ray->wallDist;
 	column->start = ((-column->height) / 2) + (SCREEN_Y / 2);
 	if (column->start < 0)
@@ -162,7 +178,8 @@ int	update_column(t_col **col, t_ray *ray, int x)
 
 void dda(t_ray *ray)
 {
-	//printf("side_dist avant: %f\n", ray->sideDistX)
+	//printf("ray_dist_x: %f ray_dist_y: %f\n", ray->sideDistX, ray->sideDistY );
+	//printf("side_dist avant: %f\n", ray->sideDistY);
 	while (ray->hit == 0)
 	{
 		if (ray->sideDistX < ray->sideDistY)
@@ -170,21 +187,44 @@ void dda(t_ray *ray)
 			ray->sideDistX += ray->deltaDistX;
 			ray->mapX += ray->stepX;
 			ray->side = 0;
+			//printf("ray_distX: %f\n", ray->sideDistX);
 		}
 		else
 		{
+			//printf("ray->delta: %f\n", ray->deltaDistY);
 			ray->sideDistY += ray->deltaDistY;
+			//printf("ray_distY: %f\n", ray->sideDistY);
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		if (ray->map[ray->mapY][ray->mapX] > '0')
+		if (ray->map[ray->mapY][ray->mapX] > '0' && ray->map[ray->mapY][ray->mapX] != 78)
 		{
+			//printf("go in\n");
 			if (ray->map[ray->mapY][ray->mapX] == '2')
 				ray->hit = 2;
 			else
 				ray->hit = 1;
 		}
 	}
+	//printf("side_dist apres: %f\n", ray->sideDistY);
+}
+
+void	new_image(t_player *player, t_ray *ray, t_col *column)
+{
+	int	x;
+	t_img		img;
+
+	x = 0;
+	img = *(player->img);
+	while (x < SCREEN_X)
+	{
+		update_ray_s(ray, x, player);
+		dda(ray);
+		update_column(&column, ray, x);
+		draw_column(player->img, column);
+		x++;
+	}
+	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 }
 
 int main(int ac, char **av)
@@ -194,7 +234,6 @@ int main(int ac, char **av)
 	t_ray       *ray;
 	t_col		*column;
 	t_img		img;
-	int         x;
 	t_map	*map;
 
 	map = map_init(map);
@@ -203,36 +242,22 @@ int main(int ac, char **av)
 	parsing_map(av[1], map);
 	checker(map);
 	print_struct_map(map);
-	x = 0;
 	img.mlx = mlx_init();
 	if (!img.mlx)
 		return (1);
 	if (init_player_s(&player, map))
 		return (1);
 	ray = init_ray_s(ray, map->map);
-	printf("\n\n\n\n\n");
 	ft_print_map(ray->map);
 	if (init_col_s(&column))
 		return (1);
 	if (!init_img(&img))
 		return (1);
-	
-	while (x < SCREEN_X)
-	{
-		printf("def\n");
-		update_ray_s(ray, x, player);
-		printf("1. %d\n", ray->mapX);
-		dda(ray);
-		printf("2. %d\n", ray->mapX);
-		update_column(&column, ray, x);
-		printf("hauteur du mur: %d\n",column->height);
-		printf("okok3\n");
-		draw_column(&img, column);
-		printf("okok4\n");
-		x++;
-	}
-	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
-	mlx_key_hook (img.mlx_win, esc_hook, &img);
+	player->column = column;
+	player->ray = ray;
+	player->img = &img;
+	new_image(player, ray, column);
+	mlx_key_hook(img.mlx_win, keys_hook, player);
 	mlx_hook(img.mlx_win, 17, 1L << 17, close_hook, &img);
 	mlx_loop(img.mlx);
 }

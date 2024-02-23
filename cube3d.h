@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 13:26:02 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:29:06 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ typedef struct s_map
 	char	**file;
 }		t_map;
 
-typedef struct	s_player
+typedef struct s_image
 {
-	double	posX;
-	double	posY;
-	double	corX;
-	double	corY;
-	double	planeX;
-	double	planeY;
-	double	time;
-	double	oldTime;
-}				t_player;
+	void	*mlx;
+	void	*mlx_win;
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		l_l;
+	int		en;
+}			t_img;
 
 typedef struct	s_ray
 {
@@ -80,16 +79,22 @@ typedef struct	s_column
 	int	corX;
 }			t_col;
 
-typedef struct s_image
+typedef struct	s_player
 {
-	void	*mlx;
-	void	*mlx_win;
-	void	*img_ptr;
-	char	*addr;
-	int		bpp;
-	int		l_l;
-	int		en;
-}			t_img;
+	double	posX;
+	double	posY;
+	double	corX;
+	double	corY;
+	double	planeX;
+	double	planeY;
+	double	time;
+	double	oldTime;
+	t_ray	*ray;
+	t_col	*column;
+	t_img	*img;
+	char	**map;
+}				t_player;
+
 
 # define SCREEN_X	1000
 # define SCREEN_Y	500
@@ -122,6 +127,10 @@ void	checker(t_map *map);
 int		close_hook(t_img *img);
 int		esc_hook(int keycode, t_img *img);
 void	draw_column(t_img *img, t_col *column);
+int		keys_hook(int keycode, t_player *player);
+
+//execution
+void	new_image(t_player *player, t_ray *ray, t_col *column);
 
 t_map	*map_init(t_map *map);
 #endif
