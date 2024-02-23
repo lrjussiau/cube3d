@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 07:06:23 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:26:43 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ int main(int ac, char **av)
 		error("Wrong input, insert the map.cub path.");
 	parsing_map(av[1], map);
 	checker(map);
+	print_struct_map(map);
 	print_struct_map(map);
 	img.mlx = mlx_init();
 	if (!img.mlx)

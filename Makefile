@@ -7,7 +7,10 @@ FILES = cube3d \
 			cleaner \
 			checker \
 			execution \
-			img_utils 
+			img_utils \
+			movement \
+			movement_utils \
+			minimap \
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

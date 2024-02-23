@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:43:01 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 12:48:54 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/23 08:04:20 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	check_player(t_map *map)
 				map->player_orientation = map->map[i][j];
 				map->player_pos_x = (double)j;
 				map->player_pos_y = (double)i;
+				map->map[i][j] = '0';
 				return ;
 			}
 			j++;
