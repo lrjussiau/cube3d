@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 09:10:39 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:33:23 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ int main(int ac, char **av)
 		error("Wrong input, insert the map.cub path.");
 	parsing_map(av[1], map);
 	checker(map);
+	print_struct_map(map);
 	print_struct_map(map);
 	img.mlx = mlx_init();
 	if (!img.mlx)

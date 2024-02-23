@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/22 12:29:06 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:25:23 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,15 @@ typedef struct	s_player
 
 # define SCREEN_X	1000
 # define SCREEN_Y	500
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define L_ARROW 123
+# define R_ARROW 124
+# define ESC 53
+
+# define MOVESPEED 1.0
 
 //utils
 void	error(char *str);
@@ -133,4 +142,19 @@ int		keys_hook(int keycode, t_player *player);
 void	new_image(t_player *player, t_ray *ray, t_col *column);
 
 t_map	*map_init(t_map *map);
+
+//Movement
+int		w_hook(t_player *player);
+int		a_hook(t_player *player);
+int		s_hook(t_player *player);
+int		d_hook(t_player *player);
+int		keys_hook(int keycode, t_player *player);
+
+//Movement Utils
+int		move_possible(t_player *player, char direc, char touch, double movement);
+void	clear(t_img *img);
+
+//Minimap
+void	print_mini_map(t_player *player);
+
 #endif
