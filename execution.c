@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 09:33:23 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:08:20 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int	update_ray_s(t_ray *ray, int x, t_player *player)
 	ray->mapX = (int)player->posX;
 	ray->mapY = (int)player->posY;
 	//printf("okok\n");
-	ray->cameraX = 2 * (SCREEN_X - x - 1) / (double)SCREEN_X - 1;
+	ray->cameraX = 2 * x / (double)SCREEN_X - 1;
 	//printf("cmaera: %f\n", ray->cameraX);
 	ray->corX = player->corX + player->planeX * ray->cameraX;
 	ray->corY =  player->corY + player->planeY * ray->cameraX;
@@ -248,6 +248,7 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 		draw_column(player->img, column);
 		x++;
 	}
+	printf("corX: %f, corY: %f\n", player->corX, player->corY);
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 }
 
@@ -282,7 +283,7 @@ int main(int ac, char **av)
 	player->ray = ray;
 	player->img = &img;
 	new_image(player, ray, column);
-	mlx_key_hook(img.mlx_win, keys_hook, player);
+	mlx_hook(img.mlx_win, 2, 1L << 0, keys_hook, player);
 	mlx_hook(img.mlx_win, 17, 1L << 17, close_hook, &img);
 	mlx_loop(img.mlx);
 }

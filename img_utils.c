@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 09:33:17 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:00:55 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ int	d_hook(t_player *player)
 	printf("go left\n");
 	printf("en x: %f\n", player->posX );
 	printf("en y: %f\n",player->posY);
-	if (player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == 78)
+	if (player->map[(int)player->posY][(int)(player->posX - player->corY * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX - player->corY * moveSpeed)] == 78)
 		player->posX -= player->corY * moveSpeed;
 	if (player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == 78)
-		player->posY -= player->corX * moveSpeed;
+		player->posY += player->corX * moveSpeed;
 	/*if (player->corX == 0)
 	{
 		if (player->map[(int)player->posY][(int)(player->posX - 1 * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX - 1 * moveSpeed)] == 78)
@@ -148,8 +148,8 @@ int	a_hook(t_player *player)
 	printf("en y: %f\n",player->posY);
 	if (player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == 78)
 		player->posX += player->corY * moveSpeed;
-	if (player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == 78)
-		player->posY += player->corX * moveSpeed;
+	if (player->map[(int)(player->posY - player->corX * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY - player->corX * moveSpeed)][(int)player->posX] == 78)
+		player->posY -= player->corX * moveSpeed;
 	//printf("what is there : %d\n", player->map[(int)player->posY][(int)(player->posX - 1 * moveSpeed)]);
 	/*if (player->corX == 0)
 	{
@@ -174,7 +174,7 @@ int	a_hook(t_player *player)
 	return (0);
 }
 
-int	left_arrow_hook(t_player *player)
+int	right_arrow_hook(t_player *player)
 {
 	double	oldCorX;
 	double	rotSpeed;
@@ -196,7 +196,7 @@ int	left_arrow_hook(t_player *player)
 	return (0);
 }
 
-int	right_arrow_hook(t_player *player)
+int	left_arrow_hook(t_player *player)
 {
 	double	oldCorX;
 	double	rotSpeed;
@@ -243,6 +243,7 @@ int	keys_hook(int keycode, t_player *player)
 		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
 		exit(0);
 	}
+	print_mini_map(player);
 	return (0);
 }
 

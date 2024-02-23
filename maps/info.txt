@@ -5,7 +5,7 @@ lecture de map actuellement:
 
 
 
-x                         -x
+-x                         x
 
 
 

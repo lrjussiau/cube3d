@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:10:23 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/23 09:27:06 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:34:36 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@
 // 	return (0);
 // }
 
-int	w_hook(t_player *player)
+/*int	w_hook(t_player *player)
 {
 	double	moveSpeed;
 
@@ -218,4 +218,4 @@ int	keys_hook(int keycode, t_player *player)
 	}
 	print_mini_map(player);
 	return (0);
-}
+}*/
