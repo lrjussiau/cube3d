@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 07:06:23 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:10:39 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,33 @@
 // si corX = 0 -> planeX = 0.66 si corY = 0 ->planeY = 0.66
 //-1 <= corX et corY <= 1
 //camera plane un peu decale sur la gauche
+
+static void	init_orientation(t_player **player, char orientation)
+{
+	if (orientation == 'N' || orientation == 'S')
+	{
+		if (orientation == 'N')
+			(*player)->corY = -1;
+		else
+			(*player)->corY = 1;
+		(*player)->planeX = 0.66;
+		(*player)->planeY = 0;
+		(*player)->corX = 0;
+		(*player)->planeX = 0.66;
+		(*player)->planeY = 0;
+	}
+	if (orientation == 'E' || orientation == 'W')
+	{
+		if (orientation == 'E')
+			(*player)->corX = -1;
+		else
+			(*player)->corX = 1;
+		(*player)->corY = 0;
+		(*player)->planeX = 0;
+		(*player)->planeY = 0.66;
+	}
+	return ;
+}
 int	init_player_s(t_player **player, t_map *map)
 {
 	(*player) = malloc(sizeof(t_player));
@@ -30,13 +57,10 @@ int	init_player_s(t_player **player, t_map *map)
 		return (1);
 	(*player)->posX = map->player_pos_x;
 	(*player)->posY = map->player_pos_y;
-	(*player)->corX = 0;
-	(*player)->corY = -1;
-	(*player)->planeX = 0.66;
-	(*player)->planeY = 0;
 	(*player)->time = 0;
 	(*player)->oldTime = 0;
 	(*player)->map = map->map;
+	init_orientation(player, map->player_orientation);
 	return (0);
 }
 

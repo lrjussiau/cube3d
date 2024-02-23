@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 06:59:59 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 09:29:01 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,11 @@ int	d_hook(t_player *player)
 	printf("go left\n");
 	printf("en x: %f\n", player->posX );
 	printf("en y: %f\n",player->posY);
-	if (player->corX == 0)
+	if (player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == 78)
+		player->posX -= player->corY * moveSpeed;
+	if (player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == 78)
+		player->posY -= player->corX * moveSpeed;
+	/*if (player->corX == 0)
 	{
 		if (player->map[(int)player->posY][(int)(player->posX - 1 * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX - 1 * moveSpeed)] == 78)
 		{
@@ -102,7 +106,7 @@ int	d_hook(t_player *player)
 	{
 		if (player->map[(int)(player->posY - 1 * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY - 1 * moveSpeed)][(int)player->posX] == 78)
 			player->posY -= 1 * moveSpeed;
-	}
+	}*/
 	clear(player->img);
 	mlx_clear_window (player->img->mlx, player->img->mlx_win);
 	//usleep(10000000);
@@ -142,8 +146,12 @@ int	a_hook(t_player *player)
 	printf("go right\n");
 	printf("en x: %f\n", player->posX );
 	printf("en y: %f\n",player->posY);
+	if (player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX + player->corY * moveSpeed)] == 78)
+		player->posX += player->corY * moveSpeed;
+	if (player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY + player->corX * moveSpeed)][(int)player->posX] == 78)
+		player->posY += player->corX * moveSpeed;
 	//printf("what is there : %d\n", player->map[(int)player->posY][(int)(player->posX - 1 * moveSpeed)]);
-	if (player->corX == 0)
+	/*if (player->corX == 0)
 	{
 		if (player->map[(int)player->posY][(int)(player->posX + 1 * moveSpeed)] == '0' || player->map[(int)player->posY][(int)(player->posX + 1 * moveSpeed)] == 78)
 		{
@@ -154,7 +162,7 @@ int	a_hook(t_player *player)
 	{
 		if (player->map[(int)(player->posY + 1 * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY + 1 * moveSpeed)][(int)player->posX] == 78)
 			player->posY += 1 * moveSpeed;
-	}
+	}*/
 	//printf("what is there : %d\n", player->map[(int)(player->posY - player->corY * moveSpeed)][(int)player->posX]);
 	//if (player->map[(int)(player->posY + player->corY * moveSpeed)][(int)player->posX] == '0' || player->map[(int)(player->posY + player->corY * moveSpeed)][(int)player->posX] == 78)
 	//	player->posY += player->corY * moveSpeed;
@@ -168,13 +176,45 @@ int	a_hook(t_player *player)
 
 int	left_arrow_hook(t_player *player)
 {
+	double	oldCorX;
+	double	rotSpeed;
+	double	oldPlaneX;
 	
+	rotSpeed = 1.5708/2;
+	oldCorX = player->corX;
+	oldPlaneX = player->planeX;
+	//printf(" corx avant: %f\n", player->corX);
+	//printf(" cory avant: %f\n", player->corY);
+	player->corX = player->corX * cos(rotSpeed) - player->corY * sin(rotSpeed);
+	player->corY = oldCorX * sin(rotSpeed) + player->corY * cos(rotSpeed);
+	player->planeX = player->planeX * cos(rotSpeed) - player->planeY * sin(rotSpeed);
+	player->planeY = oldPlaneX * sin(rotSpeed) + player->planeY * cos(rotSpeed);
+	//printf(" corx apres: %f\n", player->corX);
+	//printf(" cory apres: %f\n", player->corY);
+	clear(player->img);
+	new_image(player, player->ray, player->column);
 	return (0);
 }
 
 int	right_arrow_hook(t_player *player)
 {
-	
+	double	oldCorX;
+	double	rotSpeed;
+	double	oldPlaneX;
+
+	rotSpeed = 1.5708/2;
+	//printf(" corx avant: %f\n", player->corX);
+	//printf(" cory avant: %f\n", player->corY);
+	oldCorX = player->corX;
+	oldPlaneX = player->planeX;
+	player->corX = player->corX * cos(-rotSpeed) - player->corY * sin(-rotSpeed);
+	player->corY = oldCorX * sin(-rotSpeed) + player->corY * cos(-rotSpeed);
+	player->planeX = player->planeX * cos(-rotSpeed) - player->planeY * sin(-rotSpeed);
+	player->planeY = oldPlaneX * sin(-rotSpeed) + player->planeY * cos(-rotSpeed);
+	//printf(" corx apres: %f\n", player->corX);
+	//printf(" cory apres: %f\n", player->corY);
+	clear(player->img);
+	new_image(player, player->ray, player->column);
 	return (0);
 }
 
