@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 11:08:20 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 11:56:33 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	init_player_s(t_player **player, t_map *map)
 	(*player) = malloc(sizeof(t_player));
 	if (!(*player))
 		return (1);
-	(*player)->posX = map->player_pos_x;
-	(*player)->posY = map->player_pos_y;
+	(*player)->posX = map->player_pos_x + 0.5;
+	(*player)->posY = map->player_pos_y + 0.5;
 	(*player)->time = 0;
 	(*player)->oldTime = 0;
 	(*player)->map = map->map;
@@ -85,7 +85,7 @@ t_ray	*init_ray_s(t_ray *ray, char **map)
 	return (ray);
 }
 
-int	init_col_s(t_col **column)
+int	init_col_s(t_col **column, t_player *player)
 {
 	(*column) = malloc(sizeof(t_col));
 	if (!(*column))
@@ -95,6 +95,8 @@ int	init_col_s(t_col **column)
 	(*column)->start = 0;
 	(*column)->end = 0;
 	(*column)->corX = 0;
+	(*column)->cor_x = player->corX;
+	(*column)->cor_y = player->corY;
 	return (0);
 }
 
@@ -170,7 +172,7 @@ int	update_ray_s(t_ray *ray, int x, t_player *player)
 	return (0);
 }
 
-int	update_column(t_col **col, t_ray *ray, int x)
+int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 {
 	t_col	*column;
 
@@ -186,7 +188,7 @@ int	update_column(t_col **col, t_ray *ray, int x)
 	{
 		ray->wallDist = ray->sideDistY - ray->deltaDistY;
 		//printf("ray_side: %f, ray_delta: %f\n",ray->sideDistY , ray->deltaDistY);
-		column->color = column->color / 2;
+		column->color = 1;
 	}
 	//printf("distance du mur: %f\n",ray->wallDist);
 	column->height = (double)SCREEN_Y / ray->wallDist;
@@ -197,6 +199,8 @@ int	update_column(t_col **col, t_ray *ray, int x)
 	if (column->end >= SCREEN_Y)
 		column->end = SCREEN_Y - 1;
 	column->corX = x;
+	column->cor_x = player->corX;
+	column->cor_y = player->corY;
 	return (0);
 }
 
@@ -244,7 +248,7 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 	{
 		update_ray_s(ray, x, player);
 		dda(ray);
-		update_column(&column, ray, x);
+		update_column(&column, ray, x, player);
 		draw_column(player->img, column);
 		x++;
 	}
@@ -275,7 +279,7 @@ int main(int ac, char **av)
 		return (1);
 	ray = init_ray_s(ray, map->map);
 	ft_print_map(ray->map);
-	if (init_col_s(&column))
+	if (init_col_s(&column, player))
 		return (1);
 	if (!init_img(&img))
 		return (1);

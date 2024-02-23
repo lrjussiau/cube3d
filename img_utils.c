@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/23 11:00:55 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:15:28 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,43 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
+
+//add another condition with ray coordinate for 0 side hit
 void	draw_column(t_img *img, t_col *column)
 {
 	int	y;
 
 	y = column->start;
 	//printf("height: %d ->color: %d\n", column->height, column->color);
+	if (column->cor_x <=  0 && column->cor_y <= 0)
+	{
+		if (column->color == 1)
+			column->color = 56575;
+		else
+			column->color = 16711680;
+	}
+	if (column->cor_x > 0 && column->cor_y > 0)
+	{
+		if (column->color == 1)
+			column->color = 255;
+		else
+			column->color = 65280;
+	}
+	if (column->cor_x >  0 && column->cor_y <= 0)
+	{
+		if (column->color == 1)
+			column->color = 56575;
+		else
+			column->color = 65280;
+	}
+	if (column->cor_x <=  0 && column->cor_y > 0)
+	{
+		if (column->color == 1)
+			column->color = 255;
+		else
+			column->color = 16711680;
+		
+	}
 	while (y <= column->end)
 	{
 		//printf("y: %d y_end: %d\n", y, column->end);
@@ -87,7 +118,7 @@ int	d_hook(t_player *player)
 {
 	double	moveSpeed;
 
-	moveSpeed = 1;
+	moveSpeed = 0.25;
 	printf("go left\n");
 	printf("en x: %f\n", player->posX );
 	printf("en y: %f\n",player->posY);
@@ -180,7 +211,7 @@ int	right_arrow_hook(t_player *player)
 	double	rotSpeed;
 	double	oldPlaneX;
 	
-	rotSpeed = 1.5708/2;
+	rotSpeed = 1.5708/15;
 	oldCorX = player->corX;
 	oldPlaneX = player->planeX;
 	//printf(" corx avant: %f\n", player->corX);
@@ -202,7 +233,7 @@ int	left_arrow_hook(t_player *player)
 	double	rotSpeed;
 	double	oldPlaneX;
 
-	rotSpeed = 1.5708/2;
+	rotSpeed = 1.5708/15;
 	//printf(" corx avant: %f\n", player->corX);
 	//printf(" cory avant: %f\n", player->corY);
 	oldCorX = player->corX;
