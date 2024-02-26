@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 09:15:47 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/23 09:28:20 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:58:55 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	print_mini_map(t_player *player)
 
 	printf("\n\n");
 	tab = player->map;
-	tab[(int)player->posY][(int)player->posX] = 'P';
+	tab[(int)player->pos_y][(int)player->pos_x] = 'P';
 	i = 0;
 	while (tab[i])
 	{
@@ -35,5 +35,5 @@ void	print_mini_map(t_player *player)
 		write(1, "\n", 1);
 		i++;
 	}
-	tab[(int)player->posY][(int)player->posX] = '0';
+	tab[(int)player->pos_y][(int)player->pos_x] = '0';
 }

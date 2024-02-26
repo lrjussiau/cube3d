@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/23 11:24:33 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:00 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,22 @@ typedef struct s_image
 
 typedef struct	s_ray
 {
-	int		mapX;
-	int		mapY;
-	int		stepX;
-	int		stepY;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
 	int		hit;
 	int		side;
-	double	sideDistX;
-	double	sideDistY;
-	double	cameraX;
-	double	corX;
-	double	corY;
-	double	distX;
-	double	distY;
-	double	deltaDistX;
-	double	deltaDistY;
-	double	wallDist;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	camera_x;
+	double	cor_x;
+	double	cor_y;
+	double	dist_x;
+	double	dist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	wall_dist;
 	char	**map;
 }				t_ray;
 
@@ -76,21 +76,25 @@ typedef struct	s_column
 	int	start;
 	int	end;
 	int	color;
-	int	corX;
+	int	is_right;
+	int	side_y;
+	int	x;
+	int	ground_color;
+	int	sky_color;
 	double	cor_x;
 	double	cor_y;
 }			t_col;
 
 typedef struct	s_player
 {
-	double	posX;
-	double	posY;
-	double	corX;
-	double	corY;
-	double	planeX;
-	double	planeY;
+	double	pos_x;
+	double	pos_y;
+	double	cor_x;
+	double	cor_y;
+	double	plane_x;
+	double	plane_y;
 	double	time;
-	double	oldTime;
+	double	old_time;
 	t_ray	*ray;
 	t_col	*column;
 	t_img	*img;
@@ -109,6 +113,12 @@ typedef struct	s_player
 # define ESC 53
 
 # define MOVESPEED 1.0
+# define ROTSPEED 1.5708/15
+
+# define CUBE_COLOR_N 65280
+# define CUBE_COLOR_S 16711680
+# define CUBE_COLOR_E 255
+# define CUBE_COLOR_W 56575
 
 //utils
 void	error(char *str);
@@ -134,14 +144,6 @@ void	cleaner(t_map *map);
 //checker
 void	checker(t_map *map);
 
-//img_utils
-int		close_hook(t_img *img);
-int		esc_hook(int keycode, t_img *img);
-void	draw_column(t_img *img, t_col *column);
-int		keys_hook(int keycode, t_player *player);
-
-//execution
-void	new_image(t_player *player, t_ray *ray, t_col *column);
 
 t_map	*map_init(t_map *map);
 
@@ -158,5 +160,27 @@ void	clear(t_img *img);
 
 //Minimap
 void	print_mini_map(t_player *player);
+
+//struct_init
+int		init_player_s(t_player **player, t_map *map, t_img *img);
+t_ray	*init_ray_s(char **map);
+t_col	*init_col_s(t_player *player, t_map *map);
+t_img	*init_img(t_img *img);
+
+//struct_update
+int		update_ray_s(t_ray *ray, int x, t_player *player);
+int		update_column(t_col **col, t_ray *ray, int x, t_player *player);
+
+//image_utils
+int		keys_hook(int keycode, t_player *player);
+void	pixel_put(t_img *img, int x, int y, int color);
+void	clear_window(t_img *img);
+int		transform_color(char *rgb_color);
+
+//draw_image
+void	draw_column(t_img *img, t_col *column);
+void	draw_sky(t_img *img, t_col *column);
+void	draw_ground(t_img *img, t_col *column);
+void	new_image(t_player *player, t_ray *ray, t_col *column);
 
 #endif

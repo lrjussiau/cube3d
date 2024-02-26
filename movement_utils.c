@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/23 08:43:18 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/26 06:58:31 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	move_possible(t_player *player, char direc, char touch, double movement)
+/*int	move_possible(t_player *player, char direc, char touch, double movement)
 {
 	if (direc == 'x')
 	{
@@ -41,4 +41,4 @@ int	move_possible(t_player *player, char direc, char touch, double movement)
 		}
 	}
 	return (1);
-}
+}*/

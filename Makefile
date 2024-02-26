@@ -6,8 +6,11 @@ FILES = cube3d \
 			debug \
 			cleaner \
 			checker \
-			execution \
+			main \
 			img_utils \
+			struct_init \
+			struct_update \
+			draw_image \
 			movement \
 			movement_utils \
 			minimap \
