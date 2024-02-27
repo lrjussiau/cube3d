@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:04:56 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:32:28 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:15:13 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 	}
 	if (ray->cor_y < 0)
 		column->side_y = 1;
-	if (ray->cor_x < 0)
+	if (ray->cor_x < 0)	
 		column->is_right = 1;
 	column->height = (double)SCREEN_Y / ray->wall_dist;
 	column->start = ((-column->height) / 2) + (SCREEN_Y / 2);
@@ -99,5 +99,9 @@ int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 	column->x = x;
 	column->cor_x = player->cor_x;
 	column->cor_y = player->cor_y;
+	if (column->side_y == 0)
+		column->wall_x = player->pos_y + ray->wall_dist * ray->cor_y;
+	else
+		column->wall_x = player->pos_x + ray->wall_dist * ray->cor_x;
 	return (0);
 }

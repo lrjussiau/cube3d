@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 11:04:18 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:37:44 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int main(int ac, char **av)
 	if (!img.mlx)
 		return (1);
 	init_player_s(&player, map, &img);
+	// printf("okok\n");
 	new_image(player, player->ray, player->column);
 	mlx_hook(img.mlx_win, 2, 1L << 0, keys_hook, player);
 	mlx_loop(img.mlx);

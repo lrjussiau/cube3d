@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:47 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:35:05 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+t_tex	*load_texture(t_img *root, t_tex *tex, char *path)
+{
+	int	width;
+	int	height;
+
+	tex->img_ptr = mlx_xpm_file_to_image(root->mlx, path, &width, &height);
+	if (!tex->img_ptr)
+		error("mlx_xpm_file_to_image() failure\n");
+	tex->width = width;
+	tex->height = height;
+	tex->data = mlx_get_data_addr(tex->img_ptr, &tex->bits_per_pixel,
+			&tex->line_length, &tex->endian);
+	return (tex);
+}
 
 static void	init_orientation(t_player **player, char orientation)
 {
@@ -52,7 +67,7 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
-	(*player)->img = init_img(img);
+	(*player)->img = init_img(img, map);
 	return (0);
 }
 
@@ -97,12 +112,35 @@ t_col	*init_col_s(t_player *player, t_map *map)
 	return (column);
 }
 
-t_img *init_img(t_img *img)
+t_img *init_img(t_img *img, t_map *map)
 {
+	img->so_tex = malloc(sizeof(t_tex));
+	img->no_tex = malloc(sizeof(t_tex));
+	img->ea_tex = malloc(sizeof(t_tex));
+	img->we_tex = malloc(sizeof(t_tex));
+	if (!img->so_tex || !img->no_tex || !img->ea_tex || !img->we_tex)
+		return (0);
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
 	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X, SCREEN_Y);
 	if (!img->img_ptr)
 		return (0);
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->l_l, &img->en);
+	img->so_tex = load_texture(img, img->so_tex, map->so_path);
+	img->no_tex = load_texture(img, img->no_tex, map->no_path);
+	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
+	img->we_tex = load_texture(img, img->we_tex, map->we_path);
 	return (img);
+}
+
+t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex)
+{
+	line = safe_malloc(sizeof (t_line));
+	line->x = x;
+	line->y = 0;
+	line->y0 = col->start;
+	line->y1 = col->end;
+	line->tex_y = 0;
+	line->tex_x = 0;
+	
+	return (line);
 }

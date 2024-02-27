@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:29:28 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:01:54 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 		dda(ray);
 		update_column(&column, ray, x, player);
 		draw_sky(player->img, column);
-		draw_column(player->img, column);
+		printf("okok\n");
+		draw_texture(player, column, x);
+		printf("okok\n");
+		// draw_column(player->img, column);
 		draw_ground(player->img, column);
 		x++;
 	}
