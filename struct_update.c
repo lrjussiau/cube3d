@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:04:56 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:32:28 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:13:31 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	update_ray_s(t_ray *ray, int x, t_player *player)
 	ray->cor_y =  player->cor_y + player->plane_y * ray->camera_x;
 	if (ray->cor_x == 0)
 	{
-		printf("raycor_x == 0\n");
+		//printf("raycor_x == 0\n");
 		ray->deltadist_x = 1e30;
 	}
 	else
@@ -90,10 +90,10 @@ int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 	if (ray->cor_x < 0)
 		column->is_right = 1;
 	column->height = (double)SCREEN_Y / ray->wall_dist;
-	column->start = ((-column->height) / 2) + (SCREEN_Y / 2);
+	column->start = ((-column->height) / 2) + (SCREEN_Y / 2) + column->pitch;
 	if (column->start < 0)
 		column->start = 0;
-	column->end = (column->height / 2) + (SCREEN_Y / 2);
+	column->end = (column->height / 2) + (SCREEN_Y / 2) + column->pitch;
 	if (column->end >= SCREEN_Y)
 		column->end = SCREEN_Y - 1;
 	column->x = x;

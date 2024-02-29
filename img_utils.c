@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:27:16 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:19:20 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ int	w_hook(t_player *player)
 		player->pos_x += player->cor_x * MOVESPEED;
 	if (player->map[(int)(player->pos_y + player->cor_y * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y + player->cor_y * MOVESPEED)][(int)player->pos_x] == 78)
 		player->pos_y += player->cor_y * MOVESPEED;
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
 	return (0);
 }
 
@@ -75,9 +73,6 @@ int	d_hook(t_player *player)
 		player->pos_x -= player->cor_y * MOVESPEED;
 	if (player->map[(int)(player->pos_y + player->cor_x * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y + player->cor_x * MOVESPEED)][(int)player->pos_x] == 78)
 		player->pos_y += player->cor_x * MOVESPEED;
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
-
 	return (0);
 }
 
@@ -87,8 +82,6 @@ int	s_hook(t_player *player)
 		player->pos_x -= player->cor_x * MOVESPEED;
 	if (player->map[(int)(player->pos_y - player->cor_y * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y - player->cor_y * MOVESPEED)][(int)player->pos_x] == 78)
 		player->pos_y -= player->cor_y * MOVESPEED;
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
 	return (0);
 }
 
@@ -98,8 +91,6 @@ int	a_hook(t_player *player)
 		player->pos_x += player->cor_y * MOVESPEED;
 	if (player->map[(int)(player->pos_y - player->cor_x * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y - player->cor_x * MOVESPEED)][(int)player->pos_x] == 78)
 		player->pos_y -= player->cor_x * MOVESPEED;
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
 	return (0);
 }
 
@@ -114,8 +105,6 @@ int	right_arrow_hook(t_player *player)
 	player->cor_y = oldcor_x * sin(ROTSPEED) + player->cor_y * cos(ROTSPEED);
 	player->plane_x = player->plane_x * cos(ROTSPEED) - player->plane_y * sin(ROTSPEED);
 	player->plane_y = oldplane_x * sin(ROTSPEED) + player->plane_y * cos(ROTSPEED);
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
 	return (0);
 }
 
@@ -130,8 +119,6 @@ int	left_arrow_hook(t_player *player)
 	player->cor_y = oldcor_x * sin(-ROTSPEED) + player->cor_y * cos(-ROTSPEED);
 	player->plane_x = player->plane_x * cos(-ROTSPEED) - player->plane_y * sin(-ROTSPEED);
 	player->plane_y = oldplane_x * sin(-ROTSPEED) + player->plane_y * cos(-ROTSPEED);
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
 	return (0);
 }
 
@@ -160,7 +147,43 @@ int	keys_hook(int keycode, t_player *player)
 		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
 		exit(0);
 	}
-	print_mini_map(player);
+	player->minimap = minimap_init(player, player->map_s);
+	clear_window(player->img);
+	new_image(player, player->ray, player->column);
+	//update_map(player);
+	//print_mini_map(player);
+	return (0);
+}
+
+int	mouse_move(int x, int y, t_player *player)
+{ 
+	printf("mouse_move: x: %d, y: %d, player; %d\n", x, y, player->mouse_x);
+	/*if (x > (player->mouse_x + 10))
+		right_arrow_hook(player);
+	else if (x < (player->mouse_x - 10))
+		left_arrow_hook(player);
+	else
+		;*/
+	if (y > (player->mouse_y + 50))
+	{
+		//printf("start before: %d\n",player->column->end);
+		player->column->pitch += 1;
+		player->column->pitch += 1;
+		//printf("start after: %d\n",player->column->end);
+	}
+	else if (y < (player->mouse_y - 50))
+	{
+		printf("hello\n");
+		player->column->pitch -= 1;
+		player->column->pitch -= 1;
+	}
+	else
+		;
+	player->mouse_x = x;
+	player->mouse_x = y;
+	clear_window(player->img);
+	new_image(player, player->ray, player->column);
+	//update_map(player);
 	return (0);
 }
 

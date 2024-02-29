@@ -14,6 +14,7 @@ FILES = cube3d \
 			movement \
 			movement_utils \
 			minimap \
+			map \
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

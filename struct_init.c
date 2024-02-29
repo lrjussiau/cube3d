@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:47 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:14:04 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	init_orientation(t_player **player, char orientation)
 
 int	init_player_s(t_player **player, t_map *map, t_img *img)
 {
+	printf("hello_player\n");
 	(*player) = malloc(sizeof(t_player));
 	if (!(*player))
 		return (1);
@@ -53,6 +54,10 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
 	(*player)->img = init_img(img);
+	(*player)->minimap = minimap_init(*player, map);
+	(*player)->map_s = map;
+	(*player)->mouse_x = 0;
+	(*player)->mouse_y = 0;
 	return (0);
 }
 
@@ -94,6 +99,7 @@ t_col	*init_col_s(t_player *player, t_map *map)
 	column->sky_color = transform_color(map->cell_color);
 	column->cor_x = player->cor_x;
 	column->cor_y = player->cor_y;
+	column->pitch = 0;
 	return (column);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/26 10:29:28 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 08:31:17 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,17 +95,25 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 
 	x = 0;
 	img = *(player->img);
+	//printf("player_pos_x: %f, player_pos_y: %f", player->pos_x, player->pos_y);
 	while (x < SCREEN_X)
 	{
 		update_ray_s(ray, x, player);
 		//printf("ray_cor_x: %f ray_cor_y: %f\n", ray->cor_x, ray->cor_y);
 		dda(ray);
+		//printf("hello1\n");
 		update_column(&column, ray, x, player);
+		//printf("hello2\n");
 		draw_sky(player->img, column);
+		//printf("hello3\n");
 		draw_column(player->img, column);
+		//printf("hello4\n");
 		draw_ground(player->img, column);
 		x++;
 	}
-	//printf("cor_x: %f, cor_y: %f\n", player->cor_x, player->cor_y);
+	//printf("player: posx: %f, posy: %f, corx: %f, cory: %f\n", player->pos_x, player->pos_y, player->cor_x, player->cor_y);
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
+	clear_minimap(&img, player->minimap);
+	draw_minimap(player->minimap, player);
+	
 }

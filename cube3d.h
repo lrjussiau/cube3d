@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/26 10:58:00 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:13:53 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,45 @@ typedef struct	s_column
 	int	x;
 	int	ground_color;
 	int	sky_color;
+	int	pitch;
 	double	cor_x;
 	double	cor_y;
 }			t_col;
+
+typedef struct	s_minimap
+{
+	int		size;
+	int		y_start;
+	int		x_start;
+	char	**map;
+	double	pos_x;
+	double	pos_y;
+	double	round_x;
+	double	round_y;
+	double	cor_x;
+	double	cor_y;
+	double	orientation;
+}			t_minimap;
+
+typedef struct s_sprite
+{
+	double	sprite_x;
+	double	sprite_y;
+	double	inv_det;
+	double	transform_x;
+	double	transform_y;
+	int		sprite_screen_x;
+	int		sprite_height;
+	int		sprite_width;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		tex_x;
+	int		tex_y;
+	int		d;
+	int		color;
+}				t_sprite;
 
 typedef struct	s_player
 {
@@ -95,15 +131,18 @@ typedef struct	s_player
 	double	plane_y;
 	double	time;
 	double	old_time;
+	char	**map;
+	int		mouse_x;
+	int		mouse_y;
+	t_map	*map_s;
 	t_ray	*ray;
 	t_col	*column;
 	t_img	*img;
-	char	**map;
+	t_minimap	*minimap;
 }				t_player;
 
-
-# define SCREEN_X	1000
-# define SCREEN_Y	500
+# define SCREEN_X	2000
+# define SCREEN_Y	1000
 # define W 13
 # define A 0
 # define S 1
@@ -112,13 +151,13 @@ typedef struct	s_player
 # define R_ARROW 124
 # define ESC 53
 
-# define MOVESPEED 1.0
+# define MOVESPEED 0.4
 # define ROTSPEED 1.5708/15
 
-# define CUBE_COLOR_N 65280
-# define CUBE_COLOR_S 16711680
-# define CUBE_COLOR_E 255
-# define CUBE_COLOR_W 56575
+# define CUBE_COLOR_N 4915230
+# define CUBE_COLOR_S 25600
+# define CUBE_COLOR_E 6264488
+# define CUBE_COLOR_W 8421376
 
 //utils
 void	error(char *str);
@@ -173,6 +212,7 @@ int		update_column(t_col **col, t_ray *ray, int x, t_player *player);
 
 //image_utils
 int		keys_hook(int keycode, t_player *player);
+int		mouse_move(int x, int y, t_player *player);
 void	pixel_put(t_img *img, int x, int y, int color);
 void	clear_window(t_img *img);
 int		transform_color(char *rgb_color);
@@ -182,5 +222,12 @@ void	draw_column(t_img *img, t_col *column);
 void	draw_sky(t_img *img, t_col *column);
 void	draw_ground(t_img *img, t_col *column);
 void	new_image(t_player *player, t_ray *ray, t_col *column);
+
+//map
+char	**extract_minimap(t_player *player, t_map *map);
+void	clear_minimap(t_img *img, t_minimap *map);
+t_minimap *minimap_init(t_player *player, t_map *map);
+char	**extract_minimap(t_player *player, t_map *map);
+void 	draw_minimap(t_minimap *map, t_player *player);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 09:15:47 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/26 06:58:55 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/28 07:11:31 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	print_mini_map(t_player *player)
 
 	printf("\n\n");
 	tab = player->map;
+	//printf("il y a roblem\n");
 	tab[(int)player->pos_y][(int)player->pos_x] = 'P';
 	i = 0;
 	while (tab[i])
