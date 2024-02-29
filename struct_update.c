@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:04:56 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/27 11:15:13 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:19:24 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,11 @@ int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 	column->x = x;
 	column->cor_x = player->cor_x;
 	column->cor_y = player->cor_y;
-	if (column->side_y == 0)
+	if (column->color != 1)
 		column->wall_x = player->pos_y + ray->wall_dist * ray->cor_y;
 	else
 		column->wall_x = player->pos_x + ray->wall_dist * ray->cor_x;
+	column->wall_x -= floor(column->wall_x);
+	printf("wall_x : %f\n", column->wall_x);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/27 12:35:05 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:25:18 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ t_col	*init_col_s(t_player *player, t_map *map)
 
 t_img *init_img(t_img *img, t_map *map)
 {
+	img->addr = malloc(sizeof(char *));
 	img->so_tex = malloc(sizeof(t_tex));
 	img->no_tex = malloc(sizeof(t_tex));
 	img->ea_tex = malloc(sizeof(t_tex));
@@ -141,6 +142,5 @@ t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex)
 	line->y1 = col->end;
 	line->tex_y = 0;
 	line->tex_x = 0;
-	
 	return (line);
 }

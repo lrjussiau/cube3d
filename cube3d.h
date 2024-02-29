@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/27 12:25:54 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:20:42 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct	s_line
 # define R_ARROW 124
 # define ESC 53
 
-# define MOVESPEED 1.0
+# define MOVESPEED 0.5
 # define ROTSPEED 1.5708/15
 
 # define CUBE_COLOR_N 65280
