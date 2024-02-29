@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/29 08:31:17 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:33:08 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,8 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 		update_column(&column, ray, x, player);
 		//printf("hello2\n");
 		draw_sky(player->img, column);
-		//printf("hello3\n");
-		draw_column(player->img, column);
-		//printf("hello4\n");
+		draw_texture(player, column, x);
+		// draw_column(player->img, column);
 		draw_ground(player->img, column);
 		x++;
 	}

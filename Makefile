@@ -15,6 +15,7 @@ FILES = cube3d \
 			movement_utils \
 			minimap \
 			map \
+			apply_texture \
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

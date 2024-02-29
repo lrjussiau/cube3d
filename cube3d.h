@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/29 16:13:53 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:32:30 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ typedef struct s_map
 	char	**file;
 }		t_map;
 
+typedef struct s_tex
+{
+	void	*img_ptr;
+	char	*data;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
+}				t_tex;
+
 typedef struct s_image
 {
 	void	*mlx;
@@ -47,6 +58,10 @@ typedef struct s_image
 	int		bpp;
 	int		l_l;
 	int		en;
+	t_tex	*so_tex;
+	t_tex	*no_tex;
+	t_tex	*ea_tex;
+	t_tex	*we_tex;
 }			t_img;
 
 typedef struct	s_ray
@@ -84,6 +99,7 @@ typedef struct	s_column
 	int	pitch;
 	double	cor_x;
 	double	cor_y;
+	double	wall_x;
 }			t_col;
 
 typedef struct	s_minimap
@@ -141,8 +157,18 @@ typedef struct	s_player
 	t_minimap	*minimap;
 }				t_player;
 
-# define SCREEN_X	2000
-# define SCREEN_Y	1000
+typedef struct	s_line
+{
+	int		x;
+	int		y;
+	int		y0;
+	int		y1;
+	int		tex_x;
+	int		tex_y;
+}				t_line;
+
+# define SCREEN_X	1000
+# define SCREEN_Y	500
 # define W 13
 # define A 0
 # define S 1
@@ -204,7 +230,9 @@ void	print_mini_map(t_player *player);
 int		init_player_s(t_player **player, t_map *map, t_img *img);
 t_ray	*init_ray_s(char **map);
 t_col	*init_col_s(t_player *player, t_map *map);
-t_img	*init_img(t_img *img);
+t_img	*init_img(t_img *img, t_map *map);
+t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex);
+t_tex	*load_texture(t_img *root, t_tex *tex, char *path);
 
 //struct_update
 int		update_ray_s(t_ray *ray, int x, t_player *player);
@@ -222,6 +250,7 @@ void	draw_column(t_img *img, t_col *column);
 void	draw_sky(t_img *img, t_col *column);
 void	draw_ground(t_img *img, t_col *column);
 void	new_image(t_player *player, t_ray *ray, t_col *column);
+void	draw_texture(t_player *player, t_col *column, int x);
 
 //map
 char	**extract_minimap(t_player *player, t_map *map);
