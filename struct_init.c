@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/29 16:14:04 by vvuadens         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/29 10:25:18 by ljussiau         ###   ########.fr       */
->>>>>>> 32a971e4b7dbd6fbc0408610617ae328a3ed360f
+/*   Updated: 2024/03/01 08:09:10 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +56,6 @@ static void	init_orientation(t_player **player, char orientation)
 
 int	init_player_s(t_player **player, t_map *map, t_img *img)
 {
-	printf("hello_player\n");
 	(*player) = malloc(sizeof(t_player));
 	if (!(*player))
 		return (1);
@@ -72,7 +67,7 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
-	(*player)->img = init_img(img);
+	(*player)->img = init_img(img, map);
 	(*player)->minimap = minimap_init(*player, map);
 	(*player)->map_s = map;
 	(*player)->mouse_x = 0;

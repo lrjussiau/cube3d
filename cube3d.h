@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/29 16:32:30 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:12:15 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,13 @@ typedef struct s_image
 	t_tex	*we_tex;
 }			t_img;
 
+typedef struct s_sprite {
+	char	*name;
+	char	**paths;
+	int	width;
+	int	height;
+}		t_sprite;
+
 typedef struct	s_ray
 {
 	int		map_x;
@@ -117,7 +124,7 @@ typedef struct	s_minimap
 	double	orientation;
 }			t_minimap;
 
-typedef struct s_sprite
+/*typedef struct s_sprite
 {
 	double	sprite_x;
 	double	sprite_y;
@@ -135,7 +142,7 @@ typedef struct s_sprite
 	int		tex_y;
 	int		d;
 	int		color;
-}				t_sprite;
+}				t_sprite;*/
 
 typedef struct	s_player
 {
