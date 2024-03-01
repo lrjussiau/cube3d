@@ -3,40 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/29 16:33:08 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 09:09:39 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	draw_column(t_img *img, t_col *column)
-{
-	int	y;
+// void	draw_column(t_img *img, t_col *column)
+// {
+// 	int	y;
 
-	y = column->start;
-	if (column->color != 1)
-	{
-		if (column->is_right)
-			column->color = CUBE_COLOR_W;
-		else
-			column->color = CUBE_COLOR_E;
-	}
-	else
-	{
-		if (column->side_y == 1)
-			column->color = CUBE_COLOR_S;
-		else
-			column->color = CUBE_COLOR_N;
-	}
-	while (y <= column->end)
-	{
-		pixel_put(img, column->x, y, column->color);
-		y++;
-	}
-}
+// 	y = column->start;
+// 	if (column->color != 1)
+// 	{
+// 		if (column->is_right)
+// 			column->color = CUBE_COLOR_W;
+// 		else
+// 			column->color = CUBE_COLOR_E;
+// 	}
+// 	else
+// 	{
+// 		if (column->side_y == 1)
+// 			column->color = CUBE_COLOR_S;
+// 		else
+// 			column->color = CUBE_COLOR_N;
+// 	}
+// 	while (y <= column->end)
+// 	{
+// 		pixel_put(img, column->x, y, column->color);
+// 		y++;
+// 	}
+// }
 
 void	draw_sky(t_img *img, t_col *column)
 {
@@ -106,7 +106,6 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 		//printf("hello2\n");
 		draw_sky(player->img, column);
 		draw_texture(player, column, x);
-		// draw_column(player->img, column);
 		draw_ground(player->img, column);
 		x++;
 	}
@@ -114,5 +113,4 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 	clear_minimap(&img, player->minimap);
 	draw_minimap(player->minimap, player);
-	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_update.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:04:56 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/29 16:34:11 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/02/29 16:58:24 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,10 +100,24 @@ int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 	column->cor_x = player->cor_x;
 	column->cor_y = player->cor_y;
 	if (column->color != 1)
+	{
+		if (column->is_right)
+			column->side_wall = WEST;
+		else
+			column->side_wall = EAST;
+	}
+	else
+	{
+		if (column->side_y == 1)
+			column->side_wall = SOUTH;
+		else
+			column->side_wall = NORTH;
+	}
+	if (column->side_wall == EAST || column -> side_wall == WEST)
 		column->wall_x = player->pos_y + ray->wall_dist * ray->cor_y;
 	else
 		column->wall_x = player->pos_x + ray->wall_dist * ray->cor_x;
 	column->wall_x -= floor(column->wall_x);
-	printf("wall_x : %f\n", column->wall_x);
+	// printf("wall_x : %f\n", column->wall_x);
 	return (0);
 }

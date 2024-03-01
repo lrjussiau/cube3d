@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:40:44 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/29 11:43:39 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/01 08:23:20 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ void	draw_texture(t_player *player, t_col *column, int x)
 	line = set_t_line(line, x, column, tex);
 	y = line->y0;
 	line->tex_x = (int)(column->wall_x * (double)tex->width);
-	if (column->side_y == 0 && player->ray->cor_x > 0)
+	if ((column->side_wall == WEST || column->side_wall == EAST) && player->ray->cor_x > 0)
 		line->tex_x = tex->width - line->tex_x - 1;
-	else if (column->side_y == 1 && player->ray->cor_y > 0)
+	else if ((column->side_wall == SOUTH || column->side_wall == NORTH) && player->ray->cor_y > 0)
 		line->tex_x = tex->width - line->tex_x - 1;
 	print_texture(root, column, line, tex);
 }

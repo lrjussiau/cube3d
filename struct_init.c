@@ -6,11 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/02/29 16:14:04 by vvuadens         ###   ########.fr       */
-=======
-/*   Updated: 2024/02/29 10:25:18 by ljussiau         ###   ########.fr       */
->>>>>>> 32a971e4b7dbd6fbc0408610617ae328a3ed360f
+/*   Updated: 2024/03/01 09:03:33 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +25,20 @@ t_tex	*load_texture(t_img *root, t_tex *tex, char *path)
 	tex->data = mlx_get_data_addr(tex->img_ptr, &tex->bits_per_pixel,
 			&tex->line_length, &tex->endian);
 	return (tex);
+}
+
+t_mov	*init_mov(t_player *player)
+{
+	t_mov	*movement;
+
+	movement = safe_malloc(sizeof(t_mov));
+	movement->move_back = 0;
+	movement->move_forward = 0;
+	movement->move_left = 0;
+	movement->move_right = 0;
+	movement->rotate_left = 0;
+	movement->rotate_right = 0;
+	return (movement); 
 }
 
 static void	init_orientation(t_player **player, char orientation)
@@ -60,7 +70,6 @@ static void	init_orientation(t_player **player, char orientation)
 
 int	init_player_s(t_player **player, t_map *map, t_img *img)
 {
-	printf("hello_player\n");
 	(*player) = malloc(sizeof(t_player));
 	if (!(*player))
 		return (1);
@@ -72,8 +81,9 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
-	(*player)->img = init_img(img);
+	(*player)->img = init_img(img, map);
 	(*player)->minimap = minimap_init(*player, map);
+	(*player)->movement = init_mov(*player);
 	(*player)->map_s = map;
 	(*player)->mouse_x = 0;
 	(*player)->mouse_y = 0;
@@ -140,6 +150,8 @@ t_img *init_img(t_img *img, t_map *map)
 	img->no_tex = load_texture(img, img->no_tex, map->no_path);
 	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
 	img->we_tex = load_texture(img, img->we_tex, map->we_path);
+	// load_wall();
+	// load_wall_animate()
 	return (img);
 }
 
@@ -154,3 +166,14 @@ t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex)
 	line->tex_x = 0;
 	return (line);
 }
+
+// load_anmite(t_img img, char **paths)
+// {
+
+// 	maloc fire_wall1
+// 	maloc fire_wall2
+// 	...
+// 	maloc fire_wall6
+	
+	
+// }
