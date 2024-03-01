@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/29 16:19:20 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:13:20 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,41 +58,7 @@ void	clear_window(t_img *img)
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img_ptr, 0, 0);
 }
 
-int	w_hook(t_player *player)
-{
-	if (player->map[(int)player->pos_y][(int)(player->pos_x + player->cor_x * MOVESPEED)] == '0' || player->map[(int)player->pos_y][(int)(player->pos_x + player->cor_x * MOVESPEED)] == 78)
-		player->pos_x += player->cor_x * MOVESPEED;
-	if (player->map[(int)(player->pos_y + player->cor_y * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y + player->cor_y * MOVESPEED)][(int)player->pos_x] == 78)
-		player->pos_y += player->cor_y * MOVESPEED;
-	return (0);
-}
 
-int	d_hook(t_player *player)
-{
-	if (player->map[(int)player->pos_y][(int)(player->pos_x - player->cor_y * MOVESPEED)] == '0' || player->map[(int)player->pos_y][(int)(player->pos_x - player->cor_y * MOVESPEED)] == 78)
-		player->pos_x -= player->cor_y * MOVESPEED;
-	if (player->map[(int)(player->pos_y + player->cor_x * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y + player->cor_x * MOVESPEED)][(int)player->pos_x] == 78)
-		player->pos_y += player->cor_x * MOVESPEED;
-	return (0);
-}
-
-int	s_hook(t_player *player)
-{
-	if (player->map[(int)player->pos_y][(int)(player->pos_x - player->cor_x * MOVESPEED)] == '0' || player->map[(int)player->pos_y][(int)(player->pos_x - player->cor_x * MOVESPEED)] == 78)
-		player->pos_x -= player->cor_x * MOVESPEED;
-	if (player->map[(int)(player->pos_y - player->cor_y * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y - player->cor_y * MOVESPEED)][(int)player->pos_x] == 78)
-		player->pos_y -= player->cor_y * MOVESPEED;
-	return (0);
-}
-
-int	a_hook(t_player *player)
-{
-	if (player->map[(int)player->pos_y][(int)(player->pos_x + player->cor_y * MOVESPEED)] == '0' || player->map[(int)player->pos_y][(int)(player->pos_x + player->cor_y * MOVESPEED)] == 78)
-		player->pos_x += player->cor_y * MOVESPEED;
-	if (player->map[(int)(player->pos_y - player->cor_x * MOVESPEED)][(int)player->pos_x] == '0' || player->map[(int)(player->pos_y - player->cor_x * MOVESPEED)][(int)player->pos_x] == 78)
-		player->pos_y -= player->cor_x * MOVESPEED;
-	return (0);
-}
 
 int	right_arrow_hook(t_player *player)
 {
@@ -128,62 +94,12 @@ int	close_hook(t_img *img)
 	exit(0);
 }
 
-int	keys_hook(int keycode, t_player *player)
-{
-	if (keycode == 13)
-		w_hook(player);
-	if (keycode == 0)
-		a_hook(player);
-	if (keycode == 1)
-		s_hook(player);
-	if (keycode == 2)
-		d_hook(player);
-	if (keycode == 123)
-		left_arrow_hook(player);
-	if (keycode == 124)
-		right_arrow_hook(player);
-	if (keycode == 53)
-	{
-		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
-		exit(0);
-	}
-	player->minimap = minimap_init(player, player->map_s);
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
-	//update_map(player);
-	//print_mini_map(player);
-	return (0);
-}
-
 int	mouse_move(int x, int y, t_player *player)
-{ 
-	printf("mouse_move: x: %d, y: %d, player; %d\n", x, y, player->mouse_x);
-	/*if (x > (player->mouse_x + 10))
+{
+	if (x > (player->mouse_x + 10))
 		right_arrow_hook(player);
 	else if (x < (player->mouse_x - 10))
 		left_arrow_hook(player);
-	else
-		;*/
-	if (y > (player->mouse_y + 50))
-	{
-		//printf("start before: %d\n",player->column->end);
-		player->column->pitch += 1;
-		player->column->pitch += 1;
-		//printf("start after: %d\n",player->column->end);
-	}
-	else if (y < (player->mouse_y - 50))
-	{
-		printf("hello\n");
-		player->column->pitch -= 1;
-		player->column->pitch -= 1;
-	}
-	else
-		;
-	player->mouse_x = x;
-	player->mouse_x = y;
-	clear_window(player->img);
-	new_image(player, player->ray, player->column);
-	//update_map(player);
 	return (0);
 }
 

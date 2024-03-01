@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/01 08:14:12 by vvuadens         ###   ########.fr       */
+=======
+/*   Updated: 2024/03/01 10:15:52 by ljussiau         ###   ########.fr       */
+>>>>>>> 3c4fce7cebbcd221b6de63bd8e86e7a8f8b07a17
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+int	render(void *param)
+{
+	t_player	*player;
+
+	player = (t_player *)param;
+	player->minimap = minimap_init(player, player->map_s);
+	new_image(player, player->ray, player->column);
+	listen_hook(player);
+	return (0);
+}
 
 // todo : textures, mini-map, cercle de collision, animations
 int main(int ac, char **av)
@@ -29,7 +43,6 @@ int main(int ac, char **av)
 	img.mlx = mlx_init();
 	if (!img.mlx)
 		return (1);
-	//ft_print_map(map->map);
 	init_player_s(&player, map, &img);
 	/*printf("my_minimap: \n");
 	int i = 0;
@@ -45,8 +58,9 @@ int main(int ac, char **av)
 		i++;
 		printf("\n");
 	}*/
-	new_image(player, player->ray, player->column);
-	mlx_hook(img.mlx_win, 2, 1L << 0, keys_hook, player);
-	//mlx_hook(img.mlx_win, 6, 1l << 0, mouse_move, player);
+	mlx_hook(img.mlx_win, 2, 1L << 0, keys_pressed, player);
+	mlx_hook(img.mlx_win, 3, 1L << 1, keys_release, player);
+	mlx_hook(img.mlx_win, 6, 1l << 0, mouse_move, player);
+	mlx_loop_hook(img.mlx, render, player);
 	mlx_loop(img.mlx);
 }

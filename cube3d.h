@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 08:12:15 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:17:17 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,16 @@ typedef struct s_tex
 	int		width;
 	int		height;
 }				t_tex;
+
+typedef struct s_mov
+{
+	int	move_forward;
+	int	move_back;
+	int move_left;
+	int	move_right;
+	int rotate_left;
+	int	rotate_right;
+}				t_mov;
 
 typedef struct s_image
 {
@@ -101,6 +111,7 @@ typedef struct	s_column
 	int	is_right;
 	int	side_y;
 	int	x;
+	int side_wall;
 	int	ground_color;
 	int	sky_color;
 	int	pitch;
@@ -156,7 +167,7 @@ typedef struct	s_player
 	double	old_time;
 	char	**map;
 	int		mouse_x;
-	int		mouse_y;
+	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
 	t_col	*column;
@@ -174,8 +185,8 @@ typedef struct	s_line
 	int		tex_y;
 }				t_line;
 
-# define SCREEN_X	1000
-# define SCREEN_Y	500
+# define SCREEN_X	2000
+# define SCREEN_Y	1000
 # define W 13
 # define A 0
 # define S 1
@@ -184,13 +195,13 @@ typedef struct	s_line
 # define R_ARROW 124
 # define ESC 53
 
-# define MOVESPEED 0.4
-# define ROTSPEED 1.5708/15
+# define MOVESPEED 0.08
+# define ROTSPEED 1.5708/40
 
-# define CUBE_COLOR_N 4915230
-# define CUBE_COLOR_S 25600
-# define CUBE_COLOR_E 6264488
-# define CUBE_COLOR_W 8421376
+# define NORTH 1
+# define WEST 2
+# define EAST 3
+# define SOUTH 4
 
 //utils
 void	error(char *str);
@@ -216,19 +227,19 @@ void	cleaner(t_map *map);
 //checker
 void	checker(t_map *map);
 
-
-t_map	*map_init(t_map *map);
-
 //Movement
-int		w_hook(t_player *player);
-int		a_hook(t_player *player);
-int		s_hook(t_player *player);
-int		d_hook(t_player *player);
-int		keys_hook(int keycode, t_player *player);
+int		move_forward(t_player *player);
+int		move_back(t_player *player);
+int		move_left(t_player *player);
+int		move_right(t_player *player);
 
-//Movement Utils
-int		move_possible(t_player *player, char direc, char touch, double movement);
-void	clear(t_img *img);
+int		left_arrow_hook(t_player *player);
+int		right_arrow_hook(t_player *player);
+
+//Movement utils
+void	listen_hook(t_player *player);
+int		keys_pressed(int keycode, t_player *player);
+int		keys_release(int keycode, t_player *player);
 
 //Minimap
 void	print_mini_map(t_player *player);
@@ -240,13 +251,14 @@ t_col	*init_col_s(t_player *player, t_map *map);
 t_img	*init_img(t_img *img, t_map *map);
 t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex);
 t_tex	*load_texture(t_img *root, t_tex *tex, char *path);
+t_map	*map_init(t_map *map);
 
 //struct_update
 int		update_ray_s(t_ray *ray, int x, t_player *player);
 int		update_column(t_col **col, t_ray *ray, int x, t_player *player);
 
 //image_utils
-int		keys_hook(int keycode, t_player *player);
+int		keys_pressed(int keycode, t_player *player);
 int		mouse_move(int x, int y, t_player *player);
 void	pixel_put(t_img *img, int x, int y, int color);
 void	clear_window(t_img *img);

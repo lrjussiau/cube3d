@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:04:56 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/01 08:16:22 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:18:19 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,20 @@ int	update_column(t_col **col, t_ray *ray, int x, t_player *player)
 	column->cor_x = player->cor_x;
 	column->cor_y = player->cor_y;
 	if (column->color != 1)
+	{
+		if (column->is_right)
+			column->side_wall = WEST;
+		else
+			column->side_wall = EAST;
+	}
+	else
+	{
+		if (column->side_y == 1)
+			column->side_wall = SOUTH;
+		else
+			column->side_wall = NORTH;
+	}
+	if (column->side_wall == EAST || column -> side_wall == WEST)
 		column->wall_x = player->pos_y + ray->wall_dist * ray->cor_y;
 	else
 		column->wall_x = player->pos_x + ray->wall_dist * ray->cor_x;

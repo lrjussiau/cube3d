@@ -3,8 +3,8 @@ SO ./texture/amongus.xpm
 WE ./texture/jib.xpm
 EA ./texture/jib.xpm
 
-F 97,247,67
-C 235,115,115
+F 153,76,0
+C 153,204,255
 
         111111
         100001
