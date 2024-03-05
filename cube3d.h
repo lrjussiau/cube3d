@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 08:16:19 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:17:19 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,14 @@ typedef struct s_image
 	t_tex	*we_tex;
 }			t_img;
 
-typedef struct s_ray
+typedef struct s_sprite {
+	char	*name;
+	char	**paths;
+	int		width;
+	int		height;
+}		t_sprite;
+
+typedef struct	s_ray
 {
 	int		map_x;
 	int		map_y;
@@ -127,43 +134,25 @@ typedef struct s_minimap
 	double	orientation;
 }			t_minimap;
 
-typedef struct s_sprite
-{
-	double	sprite_x;
-	double	sprite_y;
-	double	inv_det;
-	double	transform_x;
-	double	transform_y;
-	int		sprite_screen_x;
-	int		sprite_height;
-	int		sprite_width;
-	int		draw_start_y;
-	int		draw_end_y;
-	int		draw_start_x;
-	int		draw_end_x;
-	int		tex_x;
-	int		tex_y;
-	int		d;
-	int		color;
-}				t_sprite;
-
 typedef struct s_player
 {
-	double		pos_x;
-	double		pos_y;
-	double		cor_x;
-	double		cor_y;
-	double		plane_x;
-	double		plane_y;
-	double		time;
-	double		old_time;
-	char		**map;
-	int			mouse_x;
-	t_mov		*movement;
-	t_map		*map_s;
-	t_ray		*ray;
-	t_col		*column;
-	t_img		*img;
+	double	pos_x;
+	double	pos_y;
+	double	cor_x;
+	double	cor_y;
+	double	plane_x;
+	double	plane_y;
+	double	time;
+	double	old_time;
+	char	**map;
+	int		mouse_x;
+	int		minimap_size;
+	int		drunk_mode;
+	t_mov	*movement;
+	t_map	*map_s;
+	t_ray	*ray;
+	t_col	*column;
+	t_img	*img;
 	t_minimap	*minimap;
 }				t_player;
 
@@ -179,6 +168,7 @@ typedef struct s_line
 
 # define SCREEN_X	2000
 # define SCREEN_Y	1000
+# define MINIMAP_SIZE SCREEN_Y / 5
 # define W 13
 # define A 0
 # define S 1
@@ -255,6 +245,7 @@ int			keys_pressed(int keycode, t_player *player);
 int			mouse_move(int x, int y, t_player *player);
 void		pixel_put(t_img *img, int x, int y, int color);
 int			transform_color(char *rgb_color);
+int			create_trgb(int t, int r, int g, int b);
 
 //draw_image
 void		draw_sky(t_img *img, t_col *column);
@@ -263,10 +254,11 @@ void		new_image(t_player *player, t_ray *ray, t_col *column);
 void		draw_texture(t_player *player, t_col *column, int x);
 
 //map
-char		**extract_minimap(t_player *player, t_map *map);
-void		clear_minimap(t_img *img, t_minimap *map);
-t_minimap	*minimap_init(t_player *player, t_map *map);
-char		**extract_minimap(t_player *player, t_map *map);
+char		**extract_minimap(t_player *p, t_map *m, int s);
+t_minimap 	*minimap_init(t_player *player);
 void		draw_minimap(t_minimap *map, t_player *player);
+void		clear_minimap(t_img *img, t_minimap *map);
+void		minimap_update(t_player *player);
+void 		draw_minimap(t_minimap *map, t_player *player);
 
 #endif 

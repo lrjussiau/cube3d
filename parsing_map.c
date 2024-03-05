@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:47:14 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 08:23:23 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:50:22 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	get_texture(t_map *map)
 			map->we_path = clear_path(map->file[i]);
 		if (ft_strnstr(map->file[i], "EA ", ft_strlen("EA ")))
 			map->ea_path = clear_path(map->file[i]);
+		//printf("map->no_path: %s\n", map->no_path);
 		i++;
 	}
 }
