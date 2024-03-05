@@ -6,13 +6,12 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/29 08:38:19 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:27:48 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-//au 10 eme
 void	clear_minimap(t_img *img, t_minimap *map)
 {
 	int	start_y;
@@ -36,10 +35,12 @@ static int	pick_color(char minimap_char)
 {
 	if (minimap_char == 'P')
 		return (16716947);
+	else if (minimap_char == 'T')
+		return (create_trgb(150, 220, 220, 220));
 	else if (minimap_char > '0')
 		return (16777215);
 	else
-		return (0);
+		return (create_trgb(200, 220, 220, 220));
 }
 
 void	draw_minimap(t_minimap *map, t_player *p)
@@ -77,7 +78,7 @@ double	ft_abs(double num)
 }
 
 //position = positionx + N * corx
-int	print_orientation(double x, double y, t_player *player)
+/*int	print_orientation(double x, double y, t_player *player)
 {
 	double	a = round(player->pos_x * 10) / 10;
 	double 	b = round(player->pos_y * 10) / 10;
@@ -136,18 +137,18 @@ int	print_orientation(double x, double y, t_player *player)
 		return (0);
 	} 
 }
-
+*/
 static char	pick_char(double x, double y, t_player *p)
 {
 	double	a = round(p->pos_x * 10) / 10;
 	double 	b = round(p->pos_y * 10) / 10;
 
-	if ((ft_abs(x - a) < 0.1) && (ft_abs(y - b) < 0.1))
+	if ((ft_abs(x - a) < 0.3) && (ft_abs(y - b) < 0.3))
 	{
 		return ('P');
 	}
-	else if (print_orientation(x, y, p))
-		return ('D');
+	//else if (print_orientation(x, y, p))
+	//	return ('D');
 	else
 		return ('0');
 }
@@ -162,35 +163,35 @@ void print_player(char **new_map, int i, int j, t_player *p)
 
 	k = 0;
 	y = (int)p->pos_y;
-	while (k < 10)
+	while (k < (p->minimap_size / 10))
 	{
 		m = 0;
 		l = j;
 		x = (int)p->pos_x;
-		while (m < 10)
+		while (m < (p->minimap_size / 10))
 		{
 			new_map[i][l++] = pick_char(x, y, p);
 			m++;
-			x += 0.1;
+			x += (1.0 / (p->minimap_size / 10.0));
 		}
-		y += 0.1;
+		y += (1.0 / (p->minimap_size / 10.0));
 		i++;
 		k++;
 	}
 }
 
-void print_block(char **new_map, int i, int j, char c)
+void print_block(char **new_map, int i, int j, char c, t_player *player)
 {
 	int	k;
 	int	p;
 	int	l;
 
 	k = 0;
-	while (k < 10)
+	while (k < player->minimap_size / 10)
 	{
 		p = 0;
 		l = j;
-		while (p < 10)
+		while (p < player->minimap_size / 10)
 		{
 			new_map[i][l++] = c;
 			p++;
@@ -200,74 +201,85 @@ void print_block(char **new_map, int i, int j, char c)
 	}
 }
 
-/*	i = 0;
-	j = 0;
-	while (i < 100)
-	{
-		j = 0;
-		while (j < 100)
-		{
-			printf("%c",new_map[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}*/
-
-char	**extract_minimap(t_player *player, t_map *map)
+/*void print_minimap(t_player *p, char **map, int s_x, int s_y)
 {
-	char	**new_map;
-	int		i;
-	int		j;
-	int		start_y;
-	int		start_x;
+	int	i;
+	int	j;
 
-	i = 0;
-	new_map = malloc(sizeof(char *) * 100);
-	while (i < 100)
+	i = -1;
+	while (++i < 10)
 	{
-		new_map[i] = malloc(sizeof(char) * 100);
-		i++;
-	}
-	start_x = (player->pos_x - 5);
-	start_y = (player->pos_y - 5);
-	i = 0;
-	while (i < 10)
-	{
-		//printf("I: %d\n", i);
 		j = 0;
 		while (j < 10)
 		{
-			if ((start_y < map->y_max && start_y > -1) && (start_x <= map->x_max && start_x > -1))
+			if ((s_y <= p->map_s->y_max && s_y > -1) && (s_x <= p->map_s->x_max && s_x > -1))
 			{
-				if (start_x == (int)player->pos_x && start_y == (int)player->pos_y)
-				{
-					//printf("in\n");
-					print_player(new_map, i * 10, j * 10, player);
-					//printf("out\n");
-				}
+				if (s_x == (int)p->pos_x && s_y == (int)p->pos_y)
+					print_player(map, i * (size / 10), j * (size / 10), p);
 				else
-					print_block(new_map, i * 10, j * 10, map->map[start_y][start_x]);
+					print_block(map, i * (size / 10), j * (size / 10), p->map_s->map[s_y][s_x], p);
 			}
 			else
-				print_block(new_map, i * 10, j * 10, 'T');
+				print_block(new_map, i * (size / 10), j *(size / 10), 'T' , p);
 			start_x++;
 			j++;
 		}
 		start_x -= 10;
 		start_y++;
+	}
+	return (map);
+}*/
+
+char	**extract_minimap(t_player *p, t_map *m, int s)
+{
+	char	**n;
+	int		i;
+	int		j;
+	int		y;
+	int		x;
+
+	i = 0;
+	n = malloc(sizeof(char *) * s);
+	while (i < s)
+	{
+		n[i] = malloc(sizeof(char) * s);
 		i++;
 	}
-	//printf("extract done\n");
-	return (new_map);
+	x = (p->pos_x - 5);
+	y = (p->pos_y - 5);
+	i = 0;
+	while (i < 10)
+	{
+		j = 0;
+		while (j < 10)
+		{
+			if ((y <= m->y_max && y > -1) && (x <= m->x_max && x > -1))
+			{
+				if (x == (int)p->pos_x && y == (int)p->pos_y)
+					print_player(n, i * (s / 10), j * (s / 10), p);
+				else
+					print_block(n, i * (s / 10), j * (s / 10), m->map[y][x], p);
+			}
+			else
+				print_block(m, i * (s / 10), j * (s / 10), 'T', p);
+			x++;
+			j++;
+		}
+		x -= 10;
+		y++;
+		i++;
+	}
+	return (n);
 }
 
-t_minimap *minimap_init(t_player *player, t_map *map)
+t_minimap *minimap_init(t_player *player)
 {
 	t_minimap	*minimap;
 
 	minimap = malloc(sizeof(t_minimap));
-	minimap->size = 100;
+	if (!minimap)
+		return (0);
+	minimap->size = player->minimap_size;
 	minimap->x_start = SCREEN_X / 20;
 	minimap->y_start = SCREEN_Y / 20;
 	minimap->round_x = round(player->pos_x * 10) / 10;
@@ -276,8 +288,34 @@ t_minimap *minimap_init(t_player *player, t_map *map)
 	minimap->pos_y = player->pos_y;
 	minimap->cor_x = player->cor_x;
 	minimap->cor_y = player->cor_y;
-	//printf("before extract\n");
-	minimap->map = extract_minimap(player, map);
-	//printf("after extract\n");
+	minimap->map = extract_minimap(player, player->map_s, player->minimap_size);
 	return (minimap);
+}
+
+void	minimap_update(t_player *player)
+{
+	t_minimap	*minimap;
+
+	minimap = player->minimap;
+	minimap->round_x = round(player->pos_x * 10) / 10;
+	minimap->round_y = round(player->pos_y * 10) / 10;
+	minimap->pos_x = player->pos_x;
+	minimap->pos_y = player->pos_y;
+	minimap->cor_x = player->cor_x;
+	minimap->cor_y = player->cor_y;
+	//free(minimap->map);
+	minimap->map = extract_minimap(player, player->map_s, minimap->size);
+	/*int	i = 0;
+	int	j = 0;
+	while (i < player->minimap_size)
+	{
+		j = 0;
+		while (j < player->minimap_size)
+		{
+			printf("%c",minimap->map[i][j]);
+			j++;
+		}
+		i++;
+		printf("\n");
+	}*/
 }

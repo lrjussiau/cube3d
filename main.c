@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/01 08:14:12 by vvuadens         ###   ########.fr       */
-=======
-/*   Updated: 2024/03/01 10:15:52 by ljussiau         ###   ########.fr       */
->>>>>>> 3c4fce7cebbcd221b6de63bd8e86e7a8f8b07a17
+/*   Updated: 2024/03/01 12:06:47 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +17,7 @@ int	render(void *param)
 	t_player	*player;
 
 	player = (t_player *)param;
-	player->minimap = minimap_init(player, player->map_s);
+	minimap_update(player);
 	new_image(player, player->ray, player->column);
 	listen_hook(player);
 	return (0);
@@ -44,15 +40,15 @@ int main(int ac, char **av)
 	if (!img.mlx)
 		return (1);
 	init_player_s(&player, map, &img);
-	/*printf("my_minimap: \n");
-	int i = 0;
+	printf("my_minimap: \n");
+	/*int i = 0;
 	int j = 0;
-	hile (i < 100)
+	while (i < player->minimap_size)
 	{
 		j = 0;
-		while (j < 100)
+		while (j < player->minimap_size)
 		{
-			printf("%c",minimap[i][j]);
+			printf("%c",player->minimap->map[i][j]);
 			j++;
 		}
 		i++;
@@ -60,7 +56,7 @@ int main(int ac, char **av)
 	}*/
 	mlx_hook(img.mlx_win, 2, 1L << 0, keys_pressed, player);
 	mlx_hook(img.mlx_win, 3, 1L << 1, keys_release, player);
-	mlx_hook(img.mlx_win, 6, 1l << 0, mouse_move, player);
+	//mlx_hook(img.mlx_win, 6, 1l << 0, mouse_move, player);
 	mlx_loop_hook(img.mlx, render, player);
 	mlx_loop(img.mlx);
 }

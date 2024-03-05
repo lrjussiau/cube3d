@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 10:17:17 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 12:06:34 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ typedef struct	s_player
 	double	old_time;
 	char	**map;
 	int		mouse_x;
+	int		minimap_size;
 	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
@@ -187,6 +188,7 @@ typedef struct	s_line
 
 # define SCREEN_X	2000
 # define SCREEN_Y	1000
+# define MINIMAP_SIZE SCREEN_Y / 5
 # define W 13
 # define A 0
 # define S 1
@@ -263,6 +265,7 @@ int		mouse_move(int x, int y, t_player *player);
 void	pixel_put(t_img *img, int x, int y, int color);
 void	clear_window(t_img *img);
 int		transform_color(char *rgb_color);
+int		create_trgb(int t, int r, int g, int b);
 
 //draw_image
 void	draw_column(t_img *img, t_col *column);
@@ -272,10 +275,10 @@ void	new_image(t_player *player, t_ray *ray, t_col *column);
 void	draw_texture(t_player *player, t_col *column, int x);
 
 //map
-char	**extract_minimap(t_player *player, t_map *map);
+char	**extract_minimap(t_player *player, t_map *map, int size);
 void	clear_minimap(t_img *img, t_minimap *map);
-t_minimap *minimap_init(t_player *player, t_map *map);
-char	**extract_minimap(t_player *player, t_map *map);
+void	minimap_update(t_player *player);
+t_minimap *minimap_init(t_player *player);
 void 	draw_minimap(t_minimap *map, t_player *player);
 
 #endif
