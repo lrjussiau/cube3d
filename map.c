@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/01 20:27:48 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:54:45 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 					print_block(n, i * (s / 10), j * (s / 10), m->map[y][x], p);
 			}
 			else
-				print_block(m, i * (s / 10), j * (s / 10), 'T', p);
+				print_block(n, i * (s / 10), j * (s / 10), 'T', p);
 			x++;
 			j++;
 		}
