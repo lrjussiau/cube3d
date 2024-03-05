@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/02/29 08:38:19 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:26:08 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,6 @@ void	draw_minimap(t_minimap *map, t_player *p)
 	mlx_put_image_to_window(p->img->mlx, p->img->mlx_win, p->img->img_ptr, 0, 0);
 }
 
-double	ft_abs(double num)
-{
-	if (num < 0)
-		return (-num);
-	return (num);
-}
-
-//position = positionx + N * corx
 int	print_orientation(double x, double y, t_player *player)
 {
 	double	a = round(player->pos_x * 10) / 10;

@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 10:09:16 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:16:19 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ typedef struct s_mov
 {
 	int	move_forward;
 	int	move_back;
-	int move_left;
+	int	move_left;
 	int	move_right;
-	int rotate_left;
+	int	rotate_left;
 	int	rotate_right;
 }				t_mov;
 
@@ -74,7 +74,7 @@ typedef struct s_image
 	t_tex	*we_tex;
 }			t_img;
 
-typedef struct	s_ray
+typedef struct s_ray
 {
 	int		map_x;
 	int		map_y;
@@ -95,25 +95,24 @@ typedef struct	s_ray
 	char	**map;
 }				t_ray;
 
-typedef struct	s_column
+typedef struct s_column
 {
-	int	height;
-	int	start;
-	int	end;
-	int	color;
-	int	is_right;
-	int	side_y;
-	int	x;
-	int side_wall;
-	int	ground_color;
-	int	sky_color;
-	int	pitch;
+	int		height;
+	int		start;
+	int		end;
+	int		is_right;
+	int		side_y;
+	int		x;
+	int		side_wall;
+	int		ground_color;
+	int		sky_color;
+	int		pitch;
 	double	cor_x;
 	double	cor_y;
 	double	wall_x;
 }			t_col;
 
-typedef struct	s_minimap
+typedef struct s_minimap
 {
 	int		size;
 	int		y_start;
@@ -148,27 +147,27 @@ typedef struct s_sprite
 	int		color;
 }				t_sprite;
 
-typedef struct	s_player
+typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
-	double	cor_x;
-	double	cor_y;
-	double	plane_x;
-	double	plane_y;
-	double	time;
-	double	old_time;
-	char	**map;
-	int		mouse_x;
-	t_mov	*movement;
-	t_map	*map_s;
-	t_ray	*ray;
-	t_col	*column;
-	t_img	*img;
+	double		pos_x;
+	double		pos_y;
+	double		cor_x;
+	double		cor_y;
+	double		plane_x;
+	double		plane_y;
+	double		time;
+	double		old_time;
+	char		**map;
+	int			mouse_x;
+	t_mov		*movement;
+	t_map		*map_s;
+	t_ray		*ray;
+	t_col		*column;
+	t_img		*img;
 	t_minimap	*minimap;
 }				t_player;
 
-typedef struct	s_line
+typedef struct s_line
 {
 	int		x;
 	int		y;
@@ -189,7 +188,7 @@ typedef struct	s_line
 # define ESC 53
 
 # define MOVESPEED 0.08
-# define ROTSPEED 1.5708/40
+# define ROT 0.03927
 
 # define NORTH 1
 # define WEST 2
@@ -197,78 +196,77 @@ typedef struct	s_line
 # define SOUTH 4
 
 //utils
-void	error(char *str);
-void	*safe_malloc(unsigned int bytes);
+void		error(char *str);
+void		*safe_malloc(unsigned int bytes);
+double		ft_abs(double num);
+void		cleaner(t_map *map);
 
 //map_parsing
-void	parsing_map(char *path, t_map *map);
+void		parsing_map(char *path, t_map *map);
+void		checker(t_map *map);
 
 //map_parsing_utils
-char	*str_append(char *str1, char *str2);
-char	*clear_path(char *str);
-char	*clear_color(char *str);
-void	get_size(t_map *map);
-void	process_wall(char *str);
+char		*str_append(char *str1, char *str2);
+char		*clear_path(char *str);
+char		*clear_color(char *str);
+void		get_size(t_map *map);
+void		process_wall(char *str);
 
 //debug
-void	print_struct_map(t_map *map);
-void	ft_print_map(char **tab);
-
-//cleaner
-void	cleaner(t_map *map);
-
-//checker
-void	checker(t_map *map);
+void		print_struct_map(t_map *map);
+void		ft_print_map(char **tab);
 
 //Movement
-int		move_forward(t_player *player);
-int		move_back(t_player *player);
-int		move_left(t_player *player);
-int		move_right(t_player *player);
-
-int		left_arrow_hook(t_player *player);
-int		right_arrow_hook(t_player *player);
+int			move_forward(t_player *player);
+int			move_back(t_player *player);
+int			move_left(t_player *player);
+int			move_right(t_player *player);
+int			left_arrow_hook(t_player *player);
+int			right_arrow_hook(t_player *player);
 
 //Movement utils
-void	listen_hook(t_player *player);
-int		keys_pressed(int keycode, t_player *player);
-int		keys_release(int keycode, t_player *player);
+void		listen_hook(t_player *player);
+int			keys_pressed(int keycode, t_player *player);
+int			keys_release(int keycode, t_player *player);
 
 //Minimap
-void	print_mini_map(t_player *player);
+void		print_mini_map(t_player *player);
 
 //struct_init
-int		init_player_s(t_player **player, t_map *map, t_img *img);
-t_ray	*init_ray_s(char **map);
-t_col	*init_col_s(t_player *player, t_map *map);
-t_img	*init_img(t_img *img, t_map *map);
-t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex);
-t_tex	*load_texture(t_img *root, t_tex *tex, char *path);
-t_map	*map_init(t_map *map);
+int			init_player_s(t_player **player, t_map *map, t_img *img);
+t_ray		*init_ray_s(char **map);
+t_img		*init_img(t_img *img, t_map *map);
+t_line		*set_t_line(t_line *line, int x, t_col *col, t_tex *tex);
+t_map		*map_init(t_map *map);
+
+//struct_init_utils
+void		init_orientation(t_player **player, char orientation);
+t_mov		*init_mov(t_player *player);
+t_tex		*load_texture(t_img *root, t_tex *tex, char *path);
+t_col		*init_col_s(t_player *player, t_map *map);
 
 //struct_update
-int		update_ray_s(t_ray *ray, int x, t_player *player);
-int		update_column(t_col **col, t_ray *ray, int x, t_player *player);
+int			update_ray_s(t_ray *ray, int x, t_player *player);
+void		update_column(t_col *column, t_ray *ray, int x, t_player *player);
+void		get_wall_orientation(t_col *column, t_ray *ray);
 
 //image_utils
-int		keys_pressed(int keycode, t_player *player);
-int		mouse_move(int x, int y, t_player *player);
-void	pixel_put(t_img *img, int x, int y, int color);
-void	clear_window(t_img *img);
-int		transform_color(char *rgb_color);
+int			keys_pressed(int keycode, t_player *player);
+int			mouse_move(int x, int y, t_player *player);
+void		pixel_put(t_img *img, int x, int y, int color);
+int			transform_color(char *rgb_color);
 
 //draw_image
-void	draw_column(t_img *img, t_col *column);
-void	draw_sky(t_img *img, t_col *column);
-void	draw_ground(t_img *img, t_col *column);
-void	new_image(t_player *player, t_ray *ray, t_col *column);
-void	draw_texture(t_player *player, t_col *column, int x);
+void		draw_sky(t_img *img, t_col *column);
+void		draw_ground(t_img *img, t_col *column);
+void		new_image(t_player *player, t_ray *ray, t_col *column);
+void		draw_texture(t_player *player, t_col *column, int x);
 
 //map
-char	**extract_minimap(t_player *player, t_map *map);
-void	clear_minimap(t_img *img, t_minimap *map);
-t_minimap *minimap_init(t_player *player, t_map *map);
-char	**extract_minimap(t_player *player, t_map *map);
-void 	draw_minimap(t_minimap *map, t_player *player);
+char		**extract_minimap(t_player *player, t_map *map);
+void		clear_minimap(t_img *img, t_minimap *map);
+t_minimap	*minimap_init(t_player *player, t_map *map);
+char		**extract_minimap(t_player *player, t_map *map);
+void		draw_minimap(t_minimap *map, t_player *player);
 
-#endif
+#endif 

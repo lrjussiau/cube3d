@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 08:24:47 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:17:07 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,30 @@ int	keys_release(int keycode, t_player *player)
 	return (0);
 }
 
+int	right_arrow_hook(t_player *player)
+{
+	double	oldcor_x;
+	double	oldplane_x;
 
+	oldcor_x = player->cor_x;
+	oldplane_x = player->plane_x;
+	player->cor_x = player->cor_x * cos(ROT) - player->cor_y * sin(ROT);
+	player->cor_y = oldcor_x * sin(ROT) + player->cor_y * cos(ROT);
+	player->plane_x = player->plane_x * cos(ROT) - player->plane_y * sin(ROT);
+	player->plane_y = oldplane_x * sin(ROT) + player->plane_y * cos(ROT);
+	return (0);
+}
+
+int	left_arrow_hook(t_player *player)
+{
+	double	oldcor_x;
+	double	oldplane_x;
+
+	oldcor_x = player->cor_x;
+	oldplane_x = player->plane_x;
+	player->cor_x = player->cor_x * cos(-ROT) - player->cor_y * sin(-ROT);
+	player->cor_y = oldcor_x * sin(-ROT) + player->cor_y * cos(-ROT);
+	player->plane_x = player->plane_x * cos(-ROT) - player->plane_y * sin(-ROT);
+	player->plane_y = oldplane_x * sin(-ROT) + player->plane_y * cos(-ROT);
+	return (0);
+}

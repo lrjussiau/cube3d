@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/01 10:15:52 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:19:57 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	render(void *param)
 	return (0);
 }
 
-// todo : textures, mini-map, cercle de collision, animations
 int main(int ac, char **av)
 {
 	t_player	*player;
