@@ -6,37 +6,11 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/01 09:09:39 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:19:48 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-// void	draw_column(t_img *img, t_col *column)
-// {
-// 	int	y;
-
-// 	y = column->start;
-// 	if (column->color != 1)
-// 	{
-// 		if (column->is_right)
-// 			column->color = CUBE_COLOR_W;
-// 		else
-// 			column->color = CUBE_COLOR_E;
-// 	}
-// 	else
-// 	{
-// 		if (column->side_y == 1)
-// 			column->color = CUBE_COLOR_S;
-// 		else
-// 			column->color = CUBE_COLOR_N;
-// 	}
-// 	while (y <= column->end)
-// 	{
-// 		pixel_put(img, column->x, y, column->color);
-// 		y++;
-// 	}
-// }
 
 void	draw_sky(t_img *img, t_col *column)
 {
@@ -78,7 +52,7 @@ static void	dda(t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (ray->map[ray->map_y][ray->map_x] > '0' && ray->map[ray->map_y][ray->map_x] != 78)
+		if (ray->map[ray->map_y][ray->map_x] > '0')
 		{
 			if (ray->map[ray->map_y][ray->map_x] == '2')
 				ray->hit = 2;
@@ -95,22 +69,20 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 
 	x = 0;
 	img = *(player->img);
-	//printf("player_pos_x: %f, player_pos_y: %f", player->pos_x, player->pos_y);
 	while (x < SCREEN_X)
 	{
 		update_ray_s(ray, x, player);
-		//printf("ray_cor_x: %f ray_cor_y: %f\n", ray->cor_x, ray->cor_y);
 		dda(ray);
-		//printf("hello1\n");
-		update_column(&column, ray, x, player);
-		//printf("hello2\n");
+		get_wall_orientation(column, ray);
+		update_column(column, ray, x, player);
 		draw_sky(player->img, column);
 		draw_texture(player, column, x);
 		draw_ground(player->img, column);
 		x++;
 	}
-	//printf("player: posx: %f, posy: %f, corx: %f, cory: %f\n", player->pos_x, player->pos_y, player->cor_x, player->cor_y);
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
-	clear_minimap(&img, player->minimap);
+	// clear_minimap(&img, player->minimap);
 	draw_minimap(player->minimap, player);
+	if (player->drunk_mode == 0)
+		mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 }

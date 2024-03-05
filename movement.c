@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:10:23 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 09:12:39 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:27:27 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,3 +56,12 @@ int	move_right(t_player *player)
 	return (0);
 }
 
+int	mouse_move(int x, int y, t_player *player)
+{
+	if (x > (player->mouse_x + 10))
+		right_arrow_hook(player);
+	else if (x < (player->mouse_x - 10))
+		left_arrow_hook(player);
+	player->mouse_x = x;
+	return (0);
+}

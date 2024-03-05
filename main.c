@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/01 12:06:47 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/05 08:54:30 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	render(void *param)
 	return (0);
 }
 
-// todo : textures, mini-map, cercle de collision, animations
 int main(int ac, char **av)
 {
 	t_player	*player;
@@ -40,20 +39,6 @@ int main(int ac, char **av)
 	if (!img.mlx)
 		return (1);
 	init_player_s(&player, map, &img);
-	printf("my_minimap: \n");
-	/*int i = 0;
-	int j = 0;
-	while (i < player->minimap_size)
-	{
-		j = 0;
-		while (j < player->minimap_size)
-		{
-			printf("%c",player->minimap->map[i][j]);
-			j++;
-		}
-		i++;
-		printf("\n");
-	}*/
 	mlx_hook(img.mlx_win, 2, 1L << 0, keys_pressed, player);
 	mlx_hook(img.mlx_win, 3, 1L << 1, keys_release, player);
 	//mlx_hook(img.mlx_win, 6, 1l << 0, mouse_move, player);

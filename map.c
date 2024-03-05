@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/05 08:54:45 by vvuadens         ###   ########.fr       */
+=======
+/*   Updated: 2024/03/05 09:12:55 by ljussiau         ###   ########.fr       */
+>>>>>>> 17a39c7e0203729f062c10d43061eaee3a28e347
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +71,8 @@ void	draw_minimap(t_minimap *map, t_player *p)
 		y++;
 		start_y++;
 	}
-	mlx_put_image_to_window(p->img->mlx, p->img->mlx_win, p->img->img_ptr, 0, 0);
-}
-
-double	ft_abs(double num)
-{
-	if (num < 0)
-		return (-num);
-	return (num);
+	if (p->drunk_mode == 0)
+		mlx_put_image_to_window(p->img->mlx, p->img->mlx_win, p->img->img_ptr, 0, 0);
 }
 
 //position = positionx + N * corx
@@ -191,9 +189,13 @@ void print_block(char **new_map, int i, int j, char c, t_player *player)
 	{
 		p = 0;
 		l = j;
+			printf("k : %d, / %d\n", k, player->minimap_size /10);
 		while (p < player->minimap_size / 10)
 		{
+			// printf("\tp : %d, / %d\n", p, player->minimap_size /10);
+			// printf("\ti : %d, l: %d\n", i, l);
 			new_map[i][l++] = c;
+			// printf("\ttest\n");
 			p++;
 		}
 		i++;
@@ -240,6 +242,7 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 
 	i = 0;
 	n = malloc(sizeof(char *) * s);
+	printf("s : %d\n", s);
 	while (i < s)
 	{
 		n[i] = malloc(sizeof(char) * s);
@@ -256,7 +259,10 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 			if ((y <= m->y_max && y > -1) && (x <= m->x_max && x > -1))
 			{
 				if (x == (int)p->pos_x && y == (int)p->pos_y)
+				{
+					printf("my_minimap: \n");
 					print_player(n, i * (s / 10), j * (s / 10), p);
+				}
 				else
 					print_block(n, i * (s / 10), j * (s / 10), m->map[y][x], p);
 			}

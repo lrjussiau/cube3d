@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:43:01 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/23 08:04:20 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/01 10:38:58 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	check_player(t_map *map)
 	error("No player inside the map");
 }
 
+//revoir pour vertical
 void	check_wall(t_map *map)
 {
 	int	row;
@@ -97,7 +98,7 @@ void	check_inside(t_map *map)
 
 void	checker(t_map *map)
 {
-	// check_path(map);
+	check_path(map);
 	check_player(map);
 	check_wall(map);
 	check_inside(map);

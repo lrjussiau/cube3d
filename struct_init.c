@@ -3,69 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/01 10:55:33 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/05 09:19:07 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-t_tex	*load_texture(t_img *root, t_tex *tex, char *path)
+t_map	*map_init(t_map *map)
 {
-	int	width;
-	int	height;
-
-	tex->img_ptr = mlx_xpm_file_to_image(root->mlx, path, &width, &height);
-	if (!tex->img_ptr)
-		error("mlx_xpm_file_to_image() failure\n");
-	tex->width = width;
-	tex->height = height;
-	tex->data = mlx_get_data_addr(tex->img_ptr, &tex->bits_per_pixel,
-			&tex->line_length, &tex->endian);
-	return (tex);
-}
-
-t_mov	*init_mov(t_player *player)
-{
-	t_mov	*movement;
-
-	movement = safe_malloc(sizeof(t_mov));
-	movement->move_back = 0;
-	movement->move_forward = 0;
-	movement->move_left = 0;
-	movement->move_right = 0;
-	movement->rotate_left = 0;
-	movement->rotate_right = 0;
-	return (movement); 
-}
-
-static void	init_orientation(t_player **player, char orientation)
-{
-	if (orientation == 'N' || orientation == 'S')
-	{
-		if (orientation == 'N')
-			(*player)->cor_y = -1;
-		else
-			(*player)->cor_y = 1;
-		(*player)->plane_x = 0.66;
-		(*player)->plane_y = 0;
-		(*player)->cor_x = 0;
-		(*player)->plane_x = 0.66;
-		(*player)->plane_y = 0;
-	}
-	if (orientation == 'E' || orientation == 'W')
-	{
-		if (orientation == 'E')
-			(*player)->cor_x = -1;
-		else
-			(*player)->cor_x = 1;
-		(*player)->cor_y = 0;
-		(*player)->plane_x = 0;
-		(*player)->plane_y = 0.66;
-	}
-	return ;
+	map = (t_map *)malloc(sizeof(t_map));
+	map->file = NULL;
+	map->map = NULL;
+	map->no_path = NULL;
+	map->so_path = NULL;
+	map->ea_path = NULL;
+	map->we_path = NULL;
+	map->cell_color = NULL;
+	map->floor_color = NULL;
+	map->player_pos_x = 0;
+	map->player_pos_y = 0;
+	map->y_max = 0;
+	map->x_max = 0;
+	return (map);
 }
 
 int	init_player_s(t_player **player, t_map *map, t_img *img)
@@ -79,6 +41,7 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->time = 0;
 	(*player)->old_time = 0;
 	(*player)->map = map->map;
+	(*player)->drunk_mode = 1;
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
@@ -113,26 +76,7 @@ t_ray	*init_ray_s(char **map)
 	return (ray);
 }
 
-t_col	*init_col_s(t_player *player, t_map *map)
-{
-	t_col	*column;
-
-	column = (t_col *)malloc(sizeof(t_col));
-	column->color = 0;
-	column->height = 0;
-	column->start = 0;
-	column->end = 0;
-	column->x = 0;
-	column->is_right = 0;
-	column->ground_color = transform_color(map->floor_color);
-	column->sky_color = transform_color(map->cell_color);
-	column->cor_x = player->cor_x;
-	column->cor_y = player->cor_y;
-	column->pitch = 0;
-	return (column);
-}
-
-t_img *init_img(t_img *img, t_map *map)
+t_img	*init_img(t_img *img, t_map *map)
 {
 	img->addr = malloc(sizeof(char *));
 	img->so_tex = malloc(sizeof(t_tex));
@@ -150,8 +94,6 @@ t_img *init_img(t_img *img, t_map *map)
 	img->no_tex = load_texture(img, img->no_tex, map->no_path);
 	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
 	img->we_tex = load_texture(img, img->we_tex, map->we_path);
-	// load_wall();
-	// load_wall_animate()
 	return (img);
 }
 
@@ -166,14 +108,3 @@ t_line	*set_t_line(t_line *line, int x, t_col *col, t_tex *tex)
 	line->tex_x = 0;
 	return (line);
 }
-
-// load_anmite(t_img img, char **paths)
-// {
-
-// 	maloc fire_wall1
-// 	maloc fire_wall2
-// 	...
-// 	maloc fire_wall6
-	
-	
-// }

@@ -1,14 +1,13 @@
 NAME = cube3D
-FILES = cube3d \
-			utils \
+FILES = utils \
 			parsing_map \
 			parsing_map__utils \
 			debug \
-			cleaner \
 			checker \
 			main \
 			img_utils \
 			struct_init \
+			struct_init_utils \
 			struct_update \
 			draw_image \
 			movement \
