@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:37:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 10:46:35 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:28:33 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ void	get_wall_texture(t_img *img, t_map *map)
 	img->no_tex = load_texture(img, img->no_tex, map->no_path);
 	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
 	img->we_tex = load_texture(img, img->we_tex, map->we_path);
+	img->so_tex_d = malloc(sizeof(t_tex));
+	img->no_tex_d = malloc(sizeof(t_tex));
+	img->ea_tex_d = malloc(sizeof(t_tex));
+	img->we_tex_d = malloc(sizeof(t_tex));
+	img->so_tex_d = load_texture(img, img->so_tex_d, "texture/drunk/jib.xpm");
+	img->no_tex_d = load_texture(img, img->no_tex_d, "texture/drunk/jib.xpm");
+	img->ea_tex_d = load_texture(img, img->ea_tex_d, "texture/drunk/jib.xpm");
+	img->we_tex_d = load_texture(img, img->we_tex_d, "texture/drunk/jib.xpm");
 }
 
 void	get_beer_texture(t_img *img)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 10:36:34 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:27:22 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,6 @@ t_ray	*init_ray_s(char **map)
 t_img	*init_img(t_img *img, t_map *map)
 {
 	img->addr = malloc(sizeof(char *));
-	img->wine_1 = malloc(sizeof(t_tex));
-	img->wine_2 = malloc(sizeof(t_tex));
-	img->wine_3 = malloc(sizeof(t_tex));
-	img->wine_4 = malloc(sizeof(t_tex));
 	img->title = malloc(sizeof(t_tex));
 	img->sub_title = malloc(sizeof(t_tex));
 	img->drink_info = malloc(sizeof(t_tex));
@@ -96,10 +92,6 @@ t_img	*init_img(t_img *img, t_map *map)
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->l_l, &img->en);
 	get_wall_texture(img, map);
 	get_beer_texture(img);
-	img->wine_1 = load_texture(img, img->wine_1,"./sprites/wine/wine_1/1.xpm");
-	img->wine_2 = load_texture(img, img->wine_2, "./sprites/wine/wine_1/2.xpm");
-	img->wine_3 = load_texture(img, img->wine_3, "./sprites/wine/wine_1/3.xpm");
-	img->wine_4 = load_texture(img, img->wine_4, "./sprites/wine/wine_1/4.xpm");
 	img->title = load_texture(img, img->title, "./sprites/title/title.xpm");
 	img->sub_title = load_texture(img, img->sub_title, "./sprites/title/sub_title.xpm");
 	img->drink_info = load_texture(img, img->drink_info, "./sprites/title/drink_info.xpm");

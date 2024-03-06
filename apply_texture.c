@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:40:44 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 10:37:21 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:27:00 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,28 @@ void	draw_texture(t_player *player, t_col *column, int x)
 	t_img	*root;
 
 	root = player->img;
-	if (column->side_wall == WEST)
-		tex = player->img->we_tex;
-	if (column->side_wall == EAST)
-		tex = player->img->ea_tex;
-	if (column->side_wall == NORTH)
-		tex = player->img->no_tex;
-	if (column->side_wall == SOUTH)
-		tex = player->img->so_tex;
+	if (player->drunk_mode == 0)
+	{
+		if (column->side_wall == WEST)
+			tex = player->img->we_tex;
+		if (column->side_wall == EAST)
+			tex = player->img->ea_tex;
+		if (column->side_wall == NORTH)
+			tex = player->img->no_tex;
+		if (column->side_wall == SOUTH)
+			tex = player->img->so_tex;
+	}
+	else
+	{
+		if (column->side_wall == WEST)
+			tex = player->img->we_tex_d;
+		if (column->side_wall == EAST)
+			tex = player->img->ea_tex_d;
+		if (column->side_wall == NORTH)
+			tex = player->img->no_tex_d;
+		if (column->side_wall == SOUTH)
+			tex = player->img->so_tex_d;
+	}
 	line = set_t_line(line, x, column, tex);
 	y = line->y0;
 	line->tex_x = (int)(column->wall_x * (double)tex->width);
