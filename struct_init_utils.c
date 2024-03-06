@@ -6,17 +6,14 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:39:57 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 08:17:22 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:21:41 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-t_tex	*load_texture(t_img *root, t_tex *tex, char *path)
+t_tex	*load_texture(t_img *root, t_tex *tex, char *path, int width, int height)
 {
-	int	width;
-	int	height;
-
 	tex->img_ptr = mlx_xpm_file_to_image(root->mlx, path, &width, &height);
 	if (!tex->img_ptr)
 		error("mlx_xpm_file_to_image() failure\n");
@@ -58,9 +55,9 @@ void	init_orientation(t_player **player, char orientation)
 	if (orientation == 'E' || orientation == 'W')
 	{
 		if (orientation == 'E')
-			(*player)->cor_x = -1;
-		else
 			(*player)->cor_x = 1;
+		else
+			(*player)->cor_x = -1;
 		(*player)->cor_y = 0;
 		(*player)->plane_x = 0;
 		(*player)->plane_y = 0.66;

@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 09:19:48 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 11:48:23 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 	draw_minimap(player->minimap, player);
 	if (player->drunk_mode == 0)
 		mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
+	mlx_put_image_to_window(img.mlx, img.mlx_win, img.gun->img_ptr, SCREEN_X/1.8, 400);
 }

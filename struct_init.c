@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 09:19:07 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 12:29:44 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,10 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->pos_y = map->player_pos_y + 0.5;
 	(*player)->minimap_size = MINIMAP_SIZE;
 	(*player)->time = 0;
+	(*player)->orientation = map->player_orientation;
 	(*player)->old_time = 0;
 	(*player)->map = map->map;
-	(*player)->drunk_mode = 1;
+	(*player)->drunk_mode = 0;
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
@@ -82,7 +83,8 @@ t_img	*init_img(t_img *img, t_map *map)
 	img->so_tex = malloc(sizeof(t_tex));
 	img->no_tex = malloc(sizeof(t_tex));
 	img->ea_tex = malloc(sizeof(t_tex));
-	img->we_tex = malloc(sizeof(t_tex));
+	img->we_tex = malloc(sizeof(t_tex)); 
+	img->gun = malloc(sizeof(t_tex));
 	if (!img->so_tex || !img->no_tex || !img->ea_tex || !img->we_tex)
 		return (0);
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
@@ -90,10 +92,11 @@ t_img	*init_img(t_img *img, t_map *map)
 	if (!img->img_ptr)
 		return (0);
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->l_l, &img->en);
-	img->so_tex = load_texture(img, img->so_tex, map->so_path);
-	img->no_tex = load_texture(img, img->no_tex, map->no_path);
-	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
-	img->we_tex = load_texture(img, img->we_tex, map->we_path);
+	img->gun = load_texture(img, img->gun, "./texture/weapons/test.xpm", 0, 0);
+	img->so_tex = load_texture(img, img->so_tex, map->so_path, 0, 0);
+	img->no_tex = load_texture(img, img->no_tex, map->no_path, 0 ,0);
+	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path, 0, 0);
+	img->we_tex = load_texture(img, img->we_tex, map->we_path, 0, 0);
 	return (img);
 }
 

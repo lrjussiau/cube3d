@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 09:17:19 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:35:18 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_image
 	t_tex	*no_tex;
 	t_tex	*ea_tex;
 	t_tex	*we_tex;
+	t_tex	*gun;
 }			t_img;
 
 typedef struct s_sprite {
@@ -145,9 +146,11 @@ typedef struct s_player
 	double	time;
 	double	old_time;
 	char	**map;
+	char	orientation;
 	int		mouse_x;
 	int		minimap_size;
 	int		drunk_mode;
+	void	*gun;
 	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
@@ -166,8 +169,8 @@ typedef struct s_line
 	int		tex_y;
 }				t_line;
 
-# define SCREEN_X	2000
-# define SCREEN_Y	1000
+# define SCREEN_X	1920
+# define SCREEN_Y	1080
 # define MINIMAP_SIZE SCREEN_Y / 5
 # define W 13
 # define A 0
@@ -211,8 +214,8 @@ int			move_forward(t_player *player);
 int			move_back(t_player *player);
 int			move_left(t_player *player);
 int			move_right(t_player *player);
-int			left_arrow_hook(t_player *player);
-int			right_arrow_hook(t_player *player);
+int			left_arrow_hook(t_player *player, double t);
+int			right_arrow_hook(t_player *player, double t);
 
 //Movement utils
 void		listen_hook(t_player *player);
@@ -232,7 +235,7 @@ t_map		*map_init(t_map *map);
 //struct_init_utils
 void		init_orientation(t_player **player, char orientation);
 t_mov		*init_mov(t_player *player);
-t_tex		*load_texture(t_img *root, t_tex *tex, char *path);
+t_tex		*load_texture(t_img *root, t_tex *tex, char *path, int width, int height);
 t_col		*init_col_s(t_player *player, t_map *map);
 
 //struct_update
