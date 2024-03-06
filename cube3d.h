@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 10:35:18 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:47:32 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ typedef struct s_image
 	t_tex	*no_tex;
 	t_tex	*ea_tex;
 	t_tex	*we_tex;
-	t_tex	*gun;
+	t_tex	*beer_full;
+	t_tex	*beer_empty;
 }			t_img;
 
 typedef struct s_sprite {
@@ -151,6 +152,7 @@ typedef struct s_player
 	int		minimap_size;
 	int		drunk_mode;
 	void	*gun;
+	int		enter;
 	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
@@ -209,6 +211,10 @@ void		process_wall(char *str);
 void		print_struct_map(t_map *map);
 void		ft_print_map(char **tab);
 
+//Launch texture
+void		get_wall_texture(t_img *img, t_map *map);
+void		get_beer_texture(t_img *img);
+
 //Movement
 int			move_forward(t_player *player);
 int			move_back(t_player *player);
@@ -263,5 +269,13 @@ void		draw_minimap(t_minimap *map, t_player *player);
 void		clear_minimap(t_img *img, t_minimap *map);
 void		minimap_update(t_player *player);
 void 		draw_minimap(t_minimap *map, t_player *player);
+
+// ------------------Bonus--------------------//
+
+//starting screen
+void		start(t_player *player);
+
+//Lunch game
+void		start_game(t_player *player);
 
 #endif 

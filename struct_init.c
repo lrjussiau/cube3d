@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 12:29:44 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:27:03 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->orientation = map->player_orientation;
 	(*player)->old_time = 0;
 	(*player)->map = map->map;
-	(*player)->drunk_mode = 0;
+	(*player)->drunk_mode = 1;
+	(*player)->enter = 0;
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
@@ -79,24 +80,14 @@ t_ray	*init_ray_s(char **map)
 
 t_img	*init_img(t_img *img, t_map *map)
 {
-	img->addr = malloc(sizeof(char *));
-	img->so_tex = malloc(sizeof(t_tex));
-	img->no_tex = malloc(sizeof(t_tex));
-	img->ea_tex = malloc(sizeof(t_tex));
-	img->we_tex = malloc(sizeof(t_tex)); 
-	img->gun = malloc(sizeof(t_tex));
-	if (!img->so_tex || !img->no_tex || !img->ea_tex || !img->we_tex)
-		return (0);
+	img->addr = safe_malloc(sizeof(char *));
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
 	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X, SCREEN_Y);
 	if (!img->img_ptr)
 		return (0);
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->l_l, &img->en);
-	img->gun = load_texture(img, img->gun, "./texture/weapons/test.xpm", 0, 0);
-	img->so_tex = load_texture(img, img->so_tex, map->so_path, 0, 0);
-	img->no_tex = load_texture(img, img->no_tex, map->no_path, 0 ,0);
-	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path, 0, 0);
-	img->we_tex = load_texture(img, img->we_tex, map->we_path, 0, 0);
+	get_wall_texture(img, map);
+	get_beer_texture(img);
 	return (img);
 }
 

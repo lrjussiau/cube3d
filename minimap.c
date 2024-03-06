@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 09:15:47 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 09:53:09 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:49:35 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	print_mini_map(t_player *player)
 	int		j;
 	char	**tab;
 
-	printf("\n\n");
 	tab = player->map;
 	tab[(int)player->pos_y][(int)player->pos_x] = 'P';
 	i = 0;

@@ -15,6 +15,9 @@ FILES = utils \
 			minimap \
 			map \
 			apply_texture \
+			start_screen_bonus \
+			launch_game_bonus \
+			launch_texture \
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

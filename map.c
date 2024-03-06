@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 09:12:55 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:50:13 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,6 @@ void print_block(char **new_map, int i, int j, char c, t_player *player)
 	{
 		p = 0;
 		l = j;
-			printf("k : %d, / %d\n", k, player->minimap_size /10);
 		while (p < player->minimap_size / 10)
 		{
 			// printf("\tp : %d, / %d\n", p, player->minimap_size /10);
@@ -238,7 +237,6 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 
 	i = 0;
 	n = malloc(sizeof(char *) * s);
-	printf("s : %d\n", s);
 	while (i < s)
 	{
 		n[i] = malloc(sizeof(char) * s);
@@ -256,7 +254,6 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 			{
 				if (x == (int)p->pos_x && y == (int)p->pos_y)
 				{
-					printf("my_minimap: \n");
 					print_player(n, i * (s / 10), j * (s / 10), p);
 				}
 				else
@@ -264,7 +261,6 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 			}
 			else
 			{
-					printf("my_minimap: \n");
 				print_block(n, i * (s / 10), j * (s / 10), 'T', p);
 			}
 			x++;
