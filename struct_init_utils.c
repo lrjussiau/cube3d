@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:39:57 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 10:21:41 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:47:13 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-t_tex	*load_texture(t_img *root, t_tex *tex, char *path, int width, int height)
+t_tex	*load_texture(t_img *root, t_tex *tex, char *path)
 {
+	int	width;
+	int	height;
+
 	tex->img_ptr = mlx_xpm_file_to_image(root->mlx, path, &width, &height);
 	if (!tex->img_ptr)
 		error("mlx_xpm_file_to_image() failure\n");

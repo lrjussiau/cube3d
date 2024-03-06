@@ -6,25 +6,12 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 10:40:09 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:00:49 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	render(void *param)
-{
-	t_player	*player;
-
-	player = (t_player *)param;
-	if (player->home_screen != 3)
-		put_home_screen(player);
-	minimap_update(player);
-	new_image(player, player->ray, player->column);
-	if (player->home_screen == 3)
-		listen_hook(player);
-	return (0);
-}
 
 int main(int ac, char **av)
 {

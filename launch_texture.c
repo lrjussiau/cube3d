@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:37:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 10:08:19 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:46:35 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	get_wall_texture(t_img *img, t_map *map)
 	img->no_tex = malloc(sizeof(t_tex));
 	img->ea_tex = malloc(sizeof(t_tex));
 	img->we_tex = malloc(sizeof(t_tex));
-	img->so_tex = load_texture(img, img->so_tex, map->so_path, 0, 0);
-	img->no_tex = load_texture(img, img->no_tex, map->no_path, 0 ,0);
-	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path, 0, 0);
-	img->we_tex = load_texture(img, img->we_tex, map->we_path, 0, 0);
+	img->so_tex = load_texture(img, img->so_tex, map->so_path);
+	img->no_tex = load_texture(img, img->no_tex, map->no_path);
+	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
+	img->we_tex = load_texture(img, img->we_tex, map->we_path);
 }
 
 void	get_beer_texture(t_img *img)
@@ -33,8 +33,8 @@ void	get_beer_texture(t_img *img)
 	empty = ft_strdup("./texture/beer/empty.xpm");
 	img->beer_empty = safe_malloc(sizeof(t_tex));
 	img->beer_full = safe_malloc(sizeof(t_tex));
-	img->beer_empty = load_texture(img, img->beer_empty, empty, 0, 0);
-	img->beer_full = load_texture(img, img->beer_full, full, 0, 0);
+	img->beer_empty = load_texture(img, img->beer_empty, empty);
+	img->beer_full = load_texture(img, img->beer_full, full);
 	free(full);
 	free(empty);
 }

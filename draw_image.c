@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 10:39:24 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:09:32 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,25 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 		x++;
 	}
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
+	//draw_minimap(player->minimap, player);
 	// clear_minimap(&img, player->minimap);
 	if (player->home_screen == 3 && player->drunk_mode == 0)
 	{
+		
 		draw_minimap(player->minimap, player);
+		mlx_put_image_to_window(img.mlx, img.mlx_win,
+		img.beer_full->img_ptr, 300, 479);
 		mlx_put_image_to_window(img.mlx, img.mlx_win, img.drink_info->img_ptr, 1500, 900);
 	}
 	if (player->drunk_mode == 1)
-		mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
-	if (player->drunk_mode == 0)
-		mlx_put_image_to_window(img.mlx, img.mlx_win,
-		img.beer_full->img_ptr, 300, 479);
-	else
 		mlx_put_image_to_window(img.mlx, img.mlx_win,
 		img.beer_empty->img_ptr, 300, 479);
+	// if (player->drunk_mode == 1)
+	// 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
+	// if (player->drunk_mode == 0)
+	// 	mlx_put_image_to_window(img.mlx, img.mlx_win,
+	// 	img.beer_full->img_ptr, 300, 479);
+	// else
+	// 	mlx_put_image_to_window(img.mlx, img.mlx_win,
+	// 	img.beer_empty->img_ptr, 300, 479);
 }

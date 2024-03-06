@@ -6,11 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/06 09:46:49 by vvuadens         ###   ########.fr       */
-=======
-/*   Updated: 2024/03/06 09:47:32 by ljussiau         ###   ########.fr       */
->>>>>>> 162504a9a634c713dd239c278ffbfc5b548a4855
+/*   Updated: 2024/03/06 10:46:13 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +72,6 @@ typedef struct s_image
 	t_tex	*no_tex;
 	t_tex	*ea_tex;
 	t_tex	*we_tex;
-<<<<<<< HEAD
 	t_tex	*wine_1;
 	t_tex	*wine_2;
 	t_tex	*wine_3;
@@ -84,10 +79,8 @@ typedef struct s_image
 	t_tex	*title;
 	t_tex	*sub_title;
 	t_tex	*drink_info;
-=======
 	t_tex	*beer_full;
 	t_tex	*beer_empty;
->>>>>>> 162504a9a634c713dd239c278ffbfc5b548a4855
 }			t_img;
 
 typedef struct s_sprite {
@@ -257,7 +250,7 @@ t_map		*map_init(t_map *map);
 //struct_init_utils
 void		init_orientation(t_player **player, char orientation);
 t_mov		*init_mov(t_player *player);
-t_tex		*load_texture(t_img *root, t_tex *tex, char *path, int width, int height);
+t_tex		*load_texture(t_img *root, t_tex *tex, char *path);
 t_col		*init_col_s(t_player *player, t_map *map);
 
 //struct_update
@@ -278,21 +271,8 @@ void		draw_ground(t_img *img, t_col *column);
 void		new_image(t_player *player, t_ray *ray, t_col *column);
 void		draw_texture(t_player *player, t_col *column, int x);
 
-//map
-char		**extract_minimap(t_player *p, t_map *m, int s);
-t_minimap 	*minimap_init(t_player *player);
-void		draw_minimap(t_minimap *map, t_player *player);
-void		clear_minimap(t_img *img, t_minimap *map);
-void		minimap_update(t_player *player);
-void 		draw_minimap(t_minimap *map, t_player *player);
-
-<<<<<<< HEAD
-//drunk_mode
-void		drunk_mode(t_player *player);
-
 //static home_screen
 void		put_home_screen(t_player *player);
-=======
 // ------------------Bonus--------------------//
 
 //starting screen
@@ -300,6 +280,13 @@ void		start(t_player *player);
 
 //Lunch game
 void		start_game(t_player *player);
->>>>>>> 162504a9a634c713dd239c278ffbfc5b548a4855
+
+//map
+char		**extract_minimap(t_player *p, t_map *m, int s);
+t_minimap 	*minimap_init(t_player *player);
+void		draw_minimap(t_minimap *map, t_player *player);
+void		clear_minimap(t_img *img, t_minimap *map);
+void		minimap_update(t_player *player);
+void 		draw_minimap(t_minimap *map, t_player *player);
 
 #endif 
