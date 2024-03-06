@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 10:46:13 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 11:25:56 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ typedef struct s_image
 	t_tex	*no_tex;
 	t_tex	*ea_tex;
 	t_tex	*we_tex;
-	t_tex	*wine_1;
-	t_tex	*wine_2;
-	t_tex	*wine_3;
-	t_tex	*wine_4;
+	t_tex	*so_tex_d;
+	t_tex	*no_tex_d;
+	t_tex	*ea_tex_d;
+	t_tex	*we_tex_d;
 	t_tex	*title;
 	t_tex	*sub_title;
 	t_tex	*drink_info;
@@ -83,12 +83,6 @@ typedef struct s_image
 	t_tex	*beer_empty;
 }			t_img;
 
-typedef struct s_sprite {
-	char	*name;
-	char	**paths;
-	int		width;
-	int		height;
-}		t_sprite;
 
 typedef struct	s_ray
 {
