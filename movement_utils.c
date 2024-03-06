@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 08:17:07 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:31:22 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	keys_pressed(int keycode, t_player *player)
 		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
 		exit(0);
 	}
+	if (keycode == B)
+		player->drunk_mode = 1;
 	return (0);
 }
 

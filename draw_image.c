@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 09:19:48 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:13:23 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,11 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 	}
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 	// clear_minimap(&img, player->minimap);
-	draw_minimap(player->minimap, player);
-	if (player->drunk_mode == 0)
+	if (player->home_screen == 3 && player->drunk_mode == 0)
+	{
+		draw_minimap(player->minimap, player);
+		mlx_put_image_to_window(img.mlx, img.mlx_win, img.drink_info->img_ptr, 1500, 900);
+	}
+	if (player->drunk_mode == 1)
 		mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
 }

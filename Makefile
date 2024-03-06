@@ -15,6 +15,7 @@ FILES = utils \
 			minimap \
 			map \
 			apply_texture \
+			static_home_screen \
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

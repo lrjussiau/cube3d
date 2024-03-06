@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/03/05 08:54:45 by vvuadens         ###   ########.fr       */
-=======
-/*   Updated: 2024/03/05 09:12:55 by ljussiau         ###   ########.fr       */
->>>>>>> 17a39c7e0203729f062c10d43061eaee3a28e347
+/*   Updated: 2024/03/06 06:48:27 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,7 +185,7 @@ void print_block(char **new_map, int i, int j, char c, t_player *player)
 	{
 		p = 0;
 		l = j;
-			printf("k : %d, / %d\n", k, player->minimap_size /10);
+			//printf("k : %d, / %d\n", k, player->minimap_size /10);
 		while (p < player->minimap_size / 10)
 		{
 			// printf("\tp : %d, / %d\n", p, player->minimap_size /10);
@@ -242,7 +238,7 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 
 	i = 0;
 	n = malloc(sizeof(char *) * s);
-	printf("s : %d\n", s);
+	//printf("s : %d\n", s);
 	while (i < s)
 	{
 		n[i] = malloc(sizeof(char) * s);
@@ -260,7 +256,7 @@ char	**extract_minimap(t_player *p, t_map *m, int s)
 			{
 				if (x == (int)p->pos_x && y == (int)p->pos_y)
 				{
-					printf("my_minimap: \n");
+					//printf("my_minimap: \n");
 					print_player(n, i * (s / 10), j * (s / 10), p);
 				}
 				else

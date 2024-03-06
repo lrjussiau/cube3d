@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 09:17:19 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:46:49 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ typedef struct s_image
 	t_tex	*no_tex;
 	t_tex	*ea_tex;
 	t_tex	*we_tex;
+	t_tex	*wine_1;
+	t_tex	*wine_2;
+	t_tex	*wine_3;
+	t_tex	*wine_4;
+	t_tex	*title;
+	t_tex	*sub_title;
+	t_tex	*drink_info;
 }			t_img;
 
 typedef struct s_sprite {
@@ -148,6 +155,7 @@ typedef struct s_player
 	int		mouse_x;
 	int		minimap_size;
 	int		drunk_mode;
+	int		home_screen;
 	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
@@ -173,6 +181,7 @@ typedef struct s_line
 # define A 0
 # define S 1
 # define D 2
+# define B 11
 # define L_ARROW 123
 # define R_ARROW 124
 # define ESC 53
@@ -260,5 +269,11 @@ void		draw_minimap(t_minimap *map, t_player *player);
 void		clear_minimap(t_img *img, t_minimap *map);
 void		minimap_update(t_player *player);
 void 		draw_minimap(t_minimap *map, t_player *player);
+
+//drunk_mode
+void		drunk_mode(t_player *player);
+
+//static home_screen
+void		put_home_screen(t_player *player);
 
 #endif 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 09:19:07 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/06 09:58:29 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->time = 0;
 	(*player)->old_time = 0;
 	(*player)->map = map->map;
-	(*player)->drunk_mode = 1;
+	(*player)->drunk_mode = 0;
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
+	(*player)->home_screen = 1;
 	(*player)->img = init_img(img, map);
 	(*player)->map_s = map;
 	(*player)->minimap = minimap_init(*player);
@@ -83,6 +84,13 @@ t_img	*init_img(t_img *img, t_map *map)
 	img->no_tex = malloc(sizeof(t_tex));
 	img->ea_tex = malloc(sizeof(t_tex));
 	img->we_tex = malloc(sizeof(t_tex));
+	img->wine_1 = malloc(sizeof(t_tex));
+	img->wine_2 = malloc(sizeof(t_tex));
+	img->wine_3 = malloc(sizeof(t_tex));
+	img->wine_4 = malloc(sizeof(t_tex));
+	img->title = malloc(sizeof(t_tex));
+	img->sub_title = malloc(sizeof(t_tex));
+	img->drink_info = malloc(sizeof(t_tex));
 	if (!img->so_tex || !img->no_tex || !img->ea_tex || !img->we_tex)
 		return (0);
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
@@ -94,6 +102,13 @@ t_img	*init_img(t_img *img, t_map *map)
 	img->no_tex = load_texture(img, img->no_tex, map->no_path);
 	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
 	img->we_tex = load_texture(img, img->we_tex, map->we_path);
+	img->wine_1 = load_texture(img, img->wine_1,"./sprites/wine/wine_1/1.xpm");
+	img->wine_2 = load_texture(img, img->wine_2, "./sprites/wine/wine_1/2.xpm");
+	img->wine_3 = load_texture(img, img->wine_3, "./sprites/wine/wine_1/3.xpm");
+	img->wine_4 = load_texture(img, img->wine_4, "./sprites/wine/wine_1/4.xpm");
+	img->title = load_texture(img, img->title, "./sprites/title/title.xpm");
+	img->sub_title = load_texture(img, img->sub_title, "./sprites/title/sub_title.xpm");
+	img->drink_info = load_texture(img, img->drink_info, "./sprites/title/drink_info.xpm");
 	return (img);
 }
 
