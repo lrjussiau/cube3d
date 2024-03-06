@@ -1,7 +1,7 @@
-NO texture/drunk/galaxy.xpm
-SO texture/drunk/amongus.xpm
-WE texture/drunk/face3.xpm
-EA texture/drunk/jib.xpm
+NO texture/wall.xpm
+SO texture/wall2.xpm
+WE texture/wall3.xpm
+EA texture/wall4.xpm
 
 F 153,76,0
 C 153,204,255
