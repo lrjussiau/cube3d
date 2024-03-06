@@ -16,6 +16,9 @@ FILES = utils \
 			map \
 			apply_texture \
 			static_home_screen \
+			start_screen_bonus \
+			launch_game_bonus \
+			launch_texture \
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

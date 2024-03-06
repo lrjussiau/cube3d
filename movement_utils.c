@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 10:31:22 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:36:47 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	listen_hook(t_player *player)
 	if (movement->move_right == 1)
 		move_right(player);
 	if (movement->rotate_left == 1)
-		left_arrow_hook(player);
+		left_arrow_hook(player, -ROT);
 	if (movement->rotate_right == 1)
-		right_arrow_hook(player);
+		right_arrow_hook(player, ROT);
 }
 
 int	keys_pressed(int keycode, t_player *player)
@@ -78,30 +78,40 @@ int	keys_release(int keycode, t_player *player)
 	return (0);
 }
 
-int	right_arrow_hook(t_player *player)
+int	right_arrow_hook(t_player *player, double t)
 {
 	double	oldcor_x;
 	double	oldplane_x;
 
+	if (player->orientation == 'S' || player->orientation == 'W')
+	{
+		if (player->drunk_mode == 0)
+			t *= -1;
+	}
 	oldcor_x = player->cor_x;
 	oldplane_x = player->plane_x;
-	player->cor_x = player->cor_x * cos(ROT) - player->cor_y * sin(ROT);
-	player->cor_y = oldcor_x * sin(ROT) + player->cor_y * cos(ROT);
-	player->plane_x = player->plane_x * cos(ROT) - player->plane_y * sin(ROT);
-	player->plane_y = oldplane_x * sin(ROT) + player->plane_y * cos(ROT);
+	player->cor_x = player->cor_x * cos(t) - player->cor_y * sin(t);
+	player->cor_y = oldcor_x * sin(t) + player->cor_y * cos(t);
+	player->plane_x = player->plane_x * cos(t) - player->plane_y * sin(t);
+	player->plane_y = oldplane_x * sin(t) + player->plane_y * cos(t);
 	return (0);
 }
 
-int	left_arrow_hook(t_player *player)
+int	left_arrow_hook(t_player *player, double t)
 {
 	double	oldcor_x;
 	double	oldplane_x;
 
+	if (player->orientation == 'S' || player->orientation == 'W')
+	{
+		if (player->drunk_mode == 0)
+			t *= -1;
+	}
 	oldcor_x = player->cor_x;
 	oldplane_x = player->plane_x;
-	player->cor_x = player->cor_x * cos(-ROT) - player->cor_y * sin(-ROT);
-	player->cor_y = oldcor_x * sin(-ROT) + player->cor_y * cos(-ROT);
-	player->plane_x = player->plane_x * cos(-ROT) - player->plane_y * sin(-ROT);
-	player->plane_y = oldplane_x * sin(-ROT) + player->plane_y * cos(-ROT);
+	player->cor_x = player->cor_x * cos(t) - player->cor_y * sin(t);
+	player->cor_y = oldcor_x * sin(t) + player->cor_y * cos(t);
+	player->plane_x = player->plane_x * cos(t) - player->plane_y * sin(t);
+	player->plane_y = oldplane_x * sin(t) + player->plane_y * cos(t);
 	return (0);
 }

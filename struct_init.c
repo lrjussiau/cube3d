@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 09:58:29 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:36:34 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,11 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->pos_y = map->player_pos_y + 0.5;
 	(*player)->minimap_size = MINIMAP_SIZE;
 	(*player)->time = 0;
+	(*player)->orientation = map->player_orientation;
 	(*player)->old_time = 0;
 	(*player)->map = map->map;
 	(*player)->drunk_mode = 0;
+	(*player)->enter = 0;
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);
@@ -80,10 +82,6 @@ t_ray	*init_ray_s(char **map)
 t_img	*init_img(t_img *img, t_map *map)
 {
 	img->addr = malloc(sizeof(char *));
-	img->so_tex = malloc(sizeof(t_tex));
-	img->no_tex = malloc(sizeof(t_tex));
-	img->ea_tex = malloc(sizeof(t_tex));
-	img->we_tex = malloc(sizeof(t_tex));
 	img->wine_1 = malloc(sizeof(t_tex));
 	img->wine_2 = malloc(sizeof(t_tex));
 	img->wine_3 = malloc(sizeof(t_tex));
@@ -91,17 +89,13 @@ t_img	*init_img(t_img *img, t_map *map)
 	img->title = malloc(sizeof(t_tex));
 	img->sub_title = malloc(sizeof(t_tex));
 	img->drink_info = malloc(sizeof(t_tex));
-	if (!img->so_tex || !img->no_tex || !img->ea_tex || !img->we_tex)
-		return (0);
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
 	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X, SCREEN_Y);
 	if (!img->img_ptr)
 		return (0);
 	img->addr = mlx_get_data_addr(img->img_ptr, &img->bpp, &img->l_l, &img->en);
-	img->so_tex = load_texture(img, img->so_tex, map->so_path);
-	img->no_tex = load_texture(img, img->no_tex, map->no_path);
-	img->ea_tex = load_texture(img, img->ea_tex, map->ea_path);
-	img->we_tex = load_texture(img, img->we_tex, map->we_path);
+	get_wall_texture(img, map);
+	get_beer_texture(img);
 	img->wine_1 = load_texture(img, img->wine_1,"./sprites/wine/wine_1/1.xpm");
 	img->wine_2 = load_texture(img, img->wine_2, "./sprites/wine/wine_1/2.xpm");
 	img->wine_3 = load_texture(img, img->wine_3, "./sprites/wine/wine_1/3.xpm");

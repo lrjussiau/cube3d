@@ -6,7 +6,11 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/03/06 09:46:49 by vvuadens         ###   ########.fr       */
+=======
+/*   Updated: 2024/03/06 09:47:32 by ljussiau         ###   ########.fr       */
+>>>>>>> 162504a9a634c713dd239c278ffbfc5b548a4855
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +76,7 @@ typedef struct s_image
 	t_tex	*no_tex;
 	t_tex	*ea_tex;
 	t_tex	*we_tex;
+<<<<<<< HEAD
 	t_tex	*wine_1;
 	t_tex	*wine_2;
 	t_tex	*wine_3;
@@ -79,6 +84,10 @@ typedef struct s_image
 	t_tex	*title;
 	t_tex	*sub_title;
 	t_tex	*drink_info;
+=======
+	t_tex	*beer_full;
+	t_tex	*beer_empty;
+>>>>>>> 162504a9a634c713dd239c278ffbfc5b548a4855
 }			t_img;
 
 typedef struct s_sprite {
@@ -152,10 +161,13 @@ typedef struct s_player
 	double	time;
 	double	old_time;
 	char	**map;
+	char	orientation;
 	int		mouse_x;
 	int		minimap_size;
 	int		drunk_mode;
 	int		home_screen;
+	void	*gun;
+	int		enter;
 	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
@@ -174,8 +186,8 @@ typedef struct s_line
 	int		tex_y;
 }				t_line;
 
-# define SCREEN_X	2000
-# define SCREEN_Y	1000
+# define SCREEN_X	1920
+# define SCREEN_Y	1080
 # define MINIMAP_SIZE SCREEN_Y / 5
 # define W 13
 # define A 0
@@ -215,13 +227,17 @@ void		process_wall(char *str);
 void		print_struct_map(t_map *map);
 void		ft_print_map(char **tab);
 
+//Launch texture
+void		get_wall_texture(t_img *img, t_map *map);
+void		get_beer_texture(t_img *img);
+
 //Movement
 int			move_forward(t_player *player);
 int			move_back(t_player *player);
 int			move_left(t_player *player);
 int			move_right(t_player *player);
-int			left_arrow_hook(t_player *player);
-int			right_arrow_hook(t_player *player);
+int			left_arrow_hook(t_player *player, double t);
+int			right_arrow_hook(t_player *player, double t);
 
 //Movement utils
 void		listen_hook(t_player *player);
@@ -241,7 +257,7 @@ t_map		*map_init(t_map *map);
 //struct_init_utils
 void		init_orientation(t_player **player, char orientation);
 t_mov		*init_mov(t_player *player);
-t_tex		*load_texture(t_img *root, t_tex *tex, char *path);
+t_tex		*load_texture(t_img *root, t_tex *tex, char *path, int width, int height);
 t_col		*init_col_s(t_player *player, t_map *map);
 
 //struct_update
@@ -270,10 +286,20 @@ void		clear_minimap(t_img *img, t_minimap *map);
 void		minimap_update(t_player *player);
 void 		draw_minimap(t_minimap *map, t_player *player);
 
+<<<<<<< HEAD
 //drunk_mode
 void		drunk_mode(t_player *player);
 
 //static home_screen
 void		put_home_screen(t_player *player);
+=======
+// ------------------Bonus--------------------//
+
+//starting screen
+void		start(t_player *player);
+
+//Lunch game
+void		start_game(t_player *player);
+>>>>>>> 162504a9a634c713dd239c278ffbfc5b548a4855
 
 #endif 

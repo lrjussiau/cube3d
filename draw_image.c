@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 10:13:23 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:39:24 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,10 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 	}
 	if (player->drunk_mode == 1)
 		mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);
+	if (player->drunk_mode == 0)
+		mlx_put_image_to_window(img.mlx, img.mlx_win,
+		img.beer_full->img_ptr, 300, 479);
+	else
+		mlx_put_image_to_window(img.mlx, img.mlx_win,
+		img.beer_empty->img_ptr, 300, 479);
 }
