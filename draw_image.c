@@ -3,32 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 11:09:32 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/06 12:03:41 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	draw_sky(t_img *img, t_col *column)
+void	draw_sky(t_img *img, t_col *column, int drunk)
 {
 	int	y;
+	int	color;
 
 	y = 0;
+	if (drunk == 0)
+		color = column->sky_color;
+	else
+		color = create_trgb(190, 153, 58, 78);
 	while (y < column->start)
 	{
-		pixel_put(img, column->x, y, column->sky_color);
+		pixel_put(img, column->x, y, color);
 		y++;
 	}
 }
 
-void	draw_ground(t_img *img, t_col *column)
+void	draw_ground(t_img *img, t_col *column, int drunk)
 {
 	int	y;
+	int	color;
 
 	y = column->end + 1;
+	if (drunk == 0)
+		color = column->ground_color;
+	else
+		color = create_trgb(190, 153, 58, 78);
 	while (y < SCREEN_Y)
 	{
 		pixel_put(img, column->x, y, column->ground_color);
@@ -75,9 +85,9 @@ void	new_image(t_player *player, t_ray *ray, t_col *column)
 		dda(ray);
 		get_wall_orientation(column, ray);
 		update_column(column, ray, x, player);
-		draw_sky(player->img, column);
+		draw_sky(player->img, column, player->drunk_mode);
 		draw_texture(player, column, x);
-		draw_ground(player->img, column);
+		draw_ground(player->img, column, player->drunk_mode);
 		x++;
 	}
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img_ptr, 0, 0);

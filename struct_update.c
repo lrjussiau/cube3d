@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 10:04:56 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 08:23:52 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 07:59:24 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	get_wall_orientation(t_col *column, t_ray *ray)
 void	update_column(t_col *column, t_ray *ray, int x, t_player *player)
 {
 	column->height = (double)SCREEN_Y / ray->wall_dist;
-	column->start = ((-column->height) / 2) + (SCREEN_Y / 2) + column->pitch;
+	column->start = ((-column->height) / 2) + (SCREEN_Y / 2);
 	if (column->start < 0)
 		column->start = 0;
-	column->end = (column->height / 2) + (SCREEN_Y / 2) + column->pitch;
+	column->end = (column->height / 2) + (SCREEN_Y / 2);
 	if (column->end >= SCREEN_Y)
 		column->end = SCREEN_Y - 1;
 	column->x = x;

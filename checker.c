@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:43:01 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/01 10:38:58 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:41:22 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,32 @@ void	check_wall(t_map *map)
 			col++;
 		}
 		row++;
+	}
+}
+
+void	check_wall_vertical(t_map *map)
+{
+	int	row;
+	int	col;
+
+	row = 0;
+	get_size(map);
+	while (map->map[row][col])
+	{
+		row = 0;
+		while (map->map[row])
+		{
+			if (col == 0 && (map->map[row][col] != ' '
+				&& map->map[row][col] != '1'))
+				error("map not correctly walled.");
+			else if (col == map->x_max && (map->map[row][col] != ' '
+				&& map->map[row][col] != '1'))
+				error("map not correctly walled.");
+			else
+				// process_wall(map->map[row]);
+			row++;
+		}
+		col++;
 	}
 }
 

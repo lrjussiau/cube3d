@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 11:27:22 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 07:58:55 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 	(*player)->pos_x = map->player_pos_x + 0.5;
 	(*player)->pos_y = map->player_pos_y + 0.5;
 	(*player)->minimap_size = MINIMAP_SIZE;
-	(*player)->time = 0;
 	(*player)->orientation = map->player_orientation;
-	(*player)->old_time = 0;
 	(*player)->map = map->map;
 	(*player)->drunk_mode = 0;
-	(*player)->enter = 0;
+	(*player)->start_game = 0;
 	init_orientation(player, map->player_orientation);
 	(*player)->ray = init_ray_s(map->map);
 	(*player)->column = init_col_s(*player, map);

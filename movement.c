@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:10:23 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/05 09:59:26 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:09:34 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	move_forward(t_player *player)
 {
-	if (player->map[(int)player->pos_y]
-		[(int)(player->pos_x + player->cor_x * MOVESPEED)] != '1')
+	if (player->map[(int)(player->pos_y)]
+		[(int)(player->pos_x + player->cor_x * MOVESPEED)] == '0')
 		player->pos_x += player->cor_x * MOVESPEED;
 	if (player->map[(int)(player->pos_y + player->cor_y * MOVESPEED)]
-		[(int)player->pos_x] != '1')
+		[(int)(player->pos_x)] == '0')
 		player->pos_y += player->cor_y * MOVESPEED;
 	return (0);
 }
@@ -33,22 +33,22 @@ int	move_left(t_player *player)
 		if (player->drunk_mode == 0)
 			trigger = -1;
 	}
-	if (player->map[(int)player->pos_y]
-		[(int)(player->pos_x - player->cor_y * MOVESPEED)] != '1')
+	if (player->map[(int)(player->pos_y)]
+		[(int)(player->pos_x - player->cor_y * MOVESPEED)] == '0')
 		player->pos_x -= player->cor_y * MOVESPEED * trigger;
 	if (player->map[(int)(player->pos_y + player->cor_x * MOVESPEED)]
-		[(int)player->pos_x] != '1')
+		[(int)(player->pos_x)] == '0')
 		player->pos_y += player->cor_x * MOVESPEED * trigger;
 	return (0);
 }
 
 int	move_back(t_player *player)
 {
-	if (player->map[(int)player->pos_y]
-		[(int)(player->pos_x - player->cor_x * MOVESPEED)] != '1')
+	if (player->map[(int)(player->pos_y)]
+		[(int)(player->pos_x - player->cor_x * MOVESPEED)] == '0')
 		player->pos_x -= player->cor_x * MOVESPEED;
 	if (player->map[(int)(player->pos_y - player->cor_y * MOVESPEED)]
-		[(int)player->pos_x] != '1')
+		[(int)(player->pos_x)] == '0')
 		player->pos_y -= player->cor_y * MOVESPEED;
 	return (0);
 }
@@ -63,11 +63,11 @@ int	move_right(t_player *player)
 		if (player->drunk_mode == 0)
 			trigger = -1;
 	}
-	if (player->map[(int)player->pos_y]
-		[(int)(player->pos_x + player->cor_y * MOVESPEED)] != '1')
+	if (player->map[(int)(player->pos_y)]
+		[(int)(player->pos_x + player->cor_y * MOVESPEED)] == '0')
 		player->pos_x += player->cor_y * MOVESPEED * trigger;
 	if (player->map[(int)(player->pos_y - player->cor_x * MOVESPEED)]
-		[(int)player->pos_x] != '1')
+		[(int)(player->pos_x)] == '0')
 		player->pos_y -= player->cor_x * MOVESPEED * trigger;
 	return (0);
 }

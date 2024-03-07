@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:39:57 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 10:47:13 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 07:59:29 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,5 @@ t_col	*init_col_s(t_player *player, t_map *map)
 	column->sky_color = transform_color(map->cell_color);
 	column->cor_x = player->cor_x;
 	column->cor_y = player->cor_y;
-	column->pitch = 0;
 	return (column);
 }

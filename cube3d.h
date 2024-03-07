@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 11:25:56 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:33:55 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ typedef struct s_column
 	int		side_wall;
 	int		ground_color;
 	int		sky_color;
-	int		pitch;
 	double	cor_x;
 	double	cor_y;
 	double	wall_x;
@@ -145,16 +144,13 @@ typedef struct s_player
 	double	cor_y;
 	double	plane_x;
 	double	plane_y;
-	double	time;
-	double	old_time;
 	char	**map;
 	char	orientation;
 	int		mouse_x;
 	int		minimap_size;
 	int		drunk_mode;
 	int		home_screen;
-	void	*gun;
-	int		enter;
+	int		start_game;
 	t_mov	*movement;
 	t_map	*map_s;
 	t_ray	*ray;
@@ -173,6 +169,10 @@ typedef struct s_line
 	int		tex_y;
 }				t_line;
 
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
 # define SCREEN_X	1920
 # define SCREEN_Y	1080
 # define MINIMAP_SIZE SCREEN_Y / 5
@@ -184,6 +184,7 @@ typedef struct s_line
 # define L_ARROW 123
 # define R_ARROW 124
 # define ESC 53
+# define ENTER 36
 
 # define MOVESPEED 0.08
 # define ROT 0.03927
@@ -260,8 +261,8 @@ int			transform_color(char *rgb_color);
 int			create_trgb(int t, int r, int g, int b);
 
 //draw_image
-void		draw_sky(t_img *img, t_col *column);
-void		draw_ground(t_img *img, t_col *column);
+void		draw_sky(t_img *img, t_col *column, int drunk);
+void		draw_ground(t_img *img, t_col *column, int drunk);
 void		new_image(t_player *player, t_ray *ray, t_col *column);
 void		draw_texture(t_player *player, t_col *column, int x);
 
