@@ -42,6 +42,7 @@ FILES = ft_atoi\
 			ft_free_ptr\
 			get_next_line\
 			ft_free_tab\
+			ft_str_append\
 
 CFILES = $(FILES:%=%.c)
 OFILES = $(FILES:%=%.o)

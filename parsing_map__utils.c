@@ -6,35 +6,11 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:01:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/02/21 08:06:38 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:59:51 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-char	*str_append(char *str1, char *str2)
-{
-	char	*result;
-	size_t	len1;
-	size_t	len2;
-
-	if (str1 == NULL)
-		len1 = 0;
-	else
-		len1 = ft_strlen(str1);
-	if (str2 == NULL)
-		len2 = 0;
-	else
-		len2 = ft_strlen(str2);
-	result = safe_malloc(len1 + len2 + 1);
-	*result = '\0';
-	if (str1)
-		ft_strlcat(result, str1, len1 + 1);
-	if (str2[0] != '\0')
-		ft_strlcat(result, str2, len1 + len2 + 1);
-	free(str1);
-	return (result);
-}
 
 char	*clear_path(char *str)
 {
@@ -96,5 +72,32 @@ void	process_wall(char *str)
 				error("map not correctly walled.");
 		}
 		i++;
+	}
+}
+
+void	process_wall_vertical(char **map, int col)
+{
+	int	row;
+
+	row = 0;
+	while (map[row])
+	{
+		if (map[row][col] != ' ')
+		{
+			if (map[row][col] != '1')
+				error("map not correctly walled.3");
+			while (map[row])
+			{
+				if (map[row][col] == ' ')
+					break ;
+				row++;
+			}
+			row--;
+			if (map[row][col] != '1')
+			{
+				error("map not correctly walled.4");
+			}
+		}
+		row++;
 	}
 }

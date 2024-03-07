@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch_texture.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:37:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:38:05 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:57:18 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	get_beer_texture(t_img *img)
 
 	full = ft_strdup("./texture/beer/full.xpm");
 	empty = ft_strdup("./texture/beer/empty.xpm");
-	img->beer_empty = safe_malloc(sizeof(t_tex));
-	img->beer_full = safe_malloc(sizeof(t_tex));
-	img->beer_empty = load_texture(img, img->beer_empty, empty);
-	img->beer_full = load_texture(img, img->beer_full, full);
+	img->emp = safe_malloc(sizeof(t_tex));
+	img->full = safe_malloc(sizeof(t_tex));
+	img->emp = load_texture(img, img->emp, empty);
+	img->full = load_texture(img, img->full, full);
 	free(full);
 	free(empty);
 }

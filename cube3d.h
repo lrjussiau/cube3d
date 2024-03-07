@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:43:48 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:56:36 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_image
 	t_tex	*title;
 	t_tex	*sub;
 	t_tex	*drink;
-	t_tex	*beer_full;
-	t_tex	*beer_empty;
+	t_tex	*full;
+	t_tex	*emp;
 }			t_img;
 
 typedef struct s_ray
@@ -201,10 +201,17 @@ void		cleaner(t_map *map);
 
 //map_parsing
 void		parsing_map(char *path, t_map *map);
+
+//checker
+void		check_path(t_map *map);
+void		check_player(t_map *map);
+void		check_wall(t_map *map);
+void		check_wall_vertical(t_map *map);
+void		check_inside(t_map *map);
 void		checker(t_map *map);
 
 //map_parsing_utils
-char		*str_append(char *str1, char *str2);
+void		process_wall_vertical(char **map, int col);
 char		*clear_path(char *str);
 char		*clear_color(char *str);
 void		get_size(t_map *map);

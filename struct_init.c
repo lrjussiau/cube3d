@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 08:44:19 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:49:32 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_img	*init_img(t_img *img, t_map *map)
 	img->addr = malloc(sizeof(char *));
 	img->title = malloc(sizeof(t_tex));
 	img->sub = malloc(sizeof(t_tex));
-	img->drink_info = malloc(sizeof(t_tex));
+	img->drink = malloc(sizeof(t_tex));
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
 	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X, SCREEN_Y);
 	if (!img->img_ptr)

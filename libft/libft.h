@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 10:34:30 by ljussiau          #+#    #+#             */
-/*   Updated: 2023/12/07 10:24:34 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:05:21 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,6 @@ void			ft_lstclear(t_list **lst, void (*del)(void *));
 void			ft_free_ptr(char **ptr);
 char			*get_next_line(int fd);
 void			ft_free_tab(char **tab);
+char			*str_append(char *str1, char *str2);
 
 #endif

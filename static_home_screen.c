@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   static_home_screen.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 09:39:14 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 08:07:59 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:46:31 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	enter_key(int keycode, t_player *player)
 
 void	put_home_screen(t_player *player)
 {
-	t_img		*img;
+	t_img		*i;
 
 	i = player->img;
 	mlx_put_image_to_window(i->mlx, i->mlx_win, i->title->img_ptr, 300, 250);

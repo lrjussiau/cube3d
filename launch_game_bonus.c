@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:25:02 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 09:27:37 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:49:03 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	start_game(t_player *player)
 	t_img	*img;
 
 	img = player->img;
+	player->home_screen = 3;
 	mlx_hook(img->mlx_win, 2, 1L << 0, keys_pressed, player);
 	mlx_hook(img->mlx_win, 3, 1L << 1, keys_release, player);
 	mlx_hook(img->mlx_win, 6, 1l << 0, mouse_move, player);

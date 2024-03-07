@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:40:44 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:27:11 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:48:14 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static t_tex	*choose_texture(t_player *player, t_col *column)
 		if (column->side_wall == SOUTH)
 			return (player->img->so_tex_d);
 	}
+	return (0);
 }
 
 void	draw_texture(t_player *player, t_col *column, int x)
