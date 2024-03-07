@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 07:58:55 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:44:19 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_img	*init_img(t_img *img, t_map *map)
 {
 	img->addr = malloc(sizeof(char *));
 	img->title = malloc(sizeof(t_tex));
-	img->sub_title = malloc(sizeof(t_tex));
+	img->sub = malloc(sizeof(t_tex));
 	img->drink_info = malloc(sizeof(t_tex));
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
 	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X, SCREEN_Y);
@@ -91,8 +91,8 @@ t_img	*init_img(t_img *img, t_map *map)
 	get_wall_texture(img, map);
 	get_beer_texture(img);
 	img->title = load_texture(img, img->title, "./sprites/title/title.xpm");
-	img->sub_title = load_texture(img, img->sub_title, "./sprites/title/sub_title.xpm");
-	img->drink_info = load_texture(img, img->drink_info, "./sprites/title/drink_info.xpm");
+	img->sub = load_texture(img, img->sub, "./sprites/title/sub_title.xpm");
+	img->drink = load_texture(img, img->drink, "./sprites/title/drink.xpm");
 	return (img);
 }
 

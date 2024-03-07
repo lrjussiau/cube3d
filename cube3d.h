@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:33:55 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:43:48 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,13 @@ typedef struct s_image
 	t_tex	*ea_tex_d;
 	t_tex	*we_tex_d;
 	t_tex	*title;
-	t_tex	*sub_title;
-	t_tex	*drink_info;
+	t_tex	*sub;
+	t_tex	*drink;
 	t_tex	*beer_full;
 	t_tex	*beer_empty;
 }			t_img;
 
-
-typedef struct	s_ray
+typedef struct s_ray
 {
 	int		map_x;
 	int		map_y;
@@ -138,24 +137,24 @@ typedef struct s_minimap
 
 typedef struct s_player
 {
-	double	pos_x;
-	double	pos_y;
-	double	cor_x;
-	double	cor_y;
-	double	plane_x;
-	double	plane_y;
-	char	**map;
-	char	orientation;
-	int		mouse_x;
-	int		minimap_size;
-	int		drunk_mode;
-	int		home_screen;
-	int		start_game;
-	t_mov	*movement;
-	t_map	*map_s;
-	t_ray	*ray;
-	t_col	*column;
-	t_img	*img;
+	double		pos_x;
+	double		pos_y;
+	double		cor_x;
+	double		cor_y;
+	double		plane_x;
+	double		plane_y;
+	char		**map;
+	char		orientation;
+	int			mouse_x;
+	int			minimap_size;
+	int			drunk_mode;
+	int			home_screen;
+	int			start_game;
+	t_mov		*movement;
+	t_map		*map_s;
+	t_ray		*ray;
+	t_col		*column;
+	t_img		*img;
 	t_minimap	*minimap;
 }				t_player;
 
@@ -175,7 +174,7 @@ typedef struct s_line
 
 # define SCREEN_X	1920
 # define SCREEN_Y	1080
-# define MINIMAP_SIZE SCREEN_Y / 5
+# define MINIMAP_SIZE 200
 # define W 13
 # define A 0
 # define S 1
@@ -261,8 +260,8 @@ int			transform_color(char *rgb_color);
 int			create_trgb(int t, int r, int g, int b);
 
 //draw_image
-void		draw_sky(t_img *img, t_col *column, int drunk);
-void		draw_ground(t_img *img, t_col *column, int drunk);
+void		draw_sky(t_img *img, t_col *column, t_player *player);
+void		draw_ground(t_img *img, t_col *column, t_player *player);
 void		new_image(t_player *player, t_ray *ray, t_col *column);
 void		draw_texture(t_player *player, t_col *column, int x);
 
@@ -278,10 +277,10 @@ void		start_game(t_player *player);
 
 //map
 char		**extract_minimap(t_player *p, t_map *m, int s);
-t_minimap 	*minimap_init(t_player *player);
+t_minimap	*minimap_init(t_player *player);
 void		draw_minimap(t_minimap *map, t_player *player);
 void		clear_minimap(t_img *img, t_minimap *map);
 void		minimap_update(t_player *player);
-void 		draw_minimap(t_minimap *map, t_player *player);
+void		draw_minimap(t_minimap *map, t_player *player);
 
 #endif 

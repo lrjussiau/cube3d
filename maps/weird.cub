@@ -1,10 +1,10 @@
-NO ./texture/amongus.xpm
-SO ./texture/amongus.xpm
-WE ./texture/jib.xpm
-EA ./texture/jib.xpm
+NO ./texture/drunk/jib.xpm
+SO ./texture/drunk/amongus.xpm
+WE ./texture/drunk/jib.xpm
+EA ./texture/drunk/jib.xpm
 
-F 153,76,0
-C 153,204,255
+F 51,26,0
+C 51,0,153
 
         111111
         100001

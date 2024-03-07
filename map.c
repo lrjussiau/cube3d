@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/06 10:49:37 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 07:12:24 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	draw_minimap(t_minimap *map, t_player *p)
 	int	y;
 
 	y = 0;
-	//printf("draw\n");
-	//clear_minimap(player->img, map);
 	start_y = map->y_start;
 	while (start_y < (map->y_start + map->size))
 	{
@@ -71,83 +69,20 @@ void	draw_minimap(t_minimap *map, t_player *p)
 		mlx_put_image_to_window(p->img->mlx, p->img->mlx_win, p->img->img_ptr, 0, 0);
 }
 
-//position = positionx + N * corx
-/*int	print_orientation(double x, double y, t_player *player)
-{
-	double	a = round(player->pos_x * 10) / 10;
-	double 	b = round(player->pos_y * 10) / 10;
-	double	corx = round(player->cor_x * 10) / 10;
-	double	cory = round(player->cor_y * 10) / 10;;
-	//x = round(x * 10) / 10;
-	//y = round(y * 10) / 10;
-
-	if ( corx == 0)
-	{
-		//printf("x: %f, y: %f, pos_x: %f, pos_y: %f, corx: %f, cory: %f\n", x, y,a, b, corx, cory );
-		corx = 1.0;
-		if (cory < 0)
-		{
-			if ((ft_abs(x - a) < 0.1 ) && (y / cory < 0) && y < b)
-				return (1);
-			return (0);
-		}
-		else
-		{
-			if ((ft_abs(x - a) < 0.1) && (y / cory > 0) && y > b)
-				return (1);
-			return (0);
-		}
-	}
-	else if (cory == 0)
-	{
-		cory = 1.0;
-		if (corx < 0)
-		{
-			if ((ft_abs(y - b) < 0.1) && (y / (corx < 0))&& x < a)
-				return (1);
-			return (0);
-		}
-		else
-		{
-			if ((ft_abs(y - b) < 0.1) && (y / corx > 0) && x > a)
-				return (1);
-			return (0);
-		}
-	}
-	else
-	{
-		// ajouter les trois autres cas 
-		if (ft_abs(((x - a) / corx)-((y - b) / cory)) < 0.3)
-		{
-			if (corx < 0 && cory < 0 && ft_abs(a) > ft_abs(x) && ft_abs(b) > ft_abs(y))
-				return (1);
-			if (corx > 0 && cory > 0 && ft_abs(a) < ft_abs(x) && ft_abs(b) < ft_abs(y))
-				return (1);
-			if (corx < 0 && cory > 0 && ft_abs(a) > ft_abs(x) && ft_abs(b) < ft_abs(y))
-				return (1);
-			if (corx > 0 && cory < 0 && ft_abs(a) < ft_abs(x) && ft_abs(b) > ft_abs(y))
-				return (1);
-		}
-		return (0);
-	} 
-}
-*/
 static char	pick_char(double x, double y, t_player *p)
 {
-	double	a = round(p->pos_x * 10) / 10;
-	double 	b = round(p->pos_y * 10) / 10;
+	double	a;
+	double 	b;
 
+	a = round(p->pos_x * 10) / 10;
+	b = round(p->pos_y * 10) / 10;
 	if ((ft_abs(x - a) < 0.3) && (ft_abs(y - b) < 0.3))
-	{
 		return ('P');
-	}
-	//else if (print_orientation(x, y, p))
-	//	return ('D');
 	else
 		return ('0');
 }
 
-void print_player(char **new_map, int i, int j, t_player *p)
+void	print_player(char **new_map, int i, int j, t_player *p)
 {
 	int		k;
 	int		m;

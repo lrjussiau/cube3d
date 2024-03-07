@@ -6,14 +6,13 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 08:30:24 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:44:34 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_player	*player;
 	t_img		img;
