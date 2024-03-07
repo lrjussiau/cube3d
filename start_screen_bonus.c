@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:16:43 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:00:56 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 09:09:17 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	animate(void *param)
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 150);
 		new_image(player, player->ray, player->column);
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 50);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->sub_title->img_ptr, 600, 800);
+		mlx_put_image_to_window(img->mlx, img->mlx_win, img->sub->img_ptr, 600, 800);
 		mlx_put_image_to_window(player->img->mlx, player->img->mlx_win, player->img->beer_empty->img_ptr, 100, 400);
 	}
 	else
@@ -58,7 +58,7 @@ int	animate(void *param)
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 150);
 		new_image(player, player->ray, player->column);
 		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 50);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->sub_title->img_ptr, 600, 800);
+		mlx_put_image_to_window(img->mlx, img->mlx_win, img->sub->img_ptr, 600, 800);
 		mlx_put_image_to_window(player->img->mlx, player->img->mlx_win, player->img->beer_full->img_ptr, 100, 400);
 	}
 	return (0);
