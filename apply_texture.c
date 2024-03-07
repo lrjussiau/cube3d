@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:40:44 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 11:27:00 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:27:11 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,32 @@ void	print_texture(t_img *img, t_col *col, t_line *line, t_tex *tex)
 	}
 }
 
+static t_tex	*choose_texture(t_player *player, t_col *column)
+{
+	if (player->drunk_mode == 0)
+	{
+		if (column->side_wall == WEST)
+			return (player->img->we_tex);
+		if (column->side_wall == EAST)
+			return (player->img->ea_tex);
+		if (column->side_wall == NORTH)
+			return (player->img->no_tex);
+		if (column->side_wall == SOUTH)
+			return (player->img->so_tex);
+	}
+	else
+	{
+		if (column->side_wall == WEST)
+			return (player->img->we_tex_d);
+		if (column->side_wall == EAST)
+			return (player->img->ea_tex_d);
+		if (column->side_wall == NORTH)
+			return (player->img->no_tex_d);
+		if (column->side_wall == SOUTH)
+			return (player->img->so_tex_d);
+	}
+}
+
 void	draw_texture(t_player *player, t_col *column, int x)
 {
 	char	*texture;
@@ -61,28 +87,7 @@ void	draw_texture(t_player *player, t_col *column, int x)
 	t_img	*root;
 
 	root = player->img;
-	if (player->drunk_mode == 0)
-	{
-		if (column->side_wall == WEST)
-			tex = player->img->we_tex;
-		if (column->side_wall == EAST)
-			tex = player->img->ea_tex;
-		if (column->side_wall == NORTH)
-			tex = player->img->no_tex;
-		if (column->side_wall == SOUTH)
-			tex = player->img->so_tex;
-	}
-	else
-	{
-		if (column->side_wall == WEST)
-			tex = player->img->we_tex_d;
-		if (column->side_wall == EAST)
-			tex = player->img->ea_tex_d;
-		if (column->side_wall == NORTH)
-			tex = player->img->no_tex_d;
-		if (column->side_wall == SOUTH)
-			tex = player->img->so_tex_d;
-	}
+	tex = choose_texture(player, column);
 	line = set_t_line(line, x, column, tex);
 	y = line->y0;
 	line->tex_x = (int)(column->wall_x * (double)tex->width);

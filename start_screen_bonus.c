@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:16:43 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/06 11:10:43 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 08:00:56 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	pressed_enter(int keycode, t_player *player)
 {
 	printf("okok\n");
 	if (keycode == 36)
-		player->enter = 1;
+		player->start_game = 1;
 	printf("euh\n");
 	return (0);
 }
@@ -31,7 +31,7 @@ int	animate(void *param)
 	img = player->img;
 	time_to_update = 10;
 	g_counter++;
-	if (player->enter == 1)
+	if (player->start_game== 1)
 	{
 		player->home_screen = 3;
 		start_game(player);
