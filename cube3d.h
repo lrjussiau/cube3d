@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 10:16:25 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:35:56 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ typedef struct s_image
 	t_tex	*title;
 	t_tex	*sub;
 	t_tex	*drink;
-	t_tex	*beer_full;
-	t_tex	*beer_empty;
+	t_tex	*full;
+	t_tex	*emp;
 }			t_img;
 
 typedef struct s_ray
@@ -166,6 +166,10 @@ typedef struct s_line
 	int		tex_y;
 }				t_line;
 
+# ifndef BONUS
+#  define BONUS 0
+# endif
+
 # define SCREEN_X	1920
 # define SCREEN_Y	1080
 # define M_S 200
@@ -177,6 +181,7 @@ typedef struct s_line
 # define L_ARROW 123
 # define R_ARROW 124
 # define ESC 53
+# define ENTER 36
 
 # define MOVESPEED 0.08
 # define ROT 0.03927
@@ -194,10 +199,17 @@ void		cleaner(t_map *map);
 
 //map_parsing
 void		parsing_map(char *path, t_map *map);
+
+//checker
+void		check_path(t_map *map);
+void		check_player(t_map *map);
+void		check_wall(t_map *map);
+void		check_wall_vertical(t_map *map);
+void		check_inside(t_map *map);
 void		checker(t_map *map);
 
 //map_parsing_utils
-char		*str_append(char *str1, char *str2);
+void		process_wall_vertical(char **map, int col);
 char		*clear_path(char *str);
 char		*clear_color(char *str);
 void		get_size(t_map *map);

@@ -6,61 +6,59 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:16:43 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:09:17 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:35:23 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+void	print_start_screen(t_player *player, char beer)
+{
+	t_img		*i;
+
+	i = player->img;
+	mlx_clear_window(player->img->mlx, player->img->mlx_win);
+	mlx_put_image_to_window(i->mlx, i->mlx_win, i->title->img_ptr, 300, 250);
+	new_image(player, player->ray, player->column);
+	mlx_put_image_to_window(i->mlx, i->mlx_win, i->title->img_ptr, 300, 150);
+	new_image(player, player->ray, player->column);
+	mlx_put_image_to_window(i->mlx, i->mlx_win, i->title->img_ptr, 300, 50);
+	mlx_put_image_to_window(i->mlx, i->mlx_win, i->sub->img_ptr, 600, 800);
+	if (beer == 'E')
+		mlx_put_image_to_window(i->mlx, i->mlx_win, i->emp->img_ptr, 100, 400);
+	else
+		mlx_put_image_to_window(i->mlx, i->mlx_win, i->full->img_ptr, 100, 400);
+}
+
 int	pressed_enter(int keycode, t_player *player)
 {
-	printf("okok\n");
-	if (keycode == 36)
+	if (keycode == ENTER)
 		player->start_game = 1;
-	printf("euh\n");
+	if (keycode == ESC)
+	{
+		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
+		exit(0);
+	}
 	return (0);
 }
 
 int	animate(void *param)
 {
-	t_player	*player = param;
-	static int	g_counter = 0;
+	t_player	*player;
 	int			time_to_update;
-	t_img		*img;
+	static int	g_counter = 0;
 
-	img = player->img;
+	player = param;
 	time_to_update = 10;
 	g_counter++;
-	if (player->start_game== 1)
-	{
-		player->home_screen = 3;
+	if (player->start_game == 1)
 		start_game(player);
-		return (0);
-	}
 	if (g_counter >= time_to_update * 2)
 		g_counter = 0;
 	else if (g_counter >= time_to_update)
-	{
-		mlx_clear_window(player->img->mlx, player->img->mlx_win);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 250);
-		new_image(player, player->ray, player->column);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 150);
-		new_image(player, player->ray, player->column);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 50);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->sub->img_ptr, 600, 800);
-		mlx_put_image_to_window(player->img->mlx, player->img->mlx_win, player->img->beer_empty->img_ptr, 100, 400);
-	}
+		print_start_screen(player, 'E');
 	else
-	{
-		mlx_clear_window(player->img->mlx, player->img->mlx_win);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 250);
-		new_image(player, player->ray, player->column);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 150);
-		new_image(player, player->ray, player->column);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->title->img_ptr, 300, 50);
-		mlx_put_image_to_window(img->mlx, img->mlx_win, img->sub->img_ptr, 600, 800);
-		mlx_put_image_to_window(player->img->mlx, player->img->mlx_win, player->img->beer_full->img_ptr, 100, 400);
-	}
+		print_start_screen(player, 'F');
 	return (0);
 }
 

@@ -27,8 +27,6 @@ LIBFT_DIR = libft
 LIBFT_MAKEFILE = $(LIBFT_DIR)/Makefile
 LIBFT = $(LIBFT_DIR)/$(NAME)
 
-#-Wall -Wextra -Werror
-
 CC = gcc
 CFLAGS = -Imlx -I$(LIBFT_DIR) -g
 LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
@@ -44,6 +42,9 @@ $(LIBFT):
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: CFLAGS += -D BONUS=1
+bonus: fclean $(NAME)
+
 clean:
 	rm -f $(OFILES)
 	make -C $(LIBFT_DIR) clean
@@ -54,4 +55,5 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re $(LIBFT)
+.PHONY: all clean fclean re bonus
+
