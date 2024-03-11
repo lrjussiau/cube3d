@@ -12,7 +12,8 @@ FILES = utils \
 			draw_image \
 			movement \
 			movement_utils \
-			map \
+			minimap_utils \
+			create_minimap \
 			apply_texture \
 			static_home_screen \
 			start_screen_bonus \

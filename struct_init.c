@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 09:49:32 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:35:44 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	init_player_s(t_player **player, t_map *map, t_img *img)
 		return (1);
 	(*player)->pos_x = map->player_pos_x + 0.5;
 	(*player)->pos_y = map->player_pos_y + 0.5;
-	(*player)->minimap_size = MINIMAP_SIZE;
 	(*player)->orientation = map->player_orientation;
 	(*player)->map = map->map;
 	(*player)->drunk_mode = 0;

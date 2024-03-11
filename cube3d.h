@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:56:36 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:35:56 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ typedef struct s_column
 
 typedef struct s_minimap
 {
-	int		size;
 	int		y_start;
 	int		x_start;
 	char	**map;
@@ -146,7 +145,6 @@ typedef struct s_player
 	char		**map;
 	char		orientation;
 	int			mouse_x;
-	int			minimap_size;
 	int			drunk_mode;
 	int			home_screen;
 	int			start_game;
@@ -174,7 +172,7 @@ typedef struct s_line
 
 # define SCREEN_X	1920
 # define SCREEN_Y	1080
-# define MINIMAP_SIZE 200
+# define M_S 200
 # define W 13
 # define A 0
 # define S 1
@@ -282,12 +280,14 @@ void		start(t_player *player);
 //Lunch game
 void		start_game(t_player *player);
 
-//map
-char		**extract_minimap(t_player *p, t_map *m, int s);
+//create_minimap
+char		**extract_minimap(char **n, t_player *p, int i, int j);
+char		**m_alloc(int size);
+
+//minimap_utils
 t_minimap	*minimap_init(t_player *player);
-void		draw_minimap(t_minimap *map, t_player *player);
-void		clear_minimap(t_img *img, t_minimap *map);
 void		minimap_update(t_player *player);
+void		clear_minimap(t_img *img, t_minimap *map);
 void		draw_minimap(t_minimap *map, t_player *player);
 
 #endif 
