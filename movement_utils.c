@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:33:14 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/11 07:46:43 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	keys_pressed(int keycode, t_player *player)
 		movement->rotate_right = 1;
 	if (keycode == ESC)
 	{
-		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
+		mlx_destroy_window(player->img->mlx, player->img->mlx_win);
 		exit(0);
 	}
 	if (keycode == B)

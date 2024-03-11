@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:16:43 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:58:42 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/11 07:54:33 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	pressed_enter(int keycode, t_player *player)
 		player->start_game = 1;
 	if (keycode == ESC)
 	{
-		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
+		mlx_destroy_window(player->img->mlx, player->img->mlx_win);
 		exit(0);
 	}
 	return (0);

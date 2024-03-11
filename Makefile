@@ -12,7 +12,6 @@ FILES = utils \
 			draw_image \
 			movement \
 			movement_utils \
-			minimap \
 			map \
 			apply_texture \
 			static_home_screen \

@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 07:40:44 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 08:48:14 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:02:47 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ static t_tex	*choose_texture(t_player *player, t_col *column)
 
 void	draw_texture(t_player *player, t_col *column, int x)
 {
-	char	*texture;
 	int		y;
 	t_line	*line;
 	t_tex	*tex;
@@ -99,4 +98,5 @@ void	draw_texture(t_player *player, t_col *column, int x)
 		&& player->ray->cor_y > 0)
 		line->tex_x = tex->width - line->tex_x - 1;
 	print_texture(root, column, line, tex);
+	free(line);
 }
