@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:25:02 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:49:03 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:20:38 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	render(void *param)
 	t_player	*player;
 
 	player = (t_player *)param;
-	minimap_update(player);
+	if (BONUS == 1)
+		minimap_update(player);
 	new_image(player, player->ray, player->column);
 	listen_hook(player);
 	return (0);

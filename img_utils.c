@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/05 08:22:29 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/11 07:58:46 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	transform_color(char *rgb_color)
 	color = 0;
 	rgb = ft_split(rgb_color, ',');
 	color = create_trgb(100, ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
+	ft_free_tab(rgb);
 	return (color);
 }
 

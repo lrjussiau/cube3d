@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 10:37:38 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 07:24:13 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	draw_sky(t_img *img, t_col *column, t_player *player)
 	if (player->drunk_mode == 0)
 		color = column->sky_color;
 	else
-		color = create_trgb(190, 0, 0, 0);
+		color = create_trgb(190, 124, 10, 240);
 	while (y < column->start)
 	{
 		pixel_put(img, column->x, y, color);
@@ -40,7 +40,7 @@ void	draw_ground(t_img *img, t_col *column, t_player *player)
 	if (player->drunk_mode == 0)
 		color = column->ground_color;
 	else
-		color = create_trgb(190, 0, 0, 0);
+		color = create_trgb(190, 155, 42, 145);
 	while (y < SCREEN_Y)
 	{
 		pixel_put(img, column->x, y, color);

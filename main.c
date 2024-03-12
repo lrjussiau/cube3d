@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:20:58 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 08:44:34 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:19:32 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	main(int ac, char **av)
 		return (1);
 	init_player_s(&player, map, &img);
 	if (BONUS == 1)
-		printf("lol\n");
-	start(player);
+		start(player);
+	else
+		start_game(player);
+
 }

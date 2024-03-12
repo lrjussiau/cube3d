@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 10:44:00 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 07:24:20 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	keys_pressed(int keycode, t_player *player)
 		movement->rotate_right = 1;
 	if (keycode == ESC)
 	{
-		mlx_destroy_window (player->img->mlx, player->img->mlx_win);
+		mlx_destroy_window(player->img->mlx, player->img->mlx_win);
 		exit(0);
 	}
 	if (keycode == B)
