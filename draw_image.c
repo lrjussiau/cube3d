@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:59:31 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 10:35:04 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/07 10:37:38 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ static void	print_hud(t_player *player, t_img *img)
 	{
 		draw_minimap(player->minimap, player);
 		mlx_put_image_to_window(img->mlx, img->mlx_win,
-			img->beer_full->img_ptr, 300, 479);
+			img->full->img_ptr, 300, 479);
 		mlx_put_image_to_window(img->mlx, img->mlx_win,
 			img->drink->img_ptr, 1500, 900);
 	}
 	if (player->drunk_mode == 1)
 		mlx_put_image_to_window(img->mlx, img->mlx_win,
-			img->beer_empty->img_ptr, 300, 479);
+			img->emp->img_ptr, 300, 479);
 }
 
 void	new_image(t_player *player, t_ray *ray, t_col *column)
