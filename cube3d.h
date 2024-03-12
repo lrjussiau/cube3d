@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 10:35:56 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/11 08:40:27 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct s_line
 # define R_ARROW 124
 # define ESC 53
 # define ENTER 36
+# define DESTROY_NOTIFY	17
 
 # define MOVESPEED 0.08
 # define ROT 0.03927
@@ -272,13 +273,13 @@ void		draw_texture(t_player *player, t_col *column, int x);
 
 //static home_screen
 void		put_home_screen(t_player *player);
-// ------------------Bonus--------------------//
 
 //starting screen
 void		start(t_player *player);
 
 //Lunch game
 void		start_game(t_player *player);
+int			close_game(t_player *player);
 
 //create_minimap
 char		**extract_minimap(char **n, t_player *p, int i, int j);

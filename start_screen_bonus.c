@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:16:43 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/11 08:14:28 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 08:34:59 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	animate(void *param)
 void	start(t_player *player)
 {
 	mlx_hook(player->img->mlx_win, 2, 1L << 0, pressed_enter, player);
+	mlx_hook(player->img->mlx_win, DESTROY_NOTIFY, 0, close_game, player);
 	mlx_loop_hook(player->img->mlx, animate, player);
 	mlx_loop(player->img->mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 09:55:38 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 10:35:44 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 08:30:51 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,9 @@ t_ray	*init_ray_s(char **map)
 
 t_img	*init_img(t_img *img, t_map *map)
 {
-	img->addr = malloc(sizeof(char *));
-	img->title = malloc(sizeof(t_tex));
-	img->sub = malloc(sizeof(t_tex));
-	img->drink = malloc(sizeof(t_tex));
+	img->title = safe_malloc(sizeof(t_tex));
+	img->sub = safe_malloc(sizeof(t_tex));
+	img->drink = safe_malloc(sizeof(t_tex));
 	img->mlx_win = mlx_new_window(img->mlx, SCREEN_X, SCREEN_Y, "CUBE3D");
 	img->img_ptr = mlx_new_image(img->mlx, SCREEN_X, SCREEN_Y);
 	if (!img->img_ptr)
