@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 10:35:56 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 08:29:55 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,7 +281,7 @@ void		start(t_player *player);
 void		start_game(t_player *player);
 
 //create_minimap
-char		**extract_minimap(char **n, t_player *p, int i, int j);
+void		**extract_minimap(char ** map, t_player *p, int i, int j);
 char		**m_alloc(int size);
 
 //minimap_utils

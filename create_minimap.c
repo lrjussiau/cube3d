@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 08:56:44 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 10:26:59 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 08:32:51 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**m_alloc(int size)
 	return (new_map);
 }
 
-char	**extract_minimap(char **n, t_player *p, int i, int j)
+void	**extract_minimap(char **n, t_player *p, int i, int j)
 {
 	int		y;
 	int		x;
@@ -113,7 +113,6 @@ char	**extract_minimap(char **n, t_player *p, int i, int j)
 		x -= 10;
 		y++;
 	}
-	return (n);
 }
 
 /*void	fill_minimap(char **n, t_player *p, t_map *m, int s)

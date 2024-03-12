@@ -6,7 +6,7 @@
 /*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 06:00:50 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/07 10:18:04 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 08:33:17 by vvuadens         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ t_minimap	*minimap_init(t_player *player)
 	minimap->pos_y = player->pos_y;
 	minimap->cor_x = player->cor_x;
 	minimap->cor_y = player->cor_y;
-	minimap->map = extract_minimap(m_alloc(M_S), player, -1, 0);
+	minimap->map = m_alloc(M_S);
+	extract_minimap(minimap->map, player, -1, 0);
 	return (minimap);
 }
 
@@ -100,7 +101,7 @@ void	minimap_update(t_player *player)
 	minimap->pos_y = player->pos_y;
 	minimap->cor_x = player->cor_x;
 	minimap->cor_y = player->cor_y;
-	minimap->map = extract_minimap(m_alloc(M_S), player, -1, 0);
+	extract_minimap(minimap->map, player, -1, 0);
 }
 
 /*int	i = 0;
