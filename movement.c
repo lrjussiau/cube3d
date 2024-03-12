@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:10:23 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/12 08:10:15 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:39:13 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ int	move_left(t_player *player)
 	int	trigger;
 
 	trigger = 1;
-	if (player->orientation == 'N' || player->orientation == 'E')
-	{
-		if (player->drunk_mode == 0)
-			trigger = -1;
-	}
+	if (player->drunk_mode == 0)
+		trigger = -1;
 	if (player->map[(int)(player->pos_y)]
 		[(int)(player->pos_x - player->cor_y * MOVESPEED * trigger)] != '1')
 		player->pos_x -= player->cor_y * MOVESPEED * trigger;
@@ -58,11 +55,8 @@ int	move_right(t_player *player)
 	int	trigger;
 
 	trigger = 1;
-	if (player->orientation == 'N' || player->orientation == 'E')
-	{
-		if (player->drunk_mode == 0)
-			trigger = -1;
-	}
+	if (player->drunk_mode == 0)
+		trigger = -1;
 	if (player->map[(int)(player->pos_y)]
 		[(int)(player->pos_x + player->cor_y * MOVESPEED * trigger)] != '1')
 		player->pos_x += player->cor_y * MOVESPEED * trigger;

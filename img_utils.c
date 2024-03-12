@@ -6,11 +6,35 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/11 07:58:46 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:32:54 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int	isnum(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	check_color(char *c)
+{
+	int	color;
+
+	color = ft_atoi(c);
+	if (color < 0 || color > 254)
+		return (1);
+	return (0);
+}
 
 int	create_trgb(int t, int r, int g, int b)
 {
@@ -24,6 +48,10 @@ int	transform_color(char *rgb_color)
 
 	color = 0;
 	rgb = ft_split(rgb_color, ',');
+	if (isnum(rgb[0]) || isnum(rgb[1]) || isnum(rgb[2]))
+		error("Color Not valid, not a int.");
+	if (check_color(rgb[0]) || check_color(rgb[1]) || check_color(rgb[2]))
+		error("Color Not valid, value must be beetween 0 and 254.");
 	color = create_trgb(100, ft_atoi(rgb[0]), ft_atoi(rgb[1]), ft_atoi(rgb[2]));
 	ft_free_tab(rgb);
 	return (color);

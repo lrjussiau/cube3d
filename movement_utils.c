@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 08:14:59 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/11 08:39:53 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:43:00 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,8 @@ int	right_arrow_hook(t_player *player, double t)
 	double	oldcor_x;
 	double	oldplane_x;
 
-	if (player->orientation == 'S' || player->orientation == 'W')
-	{
-		if (player->drunk_mode == 0)
+	if (player->drunk_mode == 1)
 			t *= -1;
-	}
 	oldcor_x = player->cor_x;
 	oldplane_x = player->plane_x;
 	player->cor_x = player->cor_x * cos(t) - player->cor_y * sin(t);
@@ -101,11 +98,8 @@ int	left_arrow_hook(t_player *player, double t)
 	double	oldcor_x;
 	double	oldplane_x;
 
-	if (player->orientation == 'S' || player->orientation == 'W')
-	{
-		if (player->drunk_mode == 0)
-			t *= -1;
-	}
+	if (player->drunk_mode == 1)
+		t *= -1;
 	oldcor_x = player->cor_x;
 	oldplane_x = player->plane_x;
 	player->cor_x = player->cor_x * cos(t) - player->cor_y * sin(t);

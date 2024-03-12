@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vvuadens <vvuadens@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 10:39:57 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 10:35:35 by vvuadens         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:41:20 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,30 @@ t_mov	*init_mov(t_player *player)
 
 void	init_orientation(t_player **player, char orientation)
 {
-	if (orientation == 'N' || orientation == 'S')
+	(*player)->cor_x = 0;
+	(*player)->cor_y = 0;
+	(*player)->plane_x = 0;
+	(*player)->plane_y = 0;
+	if (orientation == 'N')
 	{
-		if (orientation == 'N')
-			(*player)->cor_y = -1;
-		else
-			(*player)->cor_y = 1;
+		(*player)->cor_y = -1;
 		(*player)->plane_x = 0.66;
-		(*player)->plane_y = 0;
-		(*player)->cor_x = 0;
-		(*player)->plane_x = 0.66;
-		(*player)->plane_y = 0;
 	}
-	if (orientation == 'E' || orientation == 'W')
+	else if (orientation == 'S')
 	{
-		if (orientation == 'E')
-			(*player)->cor_x = 1;
-		else
-			(*player)->cor_x = -1;
-		(*player)->cor_y = 0;
-		(*player)->plane_x = 0;
+		(*player)->cor_y = 1;
+		(*player)->plane_x = -0.66;
+	}
+	else if (orientation == 'E')
+	{
+		(*player)->cor_x = 1;
 		(*player)->plane_y = 0.66;
 	}
-	return ;
+	else if (orientation == 'W')
+	{
+		(*player)->cor_x = -1;
+		(*player)->plane_y = -0.66;
+	}
 }
 
 t_col	*init_col_s(t_player *player, t_map *map)

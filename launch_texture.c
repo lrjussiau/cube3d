@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 09:37:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:57:18 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:01:15 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void	get_wall_texture(t_img *img, t_map *map)
 	img->no_tex_d = malloc(sizeof(t_tex));
 	img->ea_tex_d = malloc(sizeof(t_tex));
 	img->we_tex_d = malloc(sizeof(t_tex));
-	img->so_tex_d = load_texture(img, img->so_tex_d, "texture/drunk/champ.xpm");
-	img->no_tex_d = load_texture(img, img->no_tex_d, "texture/drunk/land.xpm");
-	img->ea_tex_d = load_texture(img, img->ea_tex_d, "texture/drunk/land2.xpm");
-	img->we_tex_d = load_texture(img, img->we_tex_d, "texture/drunk/cater.xpm");
+	img->so_tex_d = load_texture(img, img->so_tex_d, "texture/drunk/jib.xpm");
+	img->no_tex_d = load_texture(img, img->no_tex_d, "texture/drunk/gal.xpm");
+	img->ea_tex_d = load_texture(img, img->ea_tex_d, "texture/drunk/smil.xpm");
+	img->we_tex_d = load_texture(img, img->we_tex_d, "texture/drunk/amon.xpm");
 }
 
 void	get_beer_texture(t_img *img)

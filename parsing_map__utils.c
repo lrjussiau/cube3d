@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 11:01:21 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:59:51 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 09:13:28 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,12 @@ void	process_wall_vertical(char **map, int col)
 	row = 0;
 	while (map[row])
 	{
-		if (map[row][col] != ' ')
+		if (map[row][col] == '0' || map[row][col] == '1')
 		{
 			if (map[row][col] != '1')
-				error("map not correctly walled.3");
+			{
+				error("map not correctly walled.");
+			}
 			while (map[row])
 			{
 				if (map[row][col] == ' ')
@@ -95,7 +97,7 @@ void	process_wall_vertical(char **map, int col)
 			row--;
 			if (map[row][col] != '1')
 			{
-				error("map not correctly walled.4");
+				error("map not correctly walled.");
 			}
 		}
 		row++;

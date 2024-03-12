@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/11 08:40:27 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/12 10:02:26 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,7 +282,7 @@ void		start_game(t_player *player);
 int			close_game(t_player *player);
 
 //create_minimap
-char		**extract_minimap(char **n, t_player *p, int i, int j);
+void		extract_minimap(char **map, t_player *p, int i, int j);
 char		**m_alloc(int size);
 
 //minimap_utils
