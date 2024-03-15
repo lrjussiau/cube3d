@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:16:20 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:35:45 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:20:45 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	cleaner(t_map *map)
 	free(map);
 }
 
-void	checker(t_map *map)
+void	checker(t_map *map, char *path)
 {
-	check_path(map);
+	check_path(map, path);
 	check_player(map);
 	check_wall(map);
 	check_wall_vertical(map);

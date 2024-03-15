@@ -6,13 +6,13 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:43:01 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/07 09:34:28 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:39:44 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	check_path(t_map *map)
+void	check_path(t_map *map, char *path)
 {
 	int	fd;
 
@@ -32,18 +32,25 @@ void	check_path(t_map *map)
 	if (fd < 0)
 		error("Failed to open EAST texture.");
 	close(fd);
+	if (ft_strchr(path, '.') == NULL)
+		error("Map must be a .cub");
+	if ((ft_strnstr(ft_strrchr(path, '.'), ".cub", 4) == 0)
+		|| ft_strlen(ft_strrchr(path, '.')) != 4)
+		error("Map must be a .cub");
 }
 
 void	check_player(t_map *map)
 {
 	int	i;
 	int	j;
+	int	player;
 
-	i = 0;
-	while (map->map[i])
+	i = -1;
+	player = 0;
+	while (map->map[++i])
 	{
-		j = 0;
-		while (map->map[i][j])
+		j = -1;
+		while (map->map[i][++j])
 		{
 			if (map->map[i][j] == 'N' || map->map[i][j] == 'E'
 				|| map->map[i][j] == 'S' || map->map[i][j] == 'W')
@@ -52,13 +59,12 @@ void	check_player(t_map *map)
 				map->player_pos_x = (double)j;
 				map->player_pos_y = (double)i;
 				map->map[i][j] = '0';
-				return ;
+				player++;
 			}
-			j++;
 		}
-		i++;
 	}
-	error("No player inside the map");
+	if (player != 1)
+		error("Too many or no player inside the map");
 }
 
 void	check_wall(t_map *map)

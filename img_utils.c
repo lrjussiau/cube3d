@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 10:21:24 by vvuadens          #+#    #+#             */
-/*   Updated: 2024/03/12 10:32:54 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:09:54 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int	transform_color(char *rgb_color)
 
 	color = 0;
 	rgb = ft_split(rgb_color, ',');
+	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
+		error("Color Not valid.");
 	if (isnum(rgb[0]) || isnum(rgb[1]) || isnum(rgb[2]))
 		error("Color Not valid, not a int.");
 	if (check_color(rgb[0]) || check_color(rgb[1]) || check_color(rgb[2]))

@@ -2,8 +2,7 @@
 EA          sprites/title/sub_title.xpm
 
 
-C 225,30,0
-
+C 225,125,224
 WE texture/wall.xpm
 NO texture/drunk/jib.xpm
 F 120,160,0
@@ -13,7 +12,7 @@ SO      sprites/face.xpm
 100010110001
 100000000001
 100000000001
-10000E000001
+1000N0000001
 110000000011
 100000000001
 100011000001

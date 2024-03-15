@@ -6,7 +6,7 @@
 /*   By: ljussiau <ljussiau@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:17:04 by ljussiau          #+#    #+#             */
-/*   Updated: 2024/03/15 08:36:29 by ljussiau         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:21:43 by ljussiau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,12 +202,12 @@ void		cleaner(t_map *map);
 void		parsing_map(char *path, t_map *map);
 
 //checker
-void		check_path(t_map *map);
+void		check_path(t_map *map, char *path);
 void		check_player(t_map *map);
 void		check_wall(t_map *map);
 void		check_wall_vertical(t_map *map);
 void		check_inside(t_map *map);
-void		checker(t_map *map);
+void		checker(t_map *map, char *path);
 
 //map_parsing_utils
 void		process_wall_vertical(char **map, int col);
