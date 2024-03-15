@@ -34,24 +34,24 @@ LDFLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit -L$(LIBFT_DIR) -lft
 all: $(NAME)
 
 $(NAME): $(OFILES) $(LIBFT)
-	$(CC) $(OFILES) $(LDFLAGS) -o $(NAME)
+	@ $(CC) $(OFILES) $(LDFLAGS) -o $(NAME)
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	@ make -C $(LIBFT_DIR)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(CFLAGS) -c $< -o $@
 
 bonus: CFLAGS += -D BONUS=1
 bonus: fclean $(NAME)
 
 clean:
-	rm -f $(OFILES)
-	make -C $(LIBFT_DIR) clean
+	@ rm -f $(OFILES)
+	@ make -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	make -C $(LIBFT_DIR) fclean
+	@ rm -f $(NAME)
+	@ make -C $(LIBFT_DIR) fclean
 
 re: fclean all
 

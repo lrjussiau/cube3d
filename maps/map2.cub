@@ -1,12 +1,13 @@
-NO texture/drunk/jib.xpm
-SO sprites/face.xpm
 
-EA sprites/title/sub_title.xpm
+EA          sprites/title/sub_title.xpm
 
-F 120,160,10
+
 C 225,30,0
 
 WE texture/wall.xpm
+NO texture/drunk/jib.xpm
+F 120,160,0
+SO      sprites/face.xpm
 
 111111111111
 100010110001
